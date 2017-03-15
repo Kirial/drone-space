@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-03-01T10:05:05
+# Project created by QtCreator 2017-03-08T16:29:29
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Drone-Mainframe
+TARGET = drone-space
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainframe.cpp \
+    app.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainframe.h \
+    app.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainframe.ui
