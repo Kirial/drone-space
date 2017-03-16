@@ -21,7 +21,7 @@
     <item row="0" column="2">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="pageUsername">
        <layout class="QGridLayout" name="gridLayout_2">

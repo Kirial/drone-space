@@ -99,7 +99,7 @@ public:
     {
         if (MainFrame->objectName().isEmpty())
             MainFrame->setObjectName(QStringLiteral("MainFrame"));
-        MainFrame->resize(400, 300);
+        MainFrame->resize(459, 300);
         centralWidget = new QWidget(MainFrame);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setStyleSheet(QStringLiteral("background: white;"));
@@ -390,7 +390,7 @@ public:
 
         retranslateUi(MainFrame);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainFrame);
