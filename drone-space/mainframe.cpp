@@ -38,3 +38,8 @@ void MainFrame::on_inputPassword_returnPressed()
         ui->statusBar->showMessage("Access Denied!",5000);
     }
 }
+
+void MainFrame::on_pushButton_forward_clicked()
+{
+
+}

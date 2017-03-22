@@ -20,6 +20,8 @@ private slots:
 
     void on_inputPassword_returnPressed();
 
+    void on_pushButton_forward_clicked();
+
 private:
     Ui::MainFrame *ui;
     QString username;
