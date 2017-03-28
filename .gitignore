@@ -51,3 +51,9 @@ drone-space-of/openFrameworks-Info.plist
 drone-space-of/Project.xcconfig
 
 drone-space-of/bin/data/.gitkeep
+
+drone-space-of/obj/osx/Release/src/ofApp.d
+
+drone-space-of/obj/osx/Release/.compiler_flags
+
+drone-space-of/obj/osx/Release/src/main.d
