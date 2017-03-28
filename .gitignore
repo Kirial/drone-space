@@ -28,32 +28,13 @@
 *.out
 *.app
 
+# Niklas Ignore filer
+
 drone-space-of/addons.make
-
 drone-space-of/config.make
-
-drone-space-of/drone-space-of.xcodeproj/project.pbxproj
-
-drone-space-of/drone-space-of.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-
-drone-space-of/drone-space-of.xcodeproj/project.xcworkspace/xcuserdata/nb.xcuserdatad/UserInterfaceState.xcuserstate
-
-drone-space-of/drone-space-of.xcodeproj/xcshareddata/xcschemes/drone-space-of Debug.xcscheme
-
-drone-space-of/drone-space-of.xcodeproj/xcshareddata/xcschemes/drone-space-of Release.xcscheme
-
-drone-space-of/drone-space-of.xcodeproj/xcuserdata/nb.xcuserdatad/xcschemes/xcschememanagement.plist
-
+drone-space-of/drone-space-of.xcodeproj/*
 drone-space-of/Makefile
-
 drone-space-of/openFrameworks-Info.plist
-
 drone-space-of/Project.xcconfig
-
-drone-space-of/bin/data/.gitkeep
-
-drone-space-of/obj/osx/Release/src/ofApp.d
-
-drone-space-of/obj/osx/Release/.compiler_flags
-
-drone-space-of/obj/osx/Release/src/main.d
+drone-space-of/bin/*
+drone-space-of/obj/*
