@@ -16,21 +16,21 @@ static void help()
 
 int main(int argc, char** argv)
 {
-    cv::CommandLineParser parser(argc, argv,
-        "{help h ||}{@image|../data/holahoop.jpg|}"
-    );
-    if (parser.has("help"))
-    {
-        help();
-        return 0;
-    }
+    //cv::CommandLineParser parser(argc, argv,
+    //    "{help h ||}{@image|../data/holahoop.jpg|}"
+    //);
+    //if (parser.has("help"))
+    //{
+    //    help();
+    //    return 0;
+    //}
     //![load]
-    string filename = parser.get<string>("@image");
-    Mat img = imread(filename, IMREAD_COLOR);
+    //string filename = parser.get<string>("@image");
+    Mat img = imread("holahoop.jpg", IMREAD_COLOR);
     if(img.empty())
     {
         help();
-        cout << "can not open " << filename << endl;
+        cout << "can not open " << "holahoop.jpg" << endl;
         return -1;
     }
     //![load]
