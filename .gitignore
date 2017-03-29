@@ -38,3 +38,6 @@ drone-space-of/openFrameworks-Info.plist
 drone-space-of/Project.xcconfig
 drone-space-of/bin/*
 drone-space-of/obj/*
+
+#Taras ignore files
+drone-space-of/Drone_OF/*
