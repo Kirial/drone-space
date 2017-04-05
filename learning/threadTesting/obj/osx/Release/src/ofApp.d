@@ -553,8 +553,10 @@ obj/osx/Release/src/ofApp.o: \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h \
   /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/control.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/autopilot.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/cli.h
 
 /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/ofApp.h:
 
@@ -1662,6 +1664,10 @@ obj/osx/Release/src/ofApp.o: \
 
 /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h:
 
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h:
+
 /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/control.h:
 
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h:
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/autopilot.h:
+
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/cli.h:

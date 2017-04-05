@@ -1,29 +1,30 @@
-#pragma once
-
-#include <iostream>
+#ifndef VISION_H
+#define VISION_H
 
 class Vision : public ofThread {
 
   public:
 
-    void threadedFunction() {
-
-      // Setup
-
-      //sleep(500);
+    Vision() { // Setup
 
       cout << "Vision Thread Initialized.\n\r";
+
+    }
+
+    void threadedFunction() { // Loop
 
       while(isThreadRunning()) {
 
         // Loop
 
-        cout << "Vision.\n\r";
+        //cli.addMessage("Vision.");
 
-        //sleep(1000);
+        sleep(20);
 
       }
 
     }
 
 };
+
+#endif

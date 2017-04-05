@@ -1,42 +1,24 @@
 #include "ofApp.h"
-#include <iostream>
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-  cout << "Hello, World 1.";
+  ClassA.setClassB(ClassB.getClassB());
+  ClassB.setClassA(ClassA.getClassA());
 
-  control = Control(cli);
+  ClassB.setMyPersonalId("1337");
 
-  control.startThread(true);
-  vision.startThread(true);
-  autopilot.startThread(true);
-  cli.startThread(true);
+  ClassA.talkB();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-  cout << "Update.\n\r";
-
-
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-  cout << "Draw.\n\r";
-
-}
-
-void ofApp::exit() {
-
-  control.stopThread();
-  vision.stopThread();
-  autopilot.stopThread();
-  cli.stopThread();
 
 }
 

@@ -1,11 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "control.h"
-#include "vision.h"
-#include "control.h"
-#include "autopilot.h"
-#include "cli.h"
+#include "ClassA.h"
+#include "ClassB.h"
 
 class ofApp : public ofBaseApp{
 
@@ -13,11 +10,6 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-		void exit();
-
-		// Niklas
-
-		int threadSwitch();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -31,11 +23,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		Control control;
-		Vision vision;
-		Autopilot autopilot;
-		Cli cli;
-
-
+		ClassA ClassA;
+		ClassB ClassB;
 
 };

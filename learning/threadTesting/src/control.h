@@ -1,27 +1,40 @@
-#pragma once
+#ifndef CONTROL_H
+#define CONTROL_H
 
-#include <iostream>
+#include "cli.h"
 
 class Control : public ofThread {
 
-  public:
+public:
 
-    void threadedFunction() {
+  Control(Cli *_cli) { // Setup
 
-      // Setup
+    cli = _cli;
 
-      cout << "Control Thread Initialized.\n\r";
+    cout << "Control Thread Initialized.\n\r";
 
-      while(isThreadRunning()) {
+    sleep(10);
 
-        // Loop
+  }
 
-        cout << "Control.\n\r";
+  void threadedFunction() { // Loop
 
-        //sleep(1000);
+    while(isThreadRunning()) {
 
-      }
+      // Loop
+
+      cli.addMessage("Control.");
+
+      sleep(20);
 
     }
 
+  }
+
+private:
+
+  Cli &cli;
+
 };
+
+#endif

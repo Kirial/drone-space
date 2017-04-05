@@ -1,5 +1,5 @@
 obj/osx/Release/src/main.o: \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/main.cpp \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/main.cpp \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofConstants.h \
   /Users/nb/of_v0.9.8_osx_release/libs/glew/include/GL/glew.h \
@@ -552,11 +552,9 @@ obj/osx/Release/src/main.o: \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/ofApp.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/control.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/cli.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/autopilot.h
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ofApp.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ClassA.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ClassB.h
 
 /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h:
 
@@ -1662,12 +1660,8 @@ obj/osx/Release/src/main.o: \
 
 /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h:
 
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/ofApp.h:
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ofApp.h:
 
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/vision.h:
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ClassA.h:
 
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/control.h:
-
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/cli.h:
-
-/Users/nb/Workspace/Drone-Space/drone-space-git/learning/threadTesting/src/autopilot.h:
+/Users/nb/Workspace/Drone-Space/drone-space-git/learning/connectedClassesLearning/src/ClassB.h:
