@@ -1,11 +1,7 @@
 #include "ofApp.h"
 
-#include <iostream>
-
 //--------------------------------------------------------------
 void ofApp::setup(){
-
-  cout << "Hello, World2!";
 
 }
 
@@ -70,6 +66,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
