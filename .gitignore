@@ -41,3 +41,19 @@ drone-space-of/obj/*
 
 #Taras ignore files
 drone-space-of/Drone_OF/*
+*.res
+*.cache
+*.tlog
+*.lastbuildstate
+*.log
+*.rc
+*.filters
+*.vcxproj
+*.sln
+*.sdf
+*.opensdf
+*.pdb
+*.ilk
+*.exp
+*.make
+*.suo
