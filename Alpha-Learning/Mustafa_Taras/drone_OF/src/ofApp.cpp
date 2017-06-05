@@ -1,9 +1,10 @@
 #include "ofApp.h"
-
+#include "ofxARDrone.h"
+#include "SimpleDroneControl.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
 	cout << "Hello World" << endl;
-
+	ofSetLogLevel(OF_LOG_VERBOSE);
 }
 
 //--------------------------------------------------------------
@@ -18,7 +19,24 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	int start = 0; 
+	switch (key) {
+	case 'w': 
+		start=start+0.02;
+		test.up(start);
+		break;
+	case 's':
+		start = start - 0.02;
+		test.down(start);
+		break;
+	case 'p':
+		test.land();
+		break;
+	default:
+		cout << key << endl;
+		break;
+	}
+	
 }
 
 //--------------------------------------------------------------

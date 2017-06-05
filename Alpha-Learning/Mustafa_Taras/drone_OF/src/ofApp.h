@@ -1,10 +1,15 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxARDrone.h"
+#include "ofxARDroneOscBridge.h"
+#include "SimpleDroneControl.h"
 
 class ofApp : public ofBaseApp{
 
 	public:
+		SimpleDroneControl test;
+
 		void setup();
 		void update();
 		void draw();
