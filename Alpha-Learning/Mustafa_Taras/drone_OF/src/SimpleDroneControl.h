@@ -14,39 +14,14 @@ public:
 		SimpleDroneControl();
 		~SimpleDroneControl();
 		bool isConnected();
+
 		void land();
-		int up(int dist); // Space
-		int down(int dist); // Shift
+		void takeOff();
 
-		// XY Basic Control
-		int forward(); // w W
-		int backward(); // s S
+		int droneFly(float z, float y, float x, float spin);
+		void setZero();
 
-		int strafeLeft(); // A a
-		int strafeRight(); // D d
-
-		int turnLeft(); // E e
-		int turnRight(); // Q q
-
-		// XY Advanced Control
-		int forwardStrafeLeft(); // WA wa
-		int forwardStrafeRight(); // WD wd
-
-		int backwardStrafeLeft(); // SA sa
-		int backwardStrafeRight(); // SD sd
-
-		int turnLeftForward(); // WQ wq
-		int turnRightForward(); // WE we
-
-		int leftSidewaysBackward(); // SQ sq
-		int rightSidewaysBackward(); // SE se
-
-		int strafeLeftTurnLeft(); // QA qa
-		int strafeLeftTurnRight(); // QD qd
-
-		int strafeRightTurnLeft(); // EA ea
-		int strafeRightTurnRight(); // ED ed
-
+		void emergency();
 	
 private :ofxARDrone::Drone drone;
 };

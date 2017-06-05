@@ -5,6 +5,7 @@
 void ofApp::setup(){
 	cout << "Hello World" << endl;
 	ofSetLogLevel(OF_LOG_VERBOSE);
+
 }
 
 //--------------------------------------------------------------
@@ -19,24 +20,49 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	int start = 0; 
+
 	switch (key) {
 	case 'w': 
-		start=start+0.02;
-		test.up(start);
+		start_z = start_z + 0.05;
 		break;
 	case 's':
-		start = start - 0.02;
-		test.down(start);
+		start_z = start_z + 0.05;
 		break;
-	case 'p':
+	case 'a':
+		start_sp = start_sp + 0.05;
+		break;
+	case 'd':
+		start_sp = start_sp - 0.05;
+		break;
+	case 'i':
+		start_x = start_x + 0.05;
+		break;
+	case 'k':
+		start_x = start_x - 0.05;
+		break;
+	case 'l':
+		start_y = start_y + 0.05;
+		break;
+	case 'j':
+		start_y = start_y - 0.05;
+		break;
+	case 'z':
+		test.setZero();
+		break;
+	case 't':
+		test.takeOff();
+		break;
+	case 'y':
 		test.land();
+		break;
+	case 'e':
+		test.emergency();
 		break;
 	default:
 		cout << key << endl;
 		break;
 	}
-	
+	test.droneFly(start_z,start_y, start_x,start_sp);
 }
 
 //--------------------------------------------------------------

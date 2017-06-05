@@ -8,6 +8,10 @@
 class ofApp : public ofBaseApp{
 
 	public:
+		float start_z = 0;
+		float start_y = 0;
+		float start_x = 0;
+		float start_sp = 0;
 		SimpleDroneControl test;
 
 		void setup();
