@@ -7,6 +7,12 @@
 #include "DroneRoom.h"
 #include "DroneControl.h"
 
+// Waypoint
+
+// Trajectory
+
+// Path
+
 class DroneAI {
 
 public:
