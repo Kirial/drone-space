@@ -39,7 +39,7 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
 
 void DroneAI::update() {
 
-  if(ofGetElapsedTimeMillis() > 300000) {
+  if(ofGetElapsedTimeMillis() > 40000) {
 
     // Time run out
 
@@ -52,7 +52,7 @@ void DroneAI::update() {
 
   }
 
-  if(ofGetElapsedTimeMillis() < 240000) {
+  if(ofGetElapsedTimeMillis() < 20000) {
 
     // Takeoff
 
@@ -103,8 +103,6 @@ void DroneAI::droneTakeoff() {
 
     if(!takeoffCurrent->end) {
 
-
-
       takeoffCurrent = takeoffCurrent->next;
 
       drone->setDestination(takeoffCurrent->point);
@@ -151,20 +149,52 @@ void DroneAI::droneLoop() {
 
 void DroneAI::droneLanding() {
 
-  printf("Starting to land!\n");
+  if(!calculatedLandingTrajectory) {
 
-  // Initial Landing Trajectory
+    printf("Starting to land!\n");
 
-  addLandingPoint(drone->node.getPosition(),NORMAL);
-  addLandingPoint(landingwaypoint.point,LANDING);
-  finishLandingTrajectory();
+    // Initial Landing Trajectory
 
+    addLandingPoint(drone->node.getPosition(),NORMAL);
+    addLandingPoint(landingwaypoint.point,NORMAL);
+    addLandingPoint(landingplatform,LANDING);
+    finishLandingTrajectory();
+
+    landingCurrent = landingTail->next;
+
+    calculatedLandingTrajectory = true;
+
+    drone->setFlightMode(landingCurrent->flightmode);
+    drone->setDestination(landingCurrent->point);
+
+  }
+
+  if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
+
+    if(!landingCurrent->end) {
+
+      landingCurrent = landingCurrent->next;
+
+      drone->setFlightMode(landingCurrent->flightmode);
+      drone->setDestination(landingCurrent->point);
+
+    } else if(drone->getDroneMode() != LANDED) {
+
+      printf("Landed!\n");
+      drone->setDroneMode(LANDED);
+
+    }
+  }
 }
 
 void DroneAI::droneLand() {
 
-  printf("Land!\n");
-
+  if(drone->getDroneMode() != LANDED) {
+    printf("Landing!\n");
+    drone->setDroneMode(LANDED);
+  } else {
+    printf("Landed!\n");
+  }
 }
 
 void DroneAI::draw() {

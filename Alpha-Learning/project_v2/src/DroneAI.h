@@ -97,6 +97,9 @@ private:
   Trajectory *landingCurrent;
   int landingTrajectoryCount = 0;
 
+  ofVec3f landingplatform = ofVec3f(DRONE_START_X, DRONE_START_Y, DRONE_START_Z);
+  int calculatedLandingTrajectory = false;
+
   // --- Anti Collision ---
 
   ofVec3f antiCollision();
