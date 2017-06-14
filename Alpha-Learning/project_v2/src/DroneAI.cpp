@@ -90,6 +90,8 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
     int checkHoops = HOOP_COUNT;
     int hoopsToBeChecked[HOOP_COUNT];
 
+    std::vector<int> hoopsDists;
+
     for(int j = 0; j < HOOP_COUNT; j++) {
 
       hoopsToBeChecked[j] = false;
@@ -122,7 +124,7 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
 
 
 
-      float pPdist = sin(BAPangle) * APdist;
+      float pPdist = sin(ofDegToRad(BAPangle)) * APdist;
 
       if(pPdist > HOOP_SAFETYDISTANCE) {
         printf("Hoop %i is is outside the safety distance.\n",j);
@@ -131,9 +133,15 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
 
       printf("Hoop %i distance: %f, angle: %f.\n", j, AP.length(), AP.angle(AB));
 
+      hoopsDists.push_back(pDist);
+
       hoopsToBeChecked[j] = true;
 
+    }
 
+    ofSort(hoopsDists, sortDescesding);
+
+    for(int j = 0; j < checkHoops; j++) {
 
     }
 

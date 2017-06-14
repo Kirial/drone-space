@@ -15,6 +15,12 @@
 #define DRONE_START_Y 20
 #define DRONE_START_Z 300
 
+#define DRONE_STEADY_SPEEP 0.5
+#define DRONE_NORMAL_SPEEP 1 // m/s
+#define DRONE_FAST_SPEEP 2
+#define DRONE_INSANE_SPEEP 5
+#define DRONE_LUDICROUS_SPEEP 10
+
 // Room
 
 #define ROOM_SIZE_X 1200
@@ -67,6 +73,18 @@
 #define HOOP_D_X 400
 #define HOOP_D_Y 200
 #define HOOP_D_Z -400
+
+// Hoop E
+
+#define HOOP_E_X 400
+#define HOOP_E_Y 200
+#define HOOP_E_Z -400
+
+// Hoop F
+
+#define HOOP_F_X 400
+#define HOOP_F_Y 200
+#define HOOP_F_Z -400
 
 // QR
 
