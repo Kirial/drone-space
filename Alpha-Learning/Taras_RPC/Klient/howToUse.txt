@@ -1,0 +1,18 @@
+How to setup and use client side
+
+step-1: copy your source code to your src folder 
+step-2: in visual studio click on "show all files" (in project explorer)
+step-3: you should see the files 
+step-4: include files into project by right clicking them 
+step-5: go to project properties, linker, input and add "rpcrt4.lib" into AdditionalDependencies
+step-6: go to RPC_drone_interface.idl click properties go to MIDL click command line and add "/app_config" 
+
+
+Use the code: 
+
+step-1: include header file RPC_drone.h
+step-2: create refference to header file (rpc_drone variable_name;)
+step-3: call setup function in the begining of the progect and exit in the end  (variable_name.rpc_innit();) and  (variable_name.rpc_exit();)
+step-4: use functions from RPC_drone.h	
+
+	
