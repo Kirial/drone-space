@@ -39,7 +39,7 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
 
 void DroneAI::update() {
 
-  if(ofGetElapsedTimeMillis() > 40000) {
+  if(ofGetElapsedTimeMillis() > DEADLINE*1000) {
 
     // Time run out
 
@@ -52,7 +52,7 @@ void DroneAI::update() {
 
   }
 
-  if(ofGetElapsedTimeMillis() < 20000) {
+  if(ofGetElapsedTimeMillis() < STARTLANDING*1000) {
 
     // Takeoff
 

@@ -7,6 +7,9 @@
 
 #define SCALE 1
 
+#define STARTLANDING 4.5*60 // Seconds
+#define DEADLINE 5*60 // Seconds
+
 // Drone
 
 #define DRONE_SAFETYDISTANCE 50 // "Radius"
@@ -17,13 +20,13 @@
 #define DRONE_START_Y 20
 #define DRONE_START_Z 300
 
-#define DRONE_STEADY_SPEED 0.833
-#define DRONE_NORMAL_SPEED 1.667 // m/s
+#define DRONE_STEADY_SPEED 20 //0.833
+#define DRONE_NORMAL_SPEED 40 //1.667 // m/s
 #define DRONE_FAST_SPEED 2
 #define DRONE_INSANE_SPEED 5
 #define DRONE_LUDICROUS_SPEED 10
 
-#define DRONE_ROTATION_SPEED 5
+#define DRONE_ROTATION_SPEED 20 //5
 
 #define DRONE_ORIENTATION_VECTOR 100
 
