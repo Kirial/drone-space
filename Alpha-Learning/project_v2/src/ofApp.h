@@ -34,7 +34,7 @@ class ofApp : public ofBaseApp{
 
 		Drone drone;
 		DroneRoom droneroom;
-		DroneControl dronecontrol = DroneControl(&drone, &droneroom);
+		DroneControl dronecontrol;
 		DroneAI droneai = DroneAI(&drone, &droneroom, &dronecontrol);
 
 };

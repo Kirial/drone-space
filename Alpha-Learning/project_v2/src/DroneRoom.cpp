@@ -168,11 +168,15 @@ DroneRoom::DroneRoom() {
 
     if(HOOP_RANDOM) {
 
+      int aRand = ofRandom(0,359);
+
       int xRand = ofRandom(-449,449);
       int yRand = ofRandom(101,299);
       int zRand = ofRandom(-449,449);
 
       hoops[i].setPosition(xRand,yRand,zRand);
+
+      hoops[i].node.rotate(aRand,0,1,0);
 
     }
 
@@ -197,6 +201,8 @@ DroneRoom::DroneRoom() {
 }
 
 void DroneRoom::draw() {
+
+  ofSetColor(ofColor::black);
 
   node.draw();
   room.draw();

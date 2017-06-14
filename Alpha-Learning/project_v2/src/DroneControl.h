@@ -9,7 +9,7 @@ class DroneControl {
 
 public:
 
-  DroneControl(Drone *_drone);
+  DroneControl();
 
   // ---
 
@@ -41,17 +41,7 @@ public:
 
   // ---
 
-  // --- Virtual Drone Functions ---
-
-  void move(float x, float y, float z);
-  void turn(float a);
-  void setPosition(float x, float y, float z);
-  void setTurn(float a);
-  void setDroneSensorHeight(float h);
-
 private:
-
-  Drone *drone;
 
 };
 

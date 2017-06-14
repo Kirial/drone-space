@@ -12,10 +12,16 @@ void ofApp::setup(){
 
   camera.setDistance(1000);
 
+  ofResetElapsedTimeCounter();
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+  drone.update();
+
+  droneai.update();
 
 }
 
@@ -32,6 +38,8 @@ void ofApp::draw(){
   // Draw 3D
 
   droneroom.draw();
+
+  drone.draw();
 
   droneai.draw();
 

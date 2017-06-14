@@ -5,10 +5,7 @@
 
 // --- Constructor
 
-DroneControl::DroneControl(Drone *_drone) {
-
-  Drone = _drone;
-  DroneRoom = _droneroom;
+DroneControl::DroneControl() {
 
   // Setup RPC... something something
 
@@ -40,11 +37,3 @@ int DroneControl::tellForceTurn(int a) {}
 int DroneControl::tellForceSetSpeed(int ms) {}
 
 // ---
-
-// --- Virtual Drone Functions ---
-
-int DroneControl::move(float x, float y, float z) {}
-int DroneControl::turn(float a) {}
-int DroneControl::setPosition(float x, float y, float z) {}
-int DroneControl::setTurn(float a) {}
-int DroneControl::setDroneSensorHeight(float h) {}
