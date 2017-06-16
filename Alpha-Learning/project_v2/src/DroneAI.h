@@ -11,6 +11,16 @@ struct Trajectory {
   Trajectory *next;
   Trajectory *prev;
   FlightMode flightmode;
+  int end = false;
+};
+
+struct HoopDistance {
+
+  float distToTrajectory;
+  float distToOrigin;
+  int intDist;
+  int n;
+
 };
 
 class DroneAI {
@@ -19,20 +29,9 @@ public:
 
   DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontrol);
 
-  int update();
-
-  void optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, int *count);
-
-  int antiCollision();
-
-  void sortHoops();
-
-  int originalTrajectory();
+  void update();
 
   void draw();
-  void drawTakeoffTrajectory();
-  void drawLoopTrajectory();
-  void drawLandingTrajectory();
 
 private:
 
@@ -40,10 +39,23 @@ private:
   DroneRoom *droneroom;
   DroneControl *dronecontrol;
 
-  // Trajectory Functions
+  //
 
-  // General Trajectory Functions
+  void droneStart();
+  void droneTakeoff();
+  void droneLoop();
+  void droneLanding();
+  void droneLand();
+
+  // Trajectory Functions
+  int originalTrajectory();
+  void optimizeTrajectory(Trajectory *currentPtr, Trajectory *headPtr, int *count);
   void startAllTrajectories();
+
+  // Draw
+  void drawTakeoffTrajectory();
+  void drawLoopTrajectory();
+  void drawLandingTrajectory();
 
   // Loop
   void startLoopTrajectory();
@@ -64,7 +76,6 @@ private:
   int finishLandingTrajectory();
 
   // Loop Trajectory
-
   Trajectory loopTrajectory[LOOP_TRAJECTORY_MAX]; // The Round
   Trajectory *loopHead;
   Trajectory *loopTail;
@@ -72,7 +83,6 @@ private:
   int loopTrajectoryCount = 0;
 
   // Landing / Takeoff Trajectory
-
   Trajectory landingwaypoint;
 
   Trajectory takeoffTrajectory[TAKEOFF_TRAJECTORY_MAX]; // Takeoff into the Round
@@ -86,6 +96,23 @@ private:
   Trajectory *landingTail;
   Trajectory *landingCurrent;
   int landingTrajectoryCount = 0;
+
+  ofVec3f landingplatform = ofVec3f(DRONE_START_X, DRONE_START_Y, DRONE_START_Z);
+  int calculatedLandingTrajectory = false;
+
+  // --- Anti Collision ---
+
+  ofVec3f antiCollision();
+
+  // --- Real Drone Functions ---
+
+  // --- Virtual Drone Functions ---
+
+  int move(float x, float y, float z);
+  int turn(float a);
+  int setPosition(float x, float y, float z);
+  int setTurn(float a);
+  int setDroneSensorHeight(float h);
 
 };
 

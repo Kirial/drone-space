@@ -7,19 +7,41 @@
 
 #define SCALE 1
 
-// Drone
+#define STARTLANDING 4.5*60 // Seconds
+#define DEADLINE 5*60 // Seconds
+
+// --- Drone ---
+
+// View
+
+#define DRONE_VIEW_Z_ANGLE 90
+#define DRONE_VIEW_Y_ANGLE 90
+#define DRONE_VIEW_OFFSET 100
+#define DRONE_VIEW_H 540
+#define DRONE_VIEW_W 720
+#define DRONE_COUNT 4
 
 #define DRONE_SAFETYDISTANCE 50 // "Radius"
+
+#define DRONE_ANGLE_OFFSET 5
 
 #define DRONE_START_X 300
 #define DRONE_START_Y 20
 #define DRONE_START_Z 300
 
-#define DRONE_STEADY_SPEEP 0.5
-#define DRONE_NORMAL_SPEEP 1 // m/s
-#define DRONE_FAST_SPEEP 2
-#define DRONE_INSANE_SPEEP 5
-#define DRONE_LUDICROUS_SPEEP 10
+#define DRONE_STEADY_SPEED 0.833
+#define DRONE_NORMAL_SPEED 1.667 // m/s
+#define DRONE_FAST_SPEED 2
+#define DRONE_INSANE_SPEED 5
+#define DRONE_LUDICROUS_SPEED 10
+
+#define DRONE_ROTATION_SPEED 5
+
+#define DRONE_ORIENTATION_VECTOR 100
+
+#define DRONE_BOX_X 44
+#define DRONE_BOX_Y 12
+#define DRONE_BOX_Z 44
 
 // Room
 
@@ -29,7 +51,7 @@
 
 // Hoop
 
-#define HOOP_COUNT 4
+#define HOOP_COUNT 6
 
 #define HOOP_RADIUS 35
 #define HOOP_THICKNESS 2
@@ -48,7 +70,7 @@
 
 // Hoop Random
 
-#define HOOP_RANDOM false
+#define HOOP_RANDOM true
 
 // Hoop A
 

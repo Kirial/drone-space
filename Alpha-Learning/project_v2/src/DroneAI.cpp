@@ -5,6 +5,8 @@
 #include "Drone.h"
 #include "DroneAI.h"
 
+bool sortByDist(const HoopDistance &lhs, const HoopDistance &rhs) { return lhs.intDist < rhs.intDist; }
+
 DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontrol) {
 
   drone = _drone;
@@ -31,15 +33,168 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
   }
   completeLoopTrajectory();
 
-  optimizeTrajection(loopCurrent,loopHead,&loopTrajectoryCount);
+  optimizeTrajectory(loopCurrent,loopHead,&loopTrajectoryCount);
 
-  // Initial Landing Trajectory
+}
 
-  addLandingPoint(droneroom->hoops[HOOP_COUNT-1].getExitPosition(),NORMAL);
-  addLandingPoint(landingwaypoint.point,NORMAL);
-  addLandingPoint(drone->node.getPosition(),LANDING);
-  finishLandingTrajectory();
+void DroneAI::update() {
 
+  if(ofGetElapsedTimeMillis() > DEADLINE*1000) {
+
+    // Time run out
+
+    if(drone->getDroneMode() != LANDED) {
+      droneLand();
+      return;
+    }
+
+    return;
+
+  }
+
+  if(ofGetElapsedTimeMillis() < STARTLANDING*1000) {
+
+    // Takeoff
+
+    if(drone->getDroneMode() == LANDED) {
+      droneStart();
+      return;
+    }
+
+    if(drone->getFlightMode() == TAKEOFF) {
+      droneTakeoff();
+      return;
+    }
+
+    // Loop
+
+    droneLoop();
+
+  } else {
+
+    // Landing
+
+    droneLanding();
+    return;
+
+  }
+}
+
+void DroneAI::droneStart() {
+
+  printf("Taking off!\n");
+
+  takeoffCurrent = takeoffTail;
+
+  drone->setDestination(takeoffCurrent->point);
+
+  printf("Destination - x: %f, y: %f, y: %f.\n",drone->getDestination().x,drone->getDestination().y,drone->getDestination().z);
+
+  drone->setDroneMode(AUTONOMOUS);
+  drone->setFlightMode(TAKEOFF);
+  printFlightMode(drone->getFlightMode());
+
+
+}
+
+void DroneAI::droneTakeoff() {
+
+  if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
+
+    if(!takeoffCurrent->end) {
+
+      takeoffCurrent = takeoffCurrent->next;
+
+      drone->setDestination(takeoffCurrent->point);
+      drone->setFlightMode(takeoffCurrent->flightmode);
+      printFlightMode(drone->getFlightMode());
+
+      //printf("End Destination - x: %f, y: %f, y: %f.\n",drone->getDestination().x,drone->getDestination().y,drone->getDestination().z);
+
+    } else {
+
+      //printf("END!\n");
+
+      loopCurrent = loopHead;
+      loopCurrent = loopCurrent->next;
+
+      drone->setFlightMode(loopCurrent->flightmode);
+      drone->setDestination(loopCurrent->point);
+      printFlightMode(drone->getFlightMode());
+
+      //printf("Destination - x: %f, y: %f, y: %f.\n",drone->getDestination().x,drone->getDestination().y,drone->getDestination().z);
+
+      //printf("STARTING LOOP!\n");
+
+    }
+
+  }
+
+}
+
+void DroneAI::droneLoop() {
+
+  if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
+
+    printf("New Loop Point.\n");
+
+    loopCurrent = loopCurrent->next;
+
+    drone->setFlightMode(loopCurrent->flightmode);
+    drone->setDestination(loopCurrent->point);
+
+  }
+
+}
+
+void DroneAI::droneLanding() {
+
+  if(!calculatedLandingTrajectory) {
+
+    printf("Starting to land!\n");
+
+    // Initial Landing Trajectory
+
+    addLandingPoint(drone->node.getPosition(),NORMAL);
+    addLandingPoint(landingwaypoint.point,NORMAL);
+    addLandingPoint(landingplatform,LANDING);
+    finishLandingTrajectory();
+
+    landingCurrent = landingTail->next;
+
+    calculatedLandingTrajectory = true;
+
+    drone->setFlightMode(landingCurrent->flightmode);
+    drone->setDestination(landingCurrent->point);
+
+  }
+
+  if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
+
+    if(!landingCurrent->end) {
+
+      landingCurrent = landingCurrent->next;
+
+      drone->setFlightMode(landingCurrent->flightmode);
+      drone->setDestination(landingCurrent->point);
+
+    } else if(drone->getDroneMode() != LANDED) {
+
+      printf("Landed!\n");
+      drone->setDroneMode(LANDED);
+
+    }
+  }
+}
+
+void DroneAI::droneLand() {
+
+  if(drone->getDroneMode() != LANDED) {
+    printf("Landing!\n");
+    drone->setDroneMode(LANDED);
+  } else {
+    printf("Landed!\n");
+  }
 }
 
 void DroneAI::draw() {
@@ -48,13 +203,12 @@ void DroneAI::draw() {
   drawLandingTrajectory();
 }
 
-// Calculate Trajection
+// Trajectory Functions
 
-void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, int *count) {
+// Optimize Trajectory
+void DroneAI::optimizeTrajectory(Trajectory *currentPtr, Trajectory *headPtr, int *count) {
 
   printf("Starting to optimize trajection\n");
-
-  //Hoop *sortedHoops[HOOP_COUNT];
 
   Trajectory *ptr = currentPtr;
 
@@ -87,14 +241,16 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
 
     printf("Flight distance AB: %f.\n", ABdist);
 
-    int checkHoops = HOOP_COUNT;
-    int hoopsToBeChecked[HOOP_COUNT];
+    int checkHoops = 0;
 
-    std::vector<int> hoopsDists;
+    HoopDistance hoopsToBeChecked[HOOP_COUNT];
 
     for(int j = 0; j < HOOP_COUNT; j++) {
 
-      hoopsToBeChecked[j] = false;
+      hoopsToBeChecked[j].n = j;
+      hoopsToBeChecked[j].intDist = 2147483647;
+      hoopsToBeChecked[j].distToOrigin = 0;
+      hoopsToBeChecked[j].distToTrajectory = 0;
 
     }
 
@@ -110,7 +266,7 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
 
       if(APmin < APdist) {
         printf("Hoop %i is is too far away.\n",j);
-        checkHoops--;
+        //checkHoops--;
         continue;
       }
 
@@ -118,30 +274,36 @@ void DroneAI::optimizeTrajection(Trajectory *currentPtr, Trajectory *headPtr, in
 
       if(BAPangle > 90) {
         printf("Hoop %i angle is too large.\n",j);
-        checkHoops--;
+        //checkHoops--;
         continue;
       }
-
-
 
       float pPdist = sin(ofDegToRad(BAPangle)) * APdist;
 
       if(pPdist > HOOP_SAFETYDISTANCE) {
         printf("Hoop %i is is outside the safety distance.\n",j);
+        //checkHoops--;
         continue;
       }
 
       printf("Hoop %i distance: %f, angle: %f.\n", j, AP.length(), AP.angle(AB));
 
-      hoopsDists.push_back(pDist);
+      // Push to array
 
-      hoopsToBeChecked[j] = true;
+      hoopsToBeChecked[j].distToOrigin = APdist;
+      hoopsToBeChecked[j].distToTrajectory = pPdist;
+      hoopsToBeChecked[j].intDist = (int)APdist;
+      checkHoops++;
 
     }
 
-    ofSort(hoopsDists, sortDescesding);
+    sort(&hoopsToBeChecked[0], &hoopsToBeChecked[HOOP_COUNT], sortByDist);
+
+    printf("Check Hoops Count: %i\n", checkHoops);
 
     for(int j = 0; j < checkHoops; j++) {
+
+      printf("Hoop %i with %i int dist, has distance %f to origin, and distance to trajectry %f.\n", hoopsToBeChecked[j].n, hoopsToBeChecked[j].intDist, hoopsToBeChecked[j].distToOrigin, hoopsToBeChecked[j].distToTrajectory);
 
     }
 
@@ -286,7 +448,7 @@ void DroneAI::startLandingTrajectory() {
 // Loop
 int DroneAI::addLoopPoint(ofVec3f point, FlightMode flight) {
 
-  //printf("Adding Loop Trajectory Point - x: %f, y: %f, y: %f.\n",point.x,point.y,point.z);
+  printf("Adding Loop Trajectory Point - x: %f, y: %f, y: %f.\n",point.x,point.y,point.z);
 
   loopHead->point = point;
   loopHead->flightmode = flight;
@@ -373,7 +535,7 @@ int DroneAI::insertTakeoffPoint(ofVec3f point, FlightMode flight) {
 
 }
 int DroneAI::finishTakeoffTrajectory() {
-  takeoffHead->prev->next = NULL;
+  takeoffHead->prev->end = true;
   return true;
 }
 
@@ -417,6 +579,22 @@ int DroneAI::insertLandingPoint(ofVec3f point, FlightMode flight) {
 
 }
 int DroneAI::finishLandingTrajectory() {
-  landingHead->prev->next = NULL;
+  landingHead->prev->end = true;
   return true;
 }
+
+// --- Anti Collision ---
+
+ofVec3f DroneAI::antiCollision() {}
+
+// --- Real Drone Functions ---
+
+
+
+// --- Virtual Drone Functions ---
+
+int DroneAI::move(float x, float y, float z) {}
+int DroneAI::turn(float a) {}
+int DroneAI::setPosition(float x, float y, float z) {}
+int DroneAI::setTurn(float a) {}
+int DroneAI::setDroneSensorHeight(float h) {}
