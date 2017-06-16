@@ -39,10 +39,12 @@ int DroneControl::keyboard(int key, bool keyPressed) {
     turnRightToggle(keyPressed);
     break;
     default:
-    case MAC_SPACE:
+    case MAC_SPACE_A:
+    case MAC_SPACE_B:
     upToggle(keyPressed);
     break;
-    case MAC_SHIFT:
+    case MAC_SHIFT_A:
+    case MAC_SHIFT_B:
     downToggle(keyPressed);
     break;
     return false;
@@ -85,7 +87,7 @@ int DroneControl::upToggle(bool keyPressed) {
     up = true;
     upDownSpeed = 0.1;
     return true;
-  } else if (up) {
+  } else if (up && !keyPressed) {
     printf("Stop going Up.\n");
     up = false;
     upDownSpeed = 0.0;
@@ -101,7 +103,7 @@ int DroneControl::downToggle(bool keyPressed) {
     upDownSpeed = -0.1;
     down = true;
     return true;
-  } else if (down) {
+  } else if (down && !keyPressed) {
     printf("Stop going down.\n");
     down = false;
     upDownSpeed = 0.0;
@@ -119,7 +121,7 @@ int DroneControl::forwardToggle(bool keyPressed) {
     forward = true;
     forwardBackwardSpeed = 0.1;
     return true;
-  } else if(forward) {
+  } else if(forward && !keyPressed) {
     printf("Stop going forward.\n");
     forward = false;
     forwardBackwardSpeed = 0.0;
@@ -135,7 +137,7 @@ int DroneControl::backwardToggle(bool keyPressed) {
     backward = true;
     forwardBackwardSpeed = -0.1;
     return true;
-  } else if(backward) {
+  } else if(backward && !keyPressed) {
     printf("Stop going backward.\n");
     backward = false;
     forwardBackwardSpeed = 0.0;
@@ -152,7 +154,7 @@ int DroneControl::strafeLeftToggle(bool keyPressed) {
     strafeLeft = true;
     strafeLeftRightSpeed = 0.1;
     return true;
-  } else if(strafeLeft) {
+  } else if(strafeLeft && !keyPressed) {
     printf("Stop strafing left.\n");
     strafeLeft = false;
     strafeLeftRightSpeed = 0.0;
@@ -168,7 +170,7 @@ int DroneControl::strafeRightToggle(bool keyPressed) {
     strafeRight = true;
     strafeLeftRightSpeed = -0.1;
     return true;
-  } else if(strafeRight) {
+  } else if(strafeRight && !keyPressed) {
     printf("Stop strafing right.\n");
     strafeRight = false;
     strafeLeftRightSpeed = 0.0;
@@ -185,7 +187,7 @@ int DroneControl::turnLeftToggle(bool keyPressed) {
     turnLeft = true;
     turnLeftRightSpeed = 0.1;
     return true;
-  } else if(turnLeft) {
+  } else if(turnLeft && !keyPressed) {
     printf("Stop turning Left.\n");
     turnLeft = false;
     turnLeftRightSpeed = 0.0;
@@ -201,7 +203,7 @@ int DroneControl::turnRightToggle(bool keyPressed) {
     turnRight = true;
     turnLeftRightSpeed = -0.1;
     return true;
-  } else if(turnRight) {
+  } else if(turnRight && !) {
     printf("Stop turning right.\n");
     turnRight = false;
     turnLeftRightSpeed = 0.0;
