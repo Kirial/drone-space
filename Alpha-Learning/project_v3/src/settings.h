@@ -12,22 +12,28 @@
 
 // --- Drone ---
 
-// View
+// Drone - View
 
-#define DRONE_VIEW_Z_ANGLE 90
-#define DRONE_VIEW_Y_ANGLE 90
-#define DRONE_VIEW_OFFSET 100
-#define DRONE_VIEW_H 540
-#define DRONE_VIEW_W 720
-#define DRONE_COUNT 4
+#define DRONE_VIEW_ANGLE 73
+
+#define DRONE_VIEW_PIXELCM 5
+#define DRONE_VIEW_H 720
+#define DRONE_VIEW_W 1280
+
+#define DRONE_VIEW_COUNT 4
+
+// Drone - Safety Distance
 
 #define DRONE_SAFETYDISTANCE 50 // "Radius"
-
 #define DRONE_ANGLE_OFFSET 5
+
+// Drone - Landing Platform
 
 #define DRONE_START_X 300
 #define DRONE_START_Y 20
 #define DRONE_START_Z 300
+
+// Drone - Speeds
 
 #define DRONE_STEADY_SPEED 0.833
 #define DRONE_NORMAL_SPEED 1.667 // m/s
@@ -38,6 +44,8 @@
 #define DRONE_ROTATION_SPEED 5
 
 #define DRONE_ORIENTATION_VECTOR 100
+
+// Drone - Appearance
 
 #define DRONE_BOX_X 44
 #define DRONE_BOX_Y 12
@@ -51,14 +59,12 @@
 
 // Hoop
 
-#define HOOP_COUNT 4
+#define HOOP_COUNT 6
 
-#define HOOP_RADIUS 35
+#define HOOP_RADIUS_A 40
+#define HOOP_RADIUS_B 45
+#define HOOP_RADIUS_C 50
 #define HOOP_THICKNESS 2
-
-#define HOOP_HITBOX_X DRONE_SAFETYDISTANCE*2
-#define HOOP_HITBOX_Y (DRONE_SAFETYDISTANCE+HOOP_RADIUS)*2
-#define HOOP_HITBOX_Z HOOP_HITBOX_Y
 
 #define HOOP_PASSAGE_X 140
 #define HOOP_PASSAGE_Y 20
@@ -70,7 +76,7 @@
 
 // Hoop Random
 
-#define HOOP_RANDOM false
+#define HOOP_RANDOM true
 
 // Hoop A
 
@@ -110,10 +116,106 @@
 
 // QR
 
+#define QR_REAL_COUNT 20
+
+// Wall 1
+
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+
+// Wall 2
+
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+
+// Wall 3
+
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+
+// Wall 4
+
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+#define QR_A_X 600
+#define QR_A_Y 180
+#define QR_A_Z 200
+#define QR_A_TEXT "A"
+
+// Original Test QR
+
 #define QR_COUNT 4
 
-#define QR_SIZE_Y 29
-#define QR_SIZE_X 31
+#define QR_SIZE_Y 22
+#define QR_SIZE_X 22
 
 #define QR_A_X 600
 #define QR_A_Y 180

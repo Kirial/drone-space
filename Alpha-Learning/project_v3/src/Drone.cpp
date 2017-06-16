@@ -12,20 +12,73 @@ Drone::Drone() {
   box.set(DRONE_BOX_X, DRONE_BOX_Y, DRONE_BOX_Z);
   node.setPosition(DRONE_START_X,DRONE_START_Y, DRONE_START_Z);
 
+  // Setup View Drawings
+
+  viewOffsetX = (DRONE_VIEW_W/2/DRONE_VIEW_PIXELCM)/(tan(ofDegToRad(DRONE_VIEW_ANGLE/2)));
+  viewOffsetY = DRONE_VIEW_H/2/DRONE_VIEW_PIXELCM;
+  viewOffsetZ = DRONE_VIEW_W/2/DRONE_VIEW_PIXELCM;
+
+  view[0].setPosition(viewOffsetX,viewOffsetY,-viewOffsetZ);
+  view[1].setPosition(viewOffsetX,viewOffsetY,viewOffsetZ);
+  view[2].setPosition(viewOffsetX,-viewOffsetY,viewOffsetZ);
+  view[3].setPosition(viewOffsetX,-viewOffsetY,-viewOffsetZ);
+
+  // Hoop
+
+  for(int i = 0; i < HOOP_COUNT; i++) {
+
+    viewedHoops[i].set(0,1,false);
+    viewedHoops[i].rotate(90,1,0,0);
+    viewedHoops[i].rotate(90,0,1,0);
+    viewedHoops[i].setParent(node);
+    viewedHoops[i].move(viewOffsetX, viewOffsetY, -viewOffsetZ);
+
+    projectedHoops[i].set(0,1,false);
+    projectedHoops[i].rotate(90,1,0,0);
+    projectedHoops[i].rotate(90,0,1,0);
+    projectedHoops[i].setParent(node);
+
+    viewedHoopsNumber[i] = false;
+
+  }
+
+  // QR
+
+  for(int i = 0; i < (HOOP_COUNT+QR_COUNT); i++) {
+
+    viewedQRs[i].set(0,0);
+    viewedQRs[i].rotate(90,1,0,0);
+    viewedQRs[i].rotate(90,0,0,1);
+    viewedQRs[i].setParent(node);
+    viewedQRs[i].move(viewOffsetX, viewOffsetY, -viewOffsetZ);
+
+    projectedQRs[i].set(0,0);
+    projectedQRs[i].rotate(90,1,0,0);
+    projectedQRs[i].rotate(90,0,0,1);
+    projectedQRs[i].setParent(node);
+
+    viewedQRsNumber[i] = false;
+
+  }
+
+  // Test Drawings
+
+  addHoop(40,40,100,7);
+  addHoop(60,60,100,8);
+  addHoop(100,100,100,9);
+
+  addQR(400,400,100,7);
+  addQR(500,500,100,8);
+  addQR(600,600,100,9);
+
+  // Set Flight- and DroneMode
+
   setFlightMode(NOTFLYING);
   setDroneMode(LANDED);
 
-  for(int i = 0; i < DRONE_COUNT; i++) {
+  for(int i = 0; i < 4; i++) {
     view[i].setParent(node);
   }
-
-  float angleZ = tan(ofDegToRad(DRONE_VIEW_Z_ANGLE/2))*DRONE_VIEW_OFFSET;
-  float angleY = tan(ofDegToRad(DRONE_VIEW_Y_ANGLE/2))*DRONE_VIEW_OFFSET;
-
-  view[0].setPosition(DRONE_VIEW_OFFSET,-angleZ,angleY);
-  view[1].setPosition(DRONE_VIEW_OFFSET,angleZ,angleY);
-  view[2].setPosition(DRONE_VIEW_OFFSET,angleZ,-angleY);
-  view[3].setPosition(DRONE_VIEW_OFFSET,-angleZ,-angleY);
 
 }
 
@@ -57,7 +110,7 @@ void Drone::drawView() {
 
   ofSetColor(ofColor::cyan);
 
-  for(int i = 0; i < DRONE_COUNT; i++) {
+  for(int i = 0; i < 4; i++) {
 
     ofDrawArrow(node.getGlobalPosition(),view[i].getGlobalPosition());
 
@@ -65,7 +118,81 @@ void Drone::drawView() {
 
   }
 
+  drawViewedHoops();
+  drawViewedQRs();
+
 }
+
+void Drone::addHoop(int x, int y, int h, int n) {
+
+  printf("Adding hoop - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
+
+  viewedHoops[seenHoopsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
+  viewedHoops[seenHoopsCount].set(h/DRONE_VIEW_PIXELCM,1,false);
+  viewedHoopsNumber[seenHoopsCount] = n;
+
+  seenHoopsCount++;
+
+}
+
+void Drone::resetHoops() {
+
+  seenHoopsCount = 0;
+
+}
+
+void Drone::addQR(int x, int y, int h, int n) {
+
+  viewedQRs[seenQRsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
+  viewedQRs[seenQRsCount].set(h/DRONE_VIEW_PIXELCM,h/DRONE_VIEW_PIXELCM);
+  viewedQRsNumber[seenQRsCount] = n;
+
+  seenQRsCount++;
+
+}
+
+void Drone::resetQRs() {
+
+  seenHoopsCount = 0;
+
+}
+
+void Drone::drawViewedHoops() {
+
+  for(int i = 0; i < seenHoopsCount; i++) {
+
+    ofSetColor(0,255,255); // Cyan
+    viewedHoops[i].draw();
+
+  }
+
+}
+
+void Drone::drawProjectedHoops() {
+
+  for(int i = 0; i < seenHoopsCount; i++) {
+
+
+  }
+
+}
+
+void Drone::drawViewedQRs() {
+
+  for(int i = 0; i < seenQRsCount; i++) {
+
+    ofSetColor(0,255,255); // Cyan
+    viewedQRs[i].draw();
+
+  }
+
+}
+
+void Drone::drawProjectedQRs() {
+
+
+}
+
 void Drone::update() {
 
   // Destination offset
@@ -82,16 +209,18 @@ void Drone::update() {
 
   if(angleRotationDirection.y > 0) angleOffset = -angleOffset;
 
+  //printf("Angle Offset: %f.\n", angleOffset);
+
 }
 void Drone::instruction() {
 
-  if(angleOffset > DRONE_ANGLE_OFFSET && dronemode != TAKEOFF && dronemode != LANDING) {
+  if(abs(angleOffset) > DRONE_ANGLE_OFFSET && dronemode != TAKEOFF && dronemode != LANDING) {
 
     ofVec3f angleRotationDirection = (direction.getPosition() * ofVec3f(1,0,1)).getCrossed(forward.getPosition());
 
     float angleRotation = DRONE_ROTATION_SPEED;
 
-    if(angleRotation > angleOffset) angleRotation = angleOffset;
+    if(angleRotation > abs(angleOffset)) angleRotation = abs(angleOffset);
 
     if(angleRotationDirection.y < 0) {
 

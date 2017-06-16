@@ -17,23 +17,20 @@ DroneControl::DroneControl() {
 int DroneControl::askHoop() {}
 int DroneControl::askHoopX(int n) {} // X position on camera
 int DroneControl::askHoopY(int n) {} // Y position on camera
-int DroneControl::askHoopRa(int n) {} // Vertical Radius
-int DroneControl::askHoopRb(int n) {} // Horizontal Radius
+int DroneControl::askHoopH(int n) {} // Vertical Radius
+int DroneControl::askHoopW(int n) {} // Horizontal Radius
 
 int DroneControl::askQR() {}
 int DroneControl::askQRX(int n) {}
 int DroneControl::askQRY(int n) {}
+int DroneControl::askQRH(int n) {}
+int DroneControl::askQRW(int n) {}
 
 // Drone Sensors
 int DroneControl::askHeight() {}
-int DroneControl::askMagnetometerOrientation() {}
+int DroneControl::askTrueAngle() {}
 
 // Drone Instructions
-int DroneControl::tellMove(int x, int y, int z) {}
-int DroneControl::tellTurn(int a) {}
-int DroneControl::tellSetSpeed(int ms) {}
-int DroneControl::tellForceMove(int x, int y, int z) {}
-int DroneControl::tellForceTurn(int a) {}
-int DroneControl::tellForceSetSpeed(int ms) {}
+int DroneControl::instruction(float x, float y, float z, float a) {}
 
 // ---
