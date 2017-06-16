@@ -13,6 +13,8 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
   droneroom = _droneroom;
   dronecontrol = _dronecontrol;
 
+  trueAngle = 0;
+
   trueAngleO.setGlobalPosition(0,0,0);
   trueAngleA.setParent(trueAngleO);
   trueAngleA.move(100,0,0);
@@ -161,7 +163,6 @@ void DroneAI::update() {
   return;
 
 }
-
 void DroneAI::draw() {
   drawLoopTrajectory();
   drawTakeoffTrajectory();
@@ -814,7 +815,7 @@ void DroneAI::getQRs() {
 }
 float DroneAI::getTrueAngleOffset() {
 
-  float newTrueAngle = dronecontrol->askTrueAngle();
+  float newTrueAngle = (float)dronecontrol->askTrueAngle();
 
   trueAngleO.rotate(trueAngle-newTrueAngle,0,1,0);
 
@@ -825,3 +826,10 @@ float DroneAI::getTrueAngleOffset() {
 }
 
 // --- Draw Drone Information ---
+
+void DroneAI::drawTrueAngle() {
+
+  ofSetColor(255,0,0);
+  ofDrawArrow(trueAngleO.getGlobalPosition(), trueAngleA.getGlobalPosition(), 0);
+
+}

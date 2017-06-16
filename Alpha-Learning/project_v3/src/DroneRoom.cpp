@@ -24,7 +24,6 @@ QR::QR() {
   plane.set(QR_SIZE_Y, QR_SIZE_X);
   plane.setParent(node);
 
-
 }
 
 void QR::draw() {

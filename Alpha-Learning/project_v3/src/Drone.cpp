@@ -125,7 +125,7 @@ void Drone::drawView() {
 
 void Drone::addHoop(int x, int y, int h, int n) {
 
-  printf("Adding hoop - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
+  //printf("Adding hoop - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
 
   viewedHoops[seenHoopsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
   viewedHoops[seenHoopsCount].set(h/DRONE_VIEW_PIXELCM,1,false);
@@ -143,6 +143,8 @@ void Drone::resetHoops() {
 
 void Drone::addQR(int x, int y, int h, int n) {
 
+  //printf("Adding QR - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
+
   viewedQRs[seenQRsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
   viewedQRs[seenQRsCount].set(h/DRONE_VIEW_PIXELCM,h/DRONE_VIEW_PIXELCM);
   viewedQRsNumber[seenQRsCount] = n;
@@ -153,7 +155,7 @@ void Drone::addQR(int x, int y, int h, int n) {
 
 void Drone::resetQRs() {
 
-  seenHoopsCount = 0;
+  seenQRsCount = 0;
 
 }
 
