@@ -48,6 +48,18 @@ private:
 
   int started;
 
+  // Drone Information
+
+  void getHoops();
+  void getQRs();
+
+  float getTrueAngleOffset();
+  void drawTrueAngle();
+
+  ofNode trueAngleO;
+  ofNode trueAngleA;
+  float trueAngle;
+
   // Calculate Position
 
   ofVec3f calculatePosition(); // Master
@@ -68,13 +80,6 @@ private:
   // --- Anti Collision ---
 
   ofVec3f antiCollision();
-
-  // --- Real Drone Functions ---
-
-  void instruction(float x, float y, float z, float a);
-  void getHoop();
-  void getQR();
-  void getXYZA();
 
   // Calculate Path
 

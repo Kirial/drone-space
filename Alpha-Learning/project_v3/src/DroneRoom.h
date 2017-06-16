@@ -47,10 +47,14 @@ public:
   Hoop();
 
   int number;
+  int radius;
+  ofVec3f orientation;
 
   void draw();
 
   void setPosition(float x,float y,float z);
+  void setRadius(int radius);
+  void setOrientation(ofVec3f orientation);
 
   ofVec3f getEntryPosition();
   ofVec3f getExitPosition();
