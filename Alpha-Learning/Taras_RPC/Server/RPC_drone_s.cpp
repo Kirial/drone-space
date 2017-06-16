@@ -1,11 +1,25 @@
 #include "RPC_drone_s.h"
 #include <iostream>
+#include "../../../ardrone/ardrone.h"	
+
+ARDrone ardrone;
 RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBindingHandle*/)
 {
 	return RPC_S_OK; // Always allow anyone.
 }
 
+
 void rpc_drone_s::RPC_setup() {
+
+
+	// Initialize
+	if (!ardrone.open()) {
+		std::cout << "Failed to initialize." << std::endl;
+		return;
+	}
+
+
+
 	RPC_STATUS status;
 
 	// Uses the protocol combined with the endpoint for receiving
@@ -94,9 +108,19 @@ int _askMagnetometerOrientation() {
 	return -1;
 }
 
+//printer vinklen på dronen
+
 int _askAngle() {
-	return 100;
+		
+	double yaw = ardrone.getYaw()*1000;
+	
+
+	std::cout << "Dronens vinkel er: " << yaw << std::endl << std::endl;
+
+	return (int)yaw;
 }
+
+
 
 // Drone Instructions (True, ready to move, false can't move now)
 int _tellMove(int x, int y, int z) {

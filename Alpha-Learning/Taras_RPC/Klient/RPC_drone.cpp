@@ -1,6 +1,8 @@
 #include "RPC_drone.h" 
 #include <iostream>
 #include "RPC_drone_interface_h.h" // man skal være sikker på at det er den rigtig path man angiver 
+#include "../mySketch/src/ofApp.h"
+
 
 RPC_STATUS status;
 RPC_CSTR szStringBinding = NULL;

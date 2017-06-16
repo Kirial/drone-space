@@ -4,9 +4,9 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Fri Jun 16 10:16:23 2017
+/* at Fri Jun 16 13:33:56 2017
  */
-/* Compiler settings for src\RPC_drone_Interface.idl:
+/* Compiler settings for RPC_drone_Interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
