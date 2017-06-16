@@ -20,6 +20,7 @@ public:
 	// Drone Sensors
 	int askHeight();
 	int askMagnetometerOrientation();
+	int askAngle();
 
 	// Drone Instructions (True, ready to move, false can't move now)
 	int tellMove(int x, int y, int z);

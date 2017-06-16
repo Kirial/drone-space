@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Wed Jun 14 11:21:36 2017
+/* at Fri Jun 16 10:07:52 2017
  */
 /* Compiler settings for src\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -81,6 +81,8 @@ int _askQRY(
 int _askHeight( void);
 
 int _askMagnetometerOrientation( void);
+
+int _askAngle( void);
 
 int _tellMove( 
     int x,

@@ -94,6 +94,10 @@ int _askMagnetometerOrientation() {
 	return -1;
 }
 
+int _askAngle() {
+	return 100;
+}
+
 // Drone Instructions (True, ready to move, false can't move now)
 int _tellMove(int x, int y, int z) {
 	std::cout << x << std::endl;

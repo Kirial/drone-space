@@ -280,6 +280,31 @@ int rpc_drone::askMagnetometerOrientation() {
 	return rtn_nr;
 }
 
+int rpc_drone::askAngle() {
+	int rtn_nr;
+	RpcTryExcept
+	{
+		rtn_nr = _askAngle();
+	}
+		RpcExcept(1)
+	{
+		std::cerr << "Runtime reported exception " << RpcExceptionCode()
+			<< std::endl;
+		return -1;
+	}
+	RpcEndExcept
+
+		// Free the memory allocated by a string.
+		status = RpcStringFreeA(
+			&szStringBinding); // String to be freed.
+
+	if (status)
+		std::exit(status);
+
+	return rtn_nr;
+}
+
+
 // Drone Instructions (True, ready to move, false can't move now)
 int rpc_drone::tellMove(int x, int y, int z) {
 	int rtn_nr;

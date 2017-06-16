@@ -28,7 +28,7 @@ interface cv_drone_int // The interface is named Example1
 	// Drone Sensors
 	int _askHeight();
 	int _askMagnetometerOrientation();
-
+	int _askAngle();
 	// Drone Instructions (True, ready to move, false can't move now)
 	int _tellMove(int x, int y, int z);
 	int _tellTurn(int a);
