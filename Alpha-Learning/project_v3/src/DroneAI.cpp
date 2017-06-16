@@ -13,6 +13,10 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
   droneroom = _droneroom;
   dronecontrol = _dronecontrol;
 
+  trueAngleO.setGlobalPosition(0,0,0);
+  trueAngleA.setParent(trueAngleO);
+  trueAngleA.move(100,0,0);
+
   started = false;
 
   startAI();
@@ -30,7 +34,6 @@ int DroneAI::startAI() {
   return true;
 
 }
-
 int DroneAI::stopAI() {
 
   if(!started) return false;
@@ -44,6 +47,20 @@ int DroneAI::stopAI() {
 void DroneAI::update() {
 
   if(!started) return;
+
+  // Get Drone Information
+
+    // Get True Angle
+
+    getTrueAngleOffset();
+
+    // Get Hoops
+
+    getHoops();
+
+    // QRs
+
+    getQRs();
 
   // Calculate Position
 
@@ -149,6 +166,7 @@ void DroneAI::draw() {
   drawLoopTrajectory();
   drawTakeoffTrajectory();
   drawLandingTrajectory();
+  drawTrueAngle();
 }
 
 // Drone AI Modes
@@ -197,7 +215,6 @@ void DroneAI::droneStart() {
 
 
 }
-
 void DroneAI::droneTakeoff() {
 
   if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
@@ -240,7 +257,6 @@ void DroneAI::droneTakeoff() {
   }
 
 }
-
 void DroneAI::droneLoop() {
 
   //printf("Looping.\n");
@@ -263,7 +279,6 @@ void DroneAI::droneLoop() {
   }
 
 }
-
 void DroneAI::droneLanding() {
 
   if(!calculatedLandingTrajectory) {
@@ -310,7 +325,6 @@ void DroneAI::droneLanding() {
     }
   }
 }
-
 void DroneAI::droneLand() {
 
   if(drone->getDroneMode() != LANDED) {
@@ -320,7 +334,6 @@ void DroneAI::droneLand() {
     printf("Landed!\n");
   }
 }
-
 void DroneAI::droneInstruct() {
 
   // Only turn left or right
@@ -537,7 +550,6 @@ void DroneAI::startAllTrajectories() {
   startLandingTrajectory();
 
 }
-
 void DroneAI::startLoopTrajectory() {
 
   printf("Starting Loop Trajectory\n");
@@ -559,7 +571,6 @@ void DroneAI::startLoopTrajectory() {
   loopTrajectoryCount = 0;
 
 }
-
 void DroneAI::startTakeoffTrajectory() {
 
   // Takeoff Trajectory
@@ -749,7 +760,68 @@ ofVec3f DroneAI::antiCollision() {}
 
 // --- Real Drone Functions ---
 
-void DroneAI::instruction(float x, float y, float z, float a) {}
-void DroneAI::getHoop() {}
-void DroneAI::getQR() {}
-void DroneAI::getXYZA() {}
+void DroneAI::getHoops() {
+
+  drone->resetHoops();
+
+  int hoopsNow = dronecontrol->askHoops();
+
+  int binary, x, y, h, n = 1;
+
+  for(int i = 0; i < HOOP_COUNT * 2; i++) {
+
+    if(binary & hoopsNow) {
+
+      x = dronecontrol->askHoopX(binary);
+      y = dronecontrol->askHoopY(binary);
+      h = dronecontrol->askHoopH(binary);
+      n = i + 1;
+
+      if(n > 6) n = false;
+
+      drone->addHoop(x,y,h,n);
+
+    }
+
+    binary = binary * 2;
+
+  }
+
+}
+void DroneAI::getQRs() {
+
+  drone->resetQRs();
+
+  int QRsNow = dronecontrol->askQRs();
+
+  int binary, x, y, h, n = 1;
+
+  for(int i = 0; i < (HOOP_COUNT + QR_REAL_COUNT); i++) {
+
+    if(binary & QRsNow) {
+
+      x = dronecontrol->askQRX(binary);
+      x = dronecontrol->askQRY(binary);
+      x = dronecontrol->askQRH(binary);
+      n = i + 1;
+
+      drone->addQR(x,y,h,n);
+
+    }
+
+  }
+
+}
+float DroneAI::getTrueAngleOffset() {
+
+  float newTrueAngle = dronecontrol->askTrueAngle();
+
+  trueAngleO.rotate(trueAngle-newTrueAngle,0,1,0);
+
+  trueAngle = newTrueAngle;
+
+  return trueAngle;
+
+}
+
+// --- Draw Drone Information ---

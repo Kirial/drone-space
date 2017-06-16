@@ -42,16 +42,19 @@ void QR::setPosition(float x, float y, float z) {
 
 Hoop::Hoop() {
 
+  radius = HOOP_RADIUS_C;
+  orientation = ofVec3f(0,0,1);
+
   // Hoop
   hoop.rotate(90,0,0,1);
-  hoop.set(HOOP_RADIUS, HOOP_THICKNESS,false);
+  hoop.set(radius, HOOP_THICKNESS,false);
   hoop.setParent(node);
 
   // Stand
   //stand.setParent(node);
 
   // Hitbox
-  hitbox.set(HOOP_HITBOX_X, HOOP_HITBOX_Y, HOOP_HITBOX_Z);
+  hitbox.set(DRONE_SAFETYDISTANCE*2, (DRONE_SAFETYDISTANCE+radius)*2, (DRONE_SAFETYDISTANCE+radius)*2);
   hitbox.node.setParent(node);
 
   // Passage
@@ -80,6 +83,23 @@ void Hoop::draw() {
 
 }
 
+void Hoop::setRadius(int _radius) {
+
+  radius = _radius;
+  hoop.set(radius, HOOP_THICKNESS,false);
+
+}
+
+void Hoop::setOrientation(ofVec3f _orientation) {
+
+  float angle = orientation.angle(_orientation);
+
+  orientation = _orientation;
+
+  node.rotate(angle,0,1,0);
+
+}
+
 ofVec3f Hoop::getEntryPosition() {
   return entrypoint.node.getGlobalPosition();
 }
@@ -95,8 +115,8 @@ ofVec3f Hoop::getPosition() {
 void Hoop::setPosition(float x, float y, float z) {
 
   node.setPosition(x,y,z);
-  stand.setPosition(x,(y-HOOP_RADIUS)/2,z);
-  stand.set(HOOP_THICKNESS,y-HOOP_RADIUS);
+  stand.setPosition(x,(y-radius)/2,z);
+  stand.set(HOOP_THICKNESS,y-radius);
 
 }
 
