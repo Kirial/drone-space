@@ -12,7 +12,7 @@ Drone::Drone() {
   box.set(DRONE_BOX_X, DRONE_BOX_Y, DRONE_BOX_Z);
   node.setPosition(DRONE_START_X,DRONE_START_Y, DRONE_START_Z);
 
-  setFlightMode(TAKEOFF);
+  setFlightMode(NOTFLYING);
   setDroneMode(LANDED);
 
   for(int i = 0; i < DRONE_COUNT; i++) {
@@ -29,6 +29,7 @@ Drone::Drone() {
 
 }
 
+// Update, Draw
 void Drone::draw() {
 
   // The Drone
@@ -41,10 +42,17 @@ void Drone::draw() {
   // Draw Destination Vector
   ofDrawArrow(node.getGlobalPosition(), destination, 0);
 
+  // Draw Destination Offset Vector
+  ofSetColor(0,0,255);
+  ofDrawArrow(node.getGlobalPosition(), node.getGlobalPosition() + destinationOffset, 20);
+
+  // Draw Direction Vector
+  ofSetColor(255,255,0);
+  ofDrawArrow(node.getGlobalPosition(), direction.getGlobalPosition(), 20);
+
   drawView();
 
 }
-
 void Drone::drawView() {
 
   ofSetColor(ofColor::cyan);
@@ -58,22 +66,26 @@ void Drone::drawView() {
   }
 
 }
-
 void Drone::update() {
 
-  // Destination Offset
+  // Destination offset
 
   destinationOffset = destination - node.getGlobalPosition();
 
   direction.setGlobalPosition(destination);
 
-  // Rotation
+  // Rotation angle offset
 
   angleOffset = (direction.getPosition() * ofVec3f(1,0,1)).angle(forward.getPosition());
 
-  //printf("Angle Offset %f.\n",angleOffset);
+  angleRotationDirection = (direction.getPosition() * ofVec3f(1,0,1)).getCrossed(forward.getPosition());
 
-  if(angleOffset > DRONE_ANGLE_OFFSET && flightmode != TAKEOFF && flightmode != LANDING) {
+  if(angleRotationDirection.y > 0) angleOffset = -angleOffset;
+
+}
+void Drone::instruction() {
+
+  if(angleOffset > DRONE_ANGLE_OFFSET && dronemode != TAKEOFF && dronemode != LANDING) {
 
     ofVec3f angleRotationDirection = (direction.getPosition() * ofVec3f(1,0,1)).getCrossed(forward.getPosition());
 
@@ -99,8 +111,6 @@ void Drone::update() {
 
   }
 
-  if(angleOffset > 90) return;
-
   if(destinationOffset.length()) {
 
     //printf("Moving drone.\n");
@@ -116,8 +126,10 @@ void Drone::update() {
     node.move(moveDistance * destinationOffset.getNormalized());
 
   }
+
 }
 
+// Godlike
 ofVec3f Drone::getPosition() {
 
   return node.getGlobalPosition();
@@ -132,6 +144,8 @@ ofVec3f Drone::setPosition(ofVec3f position) {
   return difference;
 
 }
+
+// Autonomous
 ofVec3f Drone::getDestination() {
  return destination;
 }
@@ -146,13 +160,25 @@ ofVec3f Drone::setDestination(ofVec3f _destination) {
   return result;
 
 }
+ofVec3f Drone::getDirection() {
+  return direction.getPosition();
+}
+ofVec3f Drone::getDestinationOffset() {
+  return destinationOffset;
+}
 float Drone::getDestinationDistance() {
 
   //printf("Distance: %f.\n", destinationOffset.length());
 
   return destinationOffset.length();
 }
+float Drone::getAngleOffset() {
 
+  return angleOffset;
+
+}
+
+// Flightmode and Speed
 void Drone::setFlightMode(FlightMode _flightmode) {
   flightmode = _flightmode;
 
@@ -161,11 +187,9 @@ void Drone::setFlightMode(FlightMode _flightmode) {
       speed = 0;
       break;
     case STEADY:
-    case LANDING:
       speed = DRONE_STEADY_SPEED;
       break;
     case NORMAL:
-    case TAKEOFF:
       speed = DRONE_NORMAL_SPEED;
       break;
     case FAST:
@@ -182,49 +206,70 @@ void Drone::setFlightMode(FlightMode _flightmode) {
       break;
   }
 }
-
+FlightMode Drone::getFlightMode() {
+  return flightmode;
+}
 int Drone::getSpeed() {
   return speed;
 }
 
-FlightMode Drone::getFlightMode() {
-  return flightmode;
-}
-
+// Drone Mode
 void Drone::setDroneMode(DroneMode _dronemode) {
   dronemode = _dronemode;
 }
-
 DroneMode Drone::getDroneMode() {
   return dronemode;
 }
-
 void printFlightMode(FlightMode flightmode) {
 
   switch(flightmode) {
-    case FAST:
-      printf("FAST\n");
-      break;
-    case NORMAL:
-      printf("NORMAL\n");
+    case NOTFLYING:
+      printf("NOTFLYING\n");
       break;
     case STEADY:
       printf("STEADY\n");
       break;
-    case TAKEOFF:
-      printf("STEADY\n");
+    case NORMAL:
+      printf("NORMAL\n");
       break;
-    case LANDING:
-      printf("LANDING\n");
-      break;
-    case NOTFLYING:
-      printf("NOTFLYING\n");
+    case FAST:
+      printf("FAST\n");
       break;
     case INSANE:
       printf("INSANE\n");
       break;
     case LUDICROUS:
       printf("LUDICROUS\n");
+      break;
+    default:
+    break;
+
+  }
+
+}
+void printDroneMode(DroneMode dronemode) {
+
+  switch(dronemode) {
+    case READY:
+      printf("READY\n");
+      break;
+    case HOLD:
+      printf("HOLD\n");
+      break;
+    case AUTONOMOUS:
+      printf("AUTONOMOUS\n");
+      break;
+    case MANUAL:
+      printf("MANUAL\n");
+      break;
+    case LANDED:
+      printf("LANDED\n");
+      break;
+    case TAKEOFF:
+      printf("TAKEOFF\n");
+      break;
+    case LANDING:
+      printf("LANDING\n");
       break;
     default:
     break;

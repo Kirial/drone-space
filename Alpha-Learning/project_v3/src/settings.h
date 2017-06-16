@@ -51,7 +51,7 @@
 
 // Hoop
 
-#define HOOP_COUNT 6
+#define HOOP_COUNT 4
 
 #define HOOP_RADIUS 35
 #define HOOP_THICKNESS 2
@@ -70,7 +70,7 @@
 
 // Hoop Random
 
-#define HOOP_RANDOM true
+#define HOOP_RANDOM false
 
 // Hoop A
 

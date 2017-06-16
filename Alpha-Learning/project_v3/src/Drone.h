@@ -3,11 +3,12 @@
 
 #include "ofMain.h"
 
-enum DroneMode {READY, HOLD, AUTONOMOUS, MANUAL, LANDED};
+enum DroneMode {READY, HOLD, AUTONOMOUS, MANUAL, LANDED, TAKEOFF, LANDING};
 
-enum FlightMode {FAST, NORMAL, STEADY, TAKEOFF, LANDING, NOTFLYING, INSANE, LUDICROUS};
+enum FlightMode {NOTFLYING, STEADY, NORMAL, FAST, INSANE, LUDICROUS};
 
 void printFlightMode(FlightMode flightmode);
+void printDroneMode(DroneMode dronemode);
 
 class Drone {
 
@@ -17,10 +18,7 @@ public:
 
   void draw();
   void update();
-
-  // View
-
-  void drawView();
+  void instruction();
 
   // Godlike
 
@@ -31,8 +29,10 @@ public:
 
   ofVec3f setDestination(ofVec3f _destination); // Set new destination.
   ofVec3f getDestination(); // Return diffence vector.
+  ofVec3f getDirection();
+  ofVec3f getDestinationOffset();
   float getDestinationDistance();
-  int onPoint();
+  float getAngleOffset();
 
   // Set DroneMode(Speed) and FlightMode
 
@@ -42,9 +42,16 @@ public:
   void setDroneMode(DroneMode _dronemode);
   DroneMode getDroneMode();
 
+  // Control
+
+  void move(ofVec3f);
+  void turn(float a);
+
   ofNode node;
 
 private:
+
+  void drawView();
 
   ofNode view[4];
 
@@ -56,12 +63,14 @@ private:
   ofVec3f destination;
   ofVec3f destinationOffset;
 
+  ofVec3f angleRotationDirection;
+
   float speed;
 
   FlightMode flightmode;
   DroneMode dronemode;
 
-  float newAngle, angle, angleOffset;
+  float angleOffset;
 
 };
 
