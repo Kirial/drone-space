@@ -5,7 +5,8 @@ RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBind
 	return RPC_S_OK; // Always allow anyone.
 }
 
-void rpc_drone_s::RPC_setup() {
+void rpc_drone_s::RPC_setup(ARDrone *_ardrone) {
+	ardrone = _ardrone;
 	RPC_STATUS status;
 
 	// Uses the protocol combined with the endpoint for receiving
@@ -89,14 +90,18 @@ int _askQRsize(int n) {
 }
 
 int _askYaw() {
-	std::cout << 10 << std::endl;
-	return 10;
+	double yaw = ardrone->getYaw() * RAD_TO_DEG * 1000;
+	return (int)yaw;
 }
 
 // Drone Instructions (True, ready to move, false can't move now)
 int _instruct(int x, int y, int z, int alfa) {
-	std::cout << x << std::endl;
-	return x;
+	double vx = x/100;
+	double vy = y/100;
+	double vz = z/100;
+	double vr = (alfa/180)*3.14;
+	ardrone->move3D(vx, vy, vz,  vr);
+	return 1;
 }
 
 
