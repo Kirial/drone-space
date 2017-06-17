@@ -5,9 +5,11 @@
 
 // --- Constructor
 
-DroneControl::DroneControl(Drone *_drone) {
+DroneControl::DroneControl(Drone *_drone, ARDrone *_ardrone, CV *_cv) {
 
   drone = _drone;
+  ardrone = _ardrone;
+  cv = _cv;
 
   // Setup RPC... something something
 
@@ -15,7 +17,9 @@ DroneControl::DroneControl(Drone *_drone) {
 
 // --- RPC Functions ---
 
-// Computer Vision
+/* Made into functions pointers
+
+// Computer Vision Func
 int DroneControl::askHoops() {return 0;}
 int DroneControl::askHoopX(int n) {return 0;} // X position on camera
 int DroneControl::askHoopY(int n) {return 0;} // Y position on camera
@@ -31,6 +35,8 @@ int DroneControl::askQRsize(int n) {return 0;}
 int DroneControl::askHeight() {return 0;}
 int DroneControl::askTrueAngle() {return 0;}
 
+
+
 // Drone Instructions
 int DroneControl::instruction(float x, float y, float z, float a) {return 0;}
 int DroneControl::takeoff() {
@@ -40,6 +46,8 @@ int DroneControl::land() {
   printf("Land Instruction!\n");
   return 0;
 }
+
+*/
 
 // ---
 

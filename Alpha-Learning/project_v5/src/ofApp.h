@@ -1,6 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
+#include "DroneRoom.h"
+#include "Drone.h"
+#include "DroneControl.h"
+#include "DroneAI.h"
+#include "UserInterface.h"
+#include "ARDrone.h"
+#include "CV.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +27,29 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+
+	private:
+
+		int keys[256];
+
+		ofEasyCam camera;
+		ofLight light;
+
+		ofNode originNode;
+
+		// RPC rpc
+
+		// ARDrone ardrone = ARDrone(&rpc);
+		// CV cv = CV(&rpc);
+
+		Drone drone;
+		DroneRoom droneroom;
+		ARDrone ardrone;
+		CV cv;
+		DroneControl dronecontrol = DroneControl(&drone, &ardrone, &cv);
+		DroneAI droneai = DroneAI(&drone, &droneroom, &dronecontrol);
+		UserInterface userinterface = UserInterface(&dronecontrol, &droneai);
+
+
+
 };
