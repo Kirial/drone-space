@@ -1,12 +1,12 @@
 
 
-/* this ALWAYS GENERATED file contains the RPC client stubs */
+/* this ALWAYS GENERATED file contains the RPC server stubs */
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sat Jun 17 18:43:42 2017
+/* at Sat Jun 17 22:50:35 2017
  */
-/* Compiler settings for src\RPC_drone_interface.idl:
+/* Compiler settings for src_fraNiklas\Klient\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -32,7 +32,6 @@
 #pragma optimize("", off ) 
 
 #include <string.h>
-
 #include "RPC_drone_interface_h.h"
 
 #define TYPE_FORMAT_STRING_SIZE   3                                 
@@ -63,272 +62,33 @@ typedef struct _RPC_drone_interface_MIDL_EXPR_FORMAT_STRING
 static const RPC_SYNTAX_IDENTIFIER  _RpcTransferSyntax = 
 {{0x8A885D04,0x1CEB,0x11C9,{0x9F,0xE8,0x08,0x00,0x2B,0x10,0x48,0x60}},{2,0}};
 
-
 extern const RPC_drone_interface_MIDL_TYPE_FORMAT_STRING RPC_drone_interface__MIDL_TypeFormatString;
 extern const RPC_drone_interface_MIDL_PROC_FORMAT_STRING RPC_drone_interface__MIDL_ProcFormatString;
 extern const RPC_drone_interface_MIDL_EXPR_FORMAT_STRING RPC_drone_interface__MIDL_ExprFormatString;
 
-#define GENERIC_BINDING_TABLE_SIZE   0            
-
-
 /* Standard interface: cv_drone_int, ver. 1.0,
    GUID={0x00000001,0xEAF3,0x4A7A,{0xA0,0xF2,0xBC,0xE4,0xC3,0x0D,0xA7,0x7E}} */
 
-handle_t hcv_drone_intBinding;
 
+extern const MIDL_SERVER_INFO cv_drone_int_ServerInfo;
 
-static const RPC_CLIENT_INTERFACE cv_drone_int___RpcClientInterface =
+extern const RPC_DISPATCH_TABLE cv_drone_int_v1_0_DispatchTable;
+
+static const RPC_SERVER_INTERFACE cv_drone_int___RpcServerInterface =
     {
-    sizeof(RPC_CLIENT_INTERFACE),
+    sizeof(RPC_SERVER_INTERFACE),
     {{0x00000001,0xEAF3,0x4A7A,{0xA0,0xF2,0xBC,0xE4,0xC3,0x0D,0xA7,0x7E}},{1,0}},
     {{0x8A885D04,0x1CEB,0x11C9,{0x9F,0xE8,0x08,0x00,0x2B,0x10,0x48,0x60}},{2,0}},
+    (RPC_DISPATCH_TABLE*)&cv_drone_int_v1_0_DispatchTable,
     0,
     0,
     0,
-    0,
-    0,
-    0x00000000
+    &cv_drone_int_ServerInfo,
+    0x04000000
     };
-RPC_IF_HANDLE cv_drone_int_v1_0_c_ifspec = (RPC_IF_HANDLE)& cv_drone_int___RpcClientInterface;
+RPC_IF_HANDLE cv_drone_int_v1_0_s_ifspec = (RPC_IF_HANDLE)& cv_drone_int___RpcServerInterface;
 
 extern const MIDL_STUB_DESC cv_drone_int_StubDesc;
-
-static RPC_BINDING_HANDLE cv_drone_int__MIDL_AutoBindHandle;
-
-
-int _askHoops( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[0],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askHoopX( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[30],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askHoopY( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[66],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askHoopH( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[102],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askHoopW( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[138],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askQR( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[174],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askQRX( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[204],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askQRY( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[240],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askQRsize( 
-    int n)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[276],
-                  ( unsigned char * )&n);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askYaw( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[312],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askHeight( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[342],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askPitch( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[372],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _askRoll( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[402],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _inctruct( 
-    int x,
-    int y,
-    int z,
-    int alfa)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[432],
-                  ( unsigned char * )&x);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _takeOff( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[486],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int _land( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[516],
-                  ( unsigned char * )0);
-    return ( int  )_RetVal.Simple;
-    
-}
 
 
 #if !defined(__RPC_WIN32__)
@@ -846,10 +606,10 @@ static const unsigned short cv_drone_int_FormatStringOffsetTable[] =
 
 static const MIDL_STUB_DESC cv_drone_int_StubDesc = 
     {
-    (void *)& cv_drone_int___RpcClientInterface,
+    (void *)& cv_drone_int___RpcServerInterface,
     MIDL_user_allocate,
     MIDL_user_free,
-    &hcv_drone_intBinding,
+    0,
     0,
     0,
     0,
@@ -867,6 +627,63 @@ static const MIDL_STUB_DESC cv_drone_int_StubDesc =
     0,   /* proxy/server info */
     0
     };
+
+static const RPC_DISPATCH_FUNCTION cv_drone_int_table[] =
+    {
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    NdrServerCall2,
+    0
+    };
+static const RPC_DISPATCH_TABLE cv_drone_int_v1_0_DispatchTable = 
+    {
+    16,
+    (RPC_DISPATCH_FUNCTION*)cv_drone_int_table
+    };
+
+static const SERVER_ROUTINE cv_drone_int_ServerRoutineTable[] = 
+    {
+    (SERVER_ROUTINE)_askHoops,
+    (SERVER_ROUTINE)_askHoopX,
+    (SERVER_ROUTINE)_askHoopY,
+    (SERVER_ROUTINE)_askHoopH,
+    (SERVER_ROUTINE)_askHoopW,
+    (SERVER_ROUTINE)_askQR,
+    (SERVER_ROUTINE)_askQRX,
+    (SERVER_ROUTINE)_askQRY,
+    (SERVER_ROUTINE)_askQRsize,
+    (SERVER_ROUTINE)_askYaw,
+    (SERVER_ROUTINE)_askHeight,
+    (SERVER_ROUTINE)_askPitch,
+    (SERVER_ROUTINE)_askRoll,
+    (SERVER_ROUTINE)_inctruct,
+    (SERVER_ROUTINE)_takeOff,
+    (SERVER_ROUTINE)_land
+    };
+
+static const MIDL_SERVER_INFO cv_drone_int_ServerInfo = 
+    {
+    &cv_drone_int_StubDesc,
+    cv_drone_int_ServerRoutineTable,
+    RPC_drone_interface__MIDL_ProcFormatString.Format,
+    cv_drone_int_FormatStringOffsetTable,
+    0,
+    0,
+    0,
+    0};
 #pragma optimize("", on )
 #if _MSC_VER >= 1200
 #pragma warning(pop)

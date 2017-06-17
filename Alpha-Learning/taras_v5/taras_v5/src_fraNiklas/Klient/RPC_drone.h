@@ -30,6 +30,6 @@ public:
 
 	// drone control 
 	int inctruct(int x, int y, int z, int alfa);
-	int takeOff();
-	int land();
+	int takeOff(void);
+	int land(void);
 };

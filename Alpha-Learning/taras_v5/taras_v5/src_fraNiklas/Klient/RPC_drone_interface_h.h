@@ -95,9 +95,9 @@ int _inctruct(
     int z,
     int alfa);
 
-int _takeOff( void);
+int _takeOff();
 
-int _land( void);
+int _land();
 
 
 extern handle_t hcv_drone_intBinding;

@@ -8,6 +8,8 @@ RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBind
 ARDrone *ardrone;
 imPros image_reader;
 bool qr_read;
+int found;
+
 void rpc_drone_s::RPC_setup(ARDrone *_ardrone) {
 	ardrone = _ardrone;
 	RPC_STATUS status;
@@ -77,7 +79,7 @@ int _askHoopW(int n) {
 
   // CV - QR
 int _askQR() {
-	int found = image_reader.getQR(ardrone->getImage());
+	found = image_reader.getQR(ardrone->getImage());
 	int rtrn_value=0;
 	for (int i = 0; i < found; i++) {
 		rtrn_value = rtrn_value | image_reader.array_qr->code;
@@ -87,7 +89,12 @@ int _askQR() {
 
 }
 int _askQRX(int n) {
-	return 0;
+
+	for (int i = 0; i < found; i++) {
+		image_reader.array_qr;
+	}
+	
+	return -1;
 }
 int _askQRY(int n) {
 	std::cout << n << std::endl;
@@ -106,23 +113,28 @@ int _askYaw() {
 
 // Drone Sensors
 int _askPitch() {
-	std::cout << 12 << std::endl;
-	return 12;
+	double tempPitch = ardrone->getPitch() * RAD_TO_DEG * 1000;
+	return (int)tempPitch;
 }
 
 int _askRoll() {
-	std::cout << 13 << std::endl;
-	return 13;
+	double tempRoll = ardrone->getRoll() * RAD_TO_DEG * 1000;
+	return (int)tempRoll;
+
 }
 
 // Drone Sensors
 int _askHeight() {
-	std::cout << 14 << std::endl;
-	return 14;
+	double tempH = ardrone->getAltitude();
+	return (int)tempH * 100;
 }
 
 // Drone Instructions (True, ready to move, false can't move now)
 int _instruct(int x, int y, int z, int alfa) {
+	cout << x <<" ";
+	cout << y <<" ";
+	cout << z <<" ";
+	cout << alfa <<endl;
 	double vx = x / 100;
 	double vy = y / 100;
 	double vz = z / 100;
