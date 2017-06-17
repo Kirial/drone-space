@@ -42,6 +42,8 @@ public:
 private:
 
   Trajectory *currentPath;
+  Trajectory tmpPath;
+  int followTmpPath = false;
 
   Drone *drone;
   DroneRoom *droneroom;
@@ -97,6 +99,7 @@ private:
   void drawTakeoffTrajectory();
   void drawLoopTrajectory();
   void drawLandingTrajectory();
+  void drawTmpPath();
 
   // Loop
   void startLoopTrajectory();
