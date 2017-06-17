@@ -3,29 +3,30 @@
 
 class rpc_drone {
 public:
-	// setup functions 
+	// CV - Hoops
 	void rpc_innit();
 	void rpc_exit();
-
-	// elipse functions  
-	int askHoops();
+	int askHoop();
 	int askHoopX(int n); // X position on camera
 	int askHoopY(int n); // Y position on camera
-	int askHoopH(int n); // Vertical Radius
-	int askHoopW(int n); // Horizontal Radius
+	int askHoopRa(int n); // Vertical Radius
+	int askHoopRb(int n); // Horizontal Radius
 
-
-	// CV - QR
+						  // CV - QR
 	int askQR();
 	int askQRX(int n);
 	int askQRY(int n);
-	int askQRsize(int n);
 
-
-	// Drone Sensors and controll 
-	int askYaw();
-	int inctruct(int x, int y, int z, int alfa);
+	// Drone Sensors
 	int askHeight();
-	int askPitch();
-	int askRoll();
+	int askMagnetometerOrientation();
+	int askAngle();
+
+	// Drone Instructions (True, ready to move, false can't move now)
+	int tellMove(int x, int y, int z);
+	int tellTurn(int a);
+	int tellSetSpeed(int ms);
+	int tellForceMove(int x, int y, int z);
+	int tellForceTurn(int a);
+	int tellForceSetSpeed(int ms);
 };

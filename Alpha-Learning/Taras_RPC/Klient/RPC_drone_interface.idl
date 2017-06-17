@@ -14,24 +14,26 @@ import "ocidl.idl";
 ]
 interface cv_drone_int // The interface is named Example1
 {
-	int _askHoops();
+	int _askHoop();
 	int _askHoopX(int n); // X position on camera
 	int _askHoopY(int n); // Y position on camera
-	int _askHoopH(int n); // Vertical Radius
-	int _askHoopW(int n); // Horizontal Radius
+	int _askHoopRa(int n); // Vertical Radius
+	int _askHoopRb(int n); // Horizontal Radius
 
-	
-	// CV - QR
+						  // CV - QR
 	int _askQR();
 	int _askQRX(int n);
 	int _askQRY(int n);
-	int _askQRsize(int n);
-
 
 	// Drone Sensors
-	int _askYaw();
-	int _inctruct(int x, int y, int z, int alfa);
 	int _askHeight();
-	int _askPitch();
-	int _askRoll();
+	int _askMagnetometerOrientation();
+	int _askAngle();
+	// Drone Instructions (True, ready to move, false can't move now)
+	int _tellMove(int x, int y, int z);
+	int _tellTurn(int a);
+	int _tellSetSpeed(int ms);
+	int _tellForceMove(int x, int y, int z);
+	int _tellForceTurn(int a);
+	int _tellForceSetSpeed(int ms);
 }
