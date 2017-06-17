@@ -67,7 +67,7 @@
 
 // Hoop
 
-#define HOOP_COUNT 6
+#define HOOP_COUNT 2
 
 #define HOOP_RADIUS_A 40
 #define HOOP_RADIUS_B 45

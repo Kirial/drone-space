@@ -96,48 +96,79 @@ float Wirebox::inside(ofVec3f position, ofVec3f *result) {
 
   tmpResult.set(0,0,0);
 
+
   positionNode.setGlobalPosition(position);
 
+  /*
+
+      printf("X: %f\n", X);
+      printf("Y: %f\n", Y);
+      printf("Z: %f\n", Z);
+
+    //centerNode.setPosition(node.getGlobalPosition());
+
+      printf("Center X: %f\n", node.getX());
+      printf("Center Y: %f\n", node.getY());
+      printf("Center Z: %f\n", node.getZ());
+
+
+
+    //positionNode.setParent(node);
+    //positionNode.setOrientation(setVectorOrientation(node.getUpDir()));
+
+    printf("Drone X: %f\n", positionNode.getX());
+    printf("Drone Y: %f\n", positionNode.getY());
+    printf("Drone Z: %f\n", positionNode.getZ());
+
+    */
+
   if(positionNode.getX() > X/2) {
-    //printf("Outside Front.\n");
+    //printf("Outside North.\n");
     tmpResult = tmpResult + ofVec3f(positionNode.getX() - X/2,0,0);
 
   } else if(positionNode.getX() < -X/2) {
-    //printf("Outside Back.\n");
+    //printf("Outside South.\n");
     tmpResult = tmpResult + ofVec3f(positionNode.getX() + X/2,0,0);
 
   }
 
-  if(positionNode.getY() > Y/2) {
+  if(positionNode.getY() > Y) {
+    //printf("Y: %f. Drone is: %f.\n", Y/2, positionNode.getY());
     //printf("Outside Top.\n");
     tmpResult = tmpResult + ofVec3f(0,positionNode.getY() - Y/2,0);
 
-  } else if(positionNode.getY() < -Y/2) {
+  } else if(positionNode.getY() < 0) {
     //printf("Outside Bottom.\n");
     tmpResult = tmpResult + ofVec3f(0,positionNode.getY() + Y/2,0);
 
   }
 
   if(positionNode.getZ() > Z/2) {
-    //printf("Outside Left.\n");
+    //printf("Outside West.\n");
     tmpResult = tmpResult + ofVec3f(0,0,positionNode.getZ() - Z/2);
 
   } else if(positionNode.getZ() < -Z/2) {
-    //printf("Outside Right.\n");
+    //printf("Outside East.\n");
     tmpResult = tmpResult + ofVec3f(0,0,positionNode.getZ() + Z/2);
 
   }
 
-  tmpResult = tmpResult;
-
   //printf("Length B: %f \n", result.length());
 
   if(tmpResult.length()) {
-    ofDrawArrow(position, (position - tmpResult), 0);
+
+    //ofDrawArrow(position, (position - tmpResult), 0);
+
+    //*result = position - tmpResult;
+
     *result = tmpResult;
+
+    printf("Inside dist: %f.\n", tmpResult.length());
+
+    return tmpResult.length();
   }
 
-  return tmpResult.length();
+  return 0;
 
 }
 
@@ -151,6 +182,24 @@ float Wirebox::outside(ofVec3f position, ofVec3f *result) {
 
   positionNode.setGlobalPosition(position);
 
+  /*
+
+  printf("Testing Outside.\n");
+
+  printf("Drone X: %f\n", positionNode.getX());
+  printf("Drone Y: %f\n", positionNode.getY());
+  printf("Drone Z: %f\n", positionNode.getZ());
+
+  printf("X: %f\n", X/2);
+  printf("Y: %f\n", Y/2);
+  printf("Z: %f\n", Z/2);
+
+  printf("X: %f\n", X/2);
+  printf("Y: %f\n", Y/2);
+  printf("Z: %f\n", Z/2);
+
+  */
+
   if(
     positionNode.getX() < X/2 &&
     positionNode.getX() > -X/2 &&
@@ -160,7 +209,7 @@ float Wirebox::outside(ofVec3f position, ofVec3f *result) {
     positionNode.getZ() > -Z/2
   ) {
 
-    //printf("Inside.\n");
+    printf("Inside.\n");
 
     dist = X/2 - positionNode.getX();
     tmpResult.set(dist,0,0);
@@ -195,10 +244,21 @@ float Wirebox::outside(ofVec3f position, ofVec3f *result) {
   }
 
   if(tmpResult.length()) {
-    ofDrawArrow(position, (position + tmpResult), 0);
+
+    //ofSetColor(255,0,0);
+
+    //ofDrawArrow(ofVec3f(0,0,0),tmpResult, 0);
+
+    //*result = position - tmpResult;
+
     *result = tmpResult;
+
+    //printf("Outside dist: %f.\n", tmpResult.length());
+
+    return tmpResult.length();
+
   }
 
-  return tmpResult.length();
+  return 0;
 
 }

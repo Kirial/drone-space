@@ -18,28 +18,28 @@ public:
   // --- RPC Functions Pointers  ---
 
   // CV - Hoops
-  int askHoops() {cv->askHoops();}
-  int askHoopX(int n) {cv->askHoopX(n);} // X position on camera
-  int askHoopY(int n) {cv->askHoopY(n);} // Y position on camera
-  int askHoopH(int n) {cv->askHoopH(n);} // Vertical Radius
-  int askHoopW(int n) {cv->askHoopW(n);} // Horizontal Radius
+  int askHoops() {return cv->askHoops();}
+  int askHoopX(int n) {return cv->askHoopX(n);} // X position on camera
+  int askHoopY(int n) {return cv->askHoopY(n);} // Y position on camera
+  int askHoopH(int n) {return cv->askHoopH(n);} // Vertical Radius
+  int askHoopW(int n) {return cv->askHoopW(n);} // Horizontal Radius
 
   // CV - QR
-  int askQRs() {cv->askQRs();}
-  int askQRX(int n) {cv->askQRX(n);}
-  int askQRY(int n) {cv->askQRY(n);}
-  int askQRsize(int n) {cv->askQRsize(n);}
+  int askQRs() {return cv->askQRs();}
+  int askQRX(int n) {return cv->askQRX(n);}
+  int askQRY(int n) {return cv->askQRY(n);}
+  int askQRsize(int n) {return cv->askQRsize(n);}
 
   // Drone Sensors
-  int askHeight() {ardrone->askHeight();}
-  int askYaw() {ardrone->askYaw();}
-  int askRoll() {ardrone->askRoll();}
-  int askPitch() {ardrone->askPitch();}
+  int askHeight() {return ardrone->askHeight();}
+  int askYaw() {return ardrone->askYaw();}
+  int askRoll() {return ardrone->askRoll();}
+  int askPitch() {return ardrone->askPitch();}
 
   // Drone Instructions (True, ready to move, false can't move now)
-  int instruct(float x, float y, float z, float a) {ardrone->instruct(x,y,z,a);}
-  int takeoff() {ardrone->takeoff();}
-  int land() {ardrone->land();}
+  int instruct(float x, float y, float z, float a) {return ardrone->instruct(x,y,z,a);}
+  int takeoff() {return ardrone->takeoff();}
+  int land() {return ardrone->land();}
 
   // Manual Control
 
