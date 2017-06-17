@@ -8,3 +8,7 @@ step-6: copy your interface and add to server/client (interfaces must be the sam
 step-7: include 2 of 3 files into your project / my_interface_h.h, my_interface_c.c for client / my_interface_h.h, my_interface_s.c for server
 step-8: rename c files to end with cpp like (my_interface_c.cpp) 
 step-9: you write your function on server side. 
+
+if you have some problems contact me:
+Taras Karpin: 
+E-mail: kamael2011tk@gmail.com

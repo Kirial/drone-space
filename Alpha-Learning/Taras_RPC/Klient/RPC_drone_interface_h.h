@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Fri Jun 16 10:07:52 2017
+/* at Sat Jun 17 16:37:29 2017
  */
 /* Compiler settings for src\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
@@ -56,7 +56,7 @@ extern "C"{
 /* interface cv_drone_int */
 /* [implicit_handle][version][uuid] */ 
 
-int _askHoop( void);
+int _askHoops( void);
 
 int _askHoopX( 
     int n);
@@ -64,10 +64,10 @@ int _askHoopX(
 int _askHoopY( 
     int n);
 
-int _askHoopRa( 
+int _askHoopH( 
     int n);
 
-int _askHoopRb( 
+int _askHoopW( 
     int n);
 
 int _askQR( void);
@@ -78,33 +78,22 @@ int _askQRX(
 int _askQRY( 
     int n);
 
+int _askQRsize( 
+    int n);
+
+int _askYaw( void);
+
+int _inctruct( 
+    int x,
+    int y,
+    int z,
+    int alfa);
+
 int _askHeight( void);
 
-int _askMagnetometerOrientation( void);
+int _askPitch( void);
 
-int _askAngle( void);
-
-int _tellMove( 
-    int x,
-    int y,
-    int z);
-
-int _tellTurn( 
-    int a);
-
-int _tellSetSpeed( 
-    int ms);
-
-int _tellForceMove( 
-    int x,
-    int y,
-    int z);
-
-int _tellForceTurn( 
-    int a);
-
-int _tellForceSetSpeed( 
-    int ms);
+int _askRoll( void);
 
 
 extern handle_t hcv_drone_intBinding;

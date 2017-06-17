@@ -5,6 +5,18 @@
 RPC_STATUS status;
 RPC_CSTR szStringBinding = NULL;
 
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////             ///////////////////////////////////////*/
+/*//////////////////////////////////////////   SET UP    ///////////////////////////////////////*/
+/*//////////////////////////////////////////             ///////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+
 
 void rpc_drone::rpc_innit() {
 	status = RpcStringBindingComposeA(
@@ -38,11 +50,24 @@ void rpc_drone::rpc_exit() {
 		std::exit(status);
 }
 
-int rpc_drone::askHoop() {
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////   elipse functions   //////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+int rpc_drone::askHoops() {
 	int rtn_nr;
 	RpcTryExcept
 	{
-		rtn_nr = _askHoop();
+		rtn_nr = _askHoops();
 	}
 		RpcExcept(1)
 	{
@@ -110,12 +135,11 @@ int rpc_drone::askHoopY(int n) {
 	return rtn_nr;
 } // Y position on camera
 
-
-int rpc_drone::askHoopRa(int n) {
+int rpc_drone::askHoopH(int n) {
 	int rtn_nr;
 	RpcTryExcept
 	{
-		rtn_nr = _askHoopRa(n);
+		rtn_nr = _askHoopH(n);
 	}
 		RpcExcept(1)
 	{
@@ -135,11 +159,11 @@ int rpc_drone::askHoopRa(int n) {
 	return rtn_nr;
 } // Vertical Radius
 
-int rpc_drone::askHoopRb(int n) {
+int rpc_drone::askHoopW(int n) {
 	int rtn_nr;
 	RpcTryExcept
 	{
-		rtn_nr = _askHoopRb(n);
+		rtn_nr = _askHoopW(n);
 	}
 		RpcExcept(1)
 	{
@@ -157,9 +181,23 @@ int rpc_drone::askHoopRb(int n) {
 		std::exit(status);
 
 	return rtn_nr;
-} // Horizontal Radius
+} 
 
-					  // CV - QR
+
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////       CV QR code     //////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+
 int rpc_drone::askQR() {
 	int rtn_nr;
 	RpcTryExcept
@@ -207,6 +245,7 @@ int rpc_drone::askQRX(int n) {
 
 	return rtn_nr;
 }
+
 int rpc_drone::askQRY(int n) {
 	int rtn_nr;
 	RpcTryExcept
@@ -231,7 +270,90 @@ int rpc_drone::askQRY(int n) {
 	return rtn_nr;
 }
 
-// Drone Sensors
+int rpc_drone::askQRsize(int n) {
+	int rtn_nr;
+	RpcTryExcept
+	{
+		rtn_nr = _askQRsize(n);
+	}
+		RpcExcept(1)
+	{
+		std::cerr << "Runtime reported exception " << RpcExceptionCode()
+			<< std::endl;
+		return -1;
+	}
+	RpcEndExcept
+
+		// Free the memory allocated by a string.
+		status = RpcStringFreeA(
+			&szStringBinding); // String to be freed.
+
+	if (status)
+		std::exit(status);
+
+	return rtn_nr;
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////     DRone Control    //////////////////////////////*/
+/*//////////////////////////////////////////                      //////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////////////////////*/
+int rpc_drone::askYaw() {
+	int rtn_nr;
+	RpcTryExcept
+	{
+		rtn_nr = _askYaw();
+	}
+		RpcExcept(1)
+	{
+		std::cerr << "Runtime reported exception " << RpcExceptionCode()
+			<< std::endl;
+		return -1;
+	}
+	RpcEndExcept
+
+		// Free the memory allocated by a string.
+		status = RpcStringFreeA(
+			&szStringBinding); // String to be freed.
+
+	if (status)
+		std::exit(status);
+
+	return rtn_nr;
+}
+
+int rpc_drone::inctruct(int x, int y, int z, int alfa) {
+	int rtn_nr;
+	RpcTryExcept
+	{
+		rtn_nr = _inctruct(x, y, z,alfa);
+	}
+		RpcExcept(1)
+	{
+		std::cerr << "Runtime reported exception " << RpcExceptionCode()
+			<< std::endl;
+		return -1;
+	}
+	RpcEndExcept
+
+		// Free the memory allocated by a string.
+		status = RpcStringFreeA(
+			&szStringBinding); // String to be freed.
+
+	if (status)
+		std::exit(status);
+
+	return rtn_nr;
+}
+
 int rpc_drone::askHeight() {
 	int rtn_nr;
 	RpcTryExcept
@@ -256,11 +378,11 @@ int rpc_drone::askHeight() {
 	return rtn_nr;
 }
 
-int rpc_drone::askMagnetometerOrientation() {
+int rpc_drone::askPitch() {
 	int rtn_nr;
 	RpcTryExcept
 	{
-		rtn_nr = _askMagnetometerOrientation();
+		rtn_nr = _askPitch();
 	}
 		RpcExcept(1)
 	{
@@ -280,152 +402,11 @@ int rpc_drone::askMagnetometerOrientation() {
 	return rtn_nr;
 }
 
-int rpc_drone::askAngle() {
+int rpc_drone::askRoll() {
 	int rtn_nr;
 	RpcTryExcept
 	{
-		rtn_nr = _askAngle();
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-
-
-// Drone Instructions (True, ready to move, false can't move now)
-int rpc_drone::tellMove(int x, int y, int z) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellMove(x, y, z);
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-int rpc_drone::tellTurn(int a) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellTurn(a);
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-int rpc_drone::tellSetSpeed(int ms) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellSetSpeed(ms);
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-int rpc_drone::tellForceMove(int x, int y, int z) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellForceMove(x, y, z);
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-int rpc_drone::tellForceTurn(int a) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellForceTurn(a);
-	}
-		RpcExcept(1)
-	{
-		std::cerr << "Runtime reported exception " << RpcExceptionCode()
-			<< std::endl;
-		return -1;
-	}
-	RpcEndExcept
-
-		// Free the memory allocated by a string.
-		status = RpcStringFreeA(
-			&szStringBinding); // String to be freed.
-
-	if (status)
-		std::exit(status);
-
-	return rtn_nr;
-}
-int rpc_drone::tellForceSetSpeed(int ms) {
-	int rtn_nr;
-	RpcTryExcept
-	{
-		rtn_nr = _tellForceSetSpeed(ms);
+		rtn_nr = _askRoll();
 	}
 		RpcExcept(1)
 	{

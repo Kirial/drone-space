@@ -45,85 +45,84 @@ void rpc_drone_s::RPC_setup() {
 		exit(status);
 }
 
-int _askHoop() {
+int _askHoops() {
 	std::cout << 1 << std::endl;
-	return -1;
+	return 1;
 }
 
 int _askHoopX(int n) { // X position on camera
 	std::cout << n << std::endl;
-	return -1;
+	return n;
 }
 
 int _askHoopY(int n) {
 	std::cout << n << std::endl;
-	return -1;
+	return n;
 } // Y position on camera
 
-int _askHoopRa(int n) {
+int _askHoopH(int n) {
 	std::cout << n << std::endl;
-	return -1;
+	return n;
 } // Vertical Radius
 
-int _askHoopRb(int n) {
+int _askHoopW(int n) {
 	std::cout << n << std::endl;
-	return -1;
+	return n;
 } // Horizontal Radius
 
   // CV - QR
 int _askQR() {
 	std::cout << 6 << std::endl;
-	return -1;
+	return 6;
 }
 int _askQRX(int n) {
 	std::cout << n << std::endl;
-	return -1;
+	return n;
 }
 int _askQRY(int n) {
 	std::cout << n << std::endl;
-	return -1;
+	return n;
+}
+int _askQRsize(int n) {
+	std::cout << n << std::endl;
+	return n;
+}
+
+int _askYaw() {
+	std::cout << 10 << std::endl;
+	return 10;
+}
+
+// Drone Instructions (True, ready to move, false can't move now)
+int _instruct(int x, int y, int z, int alfa) {
+	std::cout << x << std::endl;
+	return x;
+}
+
+
+// Drone Sensors
+int _askPitch() {
+	std::cout << 12 << std::endl;
+	return 12;
+}
+
+int _askRoll() {
+	std::cout << 13 << std::endl;
+	return 13;
 }
 
 // Drone Sensors
 int _askHeight() {
-	std::cout << 9 << std::endl;
-	return -1;
-}
-int _askMagnetometerOrientation() {
-	std::cout << 10 << std::endl;
-	return -1;
+	std::cout << 14 << std::endl;
+	return 14;
 }
 
-int _askAngle() {
-	return 100;
-}
 
-// Drone Instructions (True, ready to move, false can't move now)
-int _tellMove(int x, int y, int z) {
-	std::cout << x << std::endl;
-	return -1;
-}
 
-int _tellTurn(int a) {
-	std::cout << a << std::endl;
-	return -1;
-}
-int _tellSetSpeed(int ms) {
-	std::cout << ms << std::endl;
-	return -1;
-}
-int _tellForceMove(int x, int y, int z) {
-	std::cout << x << std::endl;
-	return -1;
-}
-int _tellForceTurn(int a) {
-	std::cout << a << std::endl;
-	return -1;
-}
-int  _tellForceSetSpeed(int ms) {
-	std::cout << ms << std::endl;
-	return -1;
-}
+
+
+
+
 
 void* __RPC_USER midl_user_allocate(size_t size)
 {

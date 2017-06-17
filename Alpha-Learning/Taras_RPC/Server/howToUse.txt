@@ -15,3 +15,8 @@ step-2: create refference to header file (rpc_drone_s variable_name;)
 step-3: call setup function in the begining of the progect(variable_name.RPC_setup();) 
 
 be awere that this is running in while loop and code after that will not work.(use threads to solve this problem)
+
+
+if you have some problems contact me:
+Taras Karpin: 
+E-mail: kamael2011tk@gmail.com
