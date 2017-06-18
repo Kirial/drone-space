@@ -39,9 +39,19 @@
 
 // Drone - Landing Platform
 
-#define DRONE_START_X 300
+#define DRONE_START_X -300
 #define DRONE_START_Y 20
-#define DRONE_START_Z 300
+#define DRONE_START_Z 200
+
+// Landing Platform
+
+#define LANDINGPLATFORM_X 80
+#define LANDINGPLATFORM_Z 100
+
+#define LANDINGPLATFORM_POS_X -300
+#define LANDINGPLATFORM_POS_Z 200
+
+#define LANDINGPLATFORM_POS_Y 100 // Landing CheckPoint offset
 
 // Drone - Speeds
 
@@ -66,13 +76,13 @@
 
 // Room
 
-#define ROOM_SIZE_X 1200
+#define ROOM_SIZE_X 1060
 #define ROOM_SIZE_Y 400
-#define ROOM_SIZE_Z 1200
+#define ROOM_SIZE_Z 926
 
 // Hoop
 
-#define HOOP_COUNT 2
+#define HOOP_COUNT 5
 
 #define HOOP_RADIUS_A 40
 #define HOOP_RADIUS_B 45
@@ -89,143 +99,153 @@
 
 // Hoop Random
 
-#define HOOP_RANDOM true
+#define HOOP_RANDOM false
 
 // Hoop A
 
-#define HOOP_A_X 100
-#define HOOP_A_Y 200
-#define HOOP_A_Z 100
+#define HOOP_A_X -289
+#define HOOP_A_Y 149
+#define HOOP_A_Z -24
+#define HOOP_A_R 50
+#define HOOP_A_A -165
 
 // Hoop B
 
-#define HOOP_B_X -200
-#define HOOP_B_Y 200
-#define HOOP_B_Z 200
+#define HOOP_B_X 42
+#define HOOP_B_Y 150
+#define HOOP_B_Z -99
+#define HOOP_B_R 50
+#define HOOP_B_A 175
 
 // Hoop C
 
-#define HOOP_C_X -300
-#define HOOP_C_Y 200
-#define HOOP_C_Z -200
+#define HOOP_C_X 326
+#define HOOP_C_Y 154
+#define HOOP_C_Z 14
+#define HOOP_C_R 45
+#define HOOP_C_A 160
 
 // Hoop D
 
-#define HOOP_D_X 400
-#define HOOP_D_Y 200
-#define HOOP_D_Z -400
+#define HOOP_D_X 276
+#define HOOP_D_Y 148
+#define HOOP_D_Z 304
+#define HOOP_D_R 45
+#define HOOP_D_A 50
 
 // Hoop E
 
-#define HOOP_E_X 400
-#define HOOP_E_Y 200
-#define HOOP_E_Z -400
+#define HOOP_E_X -71
+#define HOOP_E_Y 152
+#define HOOP_E_Z 334
+#define HOOP_E_R 40
+#define HOOP_E_A 15
 
-// Hoop F
+// Hoop F ?
 
 #define HOOP_F_X 400
 #define HOOP_F_Y 200
 #define HOOP_F_Z -400
+#define HOOP_F_R 40
+#define HOOP_F_A -15
 
 // QR
 
 #define QR_REAL_COUNT 20
 
+#define QR_REAL_H 150
+
 // Wall 1
 
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
+#define QR_W00_X 525
+#define QR_W00_Z -275
+#define QR_W00_TEXT "W00.00"
+
+#define QR_W01_X 530
+#define QR_W01_Z -125
+#define QR_W01_TEXT "W00.01"
+
+#define QR_W02_X 525
+#define QR_W02_Z 52
+#define QR_W02_TEXT "W00.02"
+
+#define QR_W03_X 530
+#define QR_W03_Z 231
+#define QR_W03_TEXT "W00.03"
+
+#define QR_W04_X 525
+#define QR_W04_Z 377
+#define QR_W04_TEXT "W00.04"
 
 // Wall 2
 
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
+#define QR_W10_X 374
+#define QR_W10_Z 463
+#define QR_W10_TEXT "W01.00"
+
+#define QR_W11_X 191
+#define QR_W11_Z 463
+#define QR_W11_TEXT "W01.01"
+
+#define QR_W12_X 36
+#define QR_W12_Z 463
+#define QR_W12_TEXT "W01.02"
+
+#define QR_W13_X -206
+#define QR_W13_Z 463
+#define QR_W13_TEXT "W01.03"
+
+#define QR_W14_X -415
+#define QR_W14_Z 463
+#define QR_W14_TEXT "W01.04"
 
 // Wall 3
 
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
+#define QR_W20_X -530
+#define QR_W20_Z 384
+#define QR_W20_TEXT "W02.00"
+
+#define QR_W21_X -530
+#define QR_W21_Z 193
+#define QR_W21_TEXT "W02.01"
+
+#define QR_W22_X -530
+#define QR_W22_Z 51
+#define QR_W22_TEXT "W02.02"
+
+#define QR_W23_X -530
+#define QR_W23_Z -135
+#define QR_W23_TEXT "W02.03"
+
+#define QR_W24_X -530
+#define QR_W24_Z -320
+#define QR_W24_TEXT "W02.04"
 
 // Wall 4
 
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
-#define QR_A_X 600
-#define QR_A_Y 180
-#define QR_A_Z 200
-#define QR_A_TEXT "A"
+#define QR_W30_X -422
+#define QR_W30_Z -463
+#define QR_W30_TEXT "W03.00"
+
+#define QR_W31_X -173
+#define QR_W31_Z -463
+#define QR_W31_TEXT "W03.01"
+
+#define QR_W32_X 31
+#define QR_W32_Z -463
+#define QR_W32_TEXT "W03.02"
+
+#define QR_W33_X 210
+#define QR_W33_Z -463
+#define QR_W33_TEXT "W03.03"
+
+#define QR_W34_X 467
+#define QR_W34_Z -463
+#define QR_W34_TEXT "W03.04"
 
 // Original Test QR
 
-#define QR_COUNT 4
+#define QR_COUNT 20
 
 #define QR_SIZE_Y 22
 #define QR_SIZE_X 22
@@ -249,16 +269,6 @@
 #define QR_D_Y 180
 #define QR_D_Z 200
 #define QR_A_TEXT "D"
-
-// Landing Platform
-
-#define LANDINGPLATFORM_X 100
-#define LANDINGPLATFORM_Z 100
-
-#define LANDINGPLATFORM_POS_X 300
-#define LANDINGPLATFORM_POS_Z 300
-
-#define LANDINGPLATFORM_POS_Y 100 // Landing CheckPoint offset
 
 // Waypoint
 
@@ -288,6 +298,7 @@
 #define W0002 256
 #define W0003 512
 #define W0004 1024
+
 #define W0100 2048
 #define W0101 4096
 #define W0102 8192

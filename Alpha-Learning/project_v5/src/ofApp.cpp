@@ -24,8 +24,11 @@ void ofApp::update(){
 
   drone.update();
 
+  //printf("Drone AI Update...");
+
   droneai.update();
 
+  //printf("Success!\n");
 }
 
 //--------------------------------------------------------------
@@ -40,11 +43,19 @@ void ofApp::draw(){
 
   // Draw 3D
 
+  //printf("Drawing Droneroom.\n");
+
   droneroom.draw();
+
+  //printf("Drawing Drone.\n");
 
   drone.draw();
 
+  //printf("Drawing AI.\n");
+
   droneai.draw();
+
+  //printf("Done Drawing.\n");
 
   camera.end();
 

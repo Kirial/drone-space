@@ -98,13 +98,12 @@ private:
   int seenHoopsCount;
   int seenQRsCount;
 
-  ofCylinderPrimitive viewedHoops[HOOP_COUNT*4];
+  ofCylinderPrimitive viewedHoops[HOOP_COUNT*2];
   //ofCylinderPrimitive projectedHoops[HOOP_COUNT];
-  int viewedHoopsNumber[HOOP_COUNT];
+  int viewedHoopsNumber[HOOP_COUNT*2];
 
-  ofPlanePrimitive viewedQRs[HOOP_COUNT+QR_COUNT];
-  ofPlanePrimitive projectedQRs[HOOP_COUNT+QR_COUNT];
-  int viewedQRsNumber[HOOP_COUNT+QR_COUNT];
+  ofPlanePrimitive viewedQRs[QR_COUNT];
+  int viewedQRsNumber[QR_COUNT];
 
   ofNode view[4];
 

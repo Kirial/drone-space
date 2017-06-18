@@ -139,7 +139,7 @@ public:
 
   // QR
 
-  QR QRs[4];
+  QR QRs[QR_COUNT];
   int qrCount = QR_COUNT;
 
 private:

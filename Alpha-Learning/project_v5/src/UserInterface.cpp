@@ -6,8 +6,12 @@
 
 UserInterface::UserInterface(DroneControl *_dronecontrol, DroneAI *_droneai) {
 
+  printf("Initializing User Interface... ");
+
   dronecontrol = _dronecontrol;
   droneai = _droneai;
+
+  printf("Success!\n");
 
 }
 
