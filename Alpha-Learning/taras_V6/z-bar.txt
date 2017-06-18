@@ -1,0 +1,14 @@
+How to install and use z-bar
+
+we are using z-bar for windows and using in visual studio 2015 project
+
+	step 1: download z-bar tool from folowing link https://sourceforge.net/projects/zbar/files/zbar/0.10/zbar-0.10-setup.exe/download
+	step 2: run program and remember to check all of the checkboxes 
+	step 3: remember where you install z-bar you going to need it
+	step 4: copy include and lib folder folder into your source folder
+	step 5: copy files from bin folder to your projects bin folder 
+	step 6: go to visual studio and click on project properties, go to linker indput and add "libzbar-0.lib" to Additional Dependencies 
+	step 7: go then properties, general and in AdditionalLibraryDirectories add "lib" that you copied earlier. 
+	step 8: go then to c/c++ general and add include folder to your AdditionalLibraryDirectories
+
+you are now ready to use the code

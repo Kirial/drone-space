@@ -1,0 +1,5 @@
+This project contains 2 files imageProccesing.h and imageProccesing.cpp
+in order to use this functions you must install zbar.(for help look in zbar.txt in prev folder)
+
+this class have 2 function one for finding qr/bar codes and other for finding ellipses. 
+it findes ellipses when ellipses are red or other warm color, and it must have minimum 250 points to form elipse

@@ -1,0 +1,41 @@
+import "oaidl.idl";
+import "ocidl.idl";
+[
+	// A unique identifier that distinguishes this
+	// interface from other interfaces.
+	uuid(00000001-EAF3-4A7A-A0F2-BCE4C30DA77E),
+
+	// This is version 1.0 of this interface.
+	version(1.0),
+
+	// This interface will use an implicit binding
+	// handle named hExample1Binding.
+	implicit_handle(handle_t hcv_drone_intBinding)
+]
+interface cv_drone_int // The interface is named Example1
+{
+	int _askHoops();
+	int _askHoopX(int n); // X position on camera
+	int _askHoopY(int n); // Y position on camera
+	int _askHoopH(int n); // Vertical Radius
+	int _askHoopW(int n); // Horizontal Radius
+
+
+						  // CV - QR
+	int _askQR();
+	int _askQRX(int n);
+	int _askQRY(int n);
+	int _askQRsize(int n);
+
+
+	// Drone Sensors
+	int _askYaw();
+	int _askHeight();
+	int _askPitch();
+	int _askRoll();
+
+	// drone control 
+	int _instruct(int x, int y, int z, int alfa);
+	int _takeOff();
+	int _land();
+}

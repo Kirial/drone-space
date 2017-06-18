@@ -1,0 +1,10 @@
+In order to create a new function you must go through this simple steps:
+step-1: find your interface ( my_interface.idl )
+step-2: delete 3 files: (my_interface_h.h, my_interface_c.cpp and my_interface_s.cpp), where my_interface is the name of your interface
+step-3: add new function to  your interface
+step-4: rebuild the project
+step-5: refresh your project and then you must look for files (my_interface_h.h, my_interface_c.c and my_interface_s.c)
+step-6: copy your interface and add to server/client (interfaces must be the same)
+step-7: include 2 of 3 files into your project / my_interface_h.h, my_interface_c.c for client / my_interface_h.h, my_interface_s.c for server
+step-8: rename c files to end with cpp like (my_interface_c.cpp) 
+step-9: you write your function on server side. 
