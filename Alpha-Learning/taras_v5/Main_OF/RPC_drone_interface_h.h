@@ -4,9 +4,9 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sun Jun 18 20:23:51 2017
+/* at Sun Jun 18 21:03:38 2017
  */
-/* Compiler settings for ..\..\src\Server\RPC_drone_Interface.idl:
+/* Compiler settings for src\Klient\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -32,8 +32,8 @@
 #endif // __RPCNDR_H_VERSION__
 
 
-#ifndef __RPC_drone_Interface_h_h__
-#define __RPC_drone_Interface_h_h__
+#ifndef __RPC_drone_interface_h_h__
+#define __RPC_drone_interface_h_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
@@ -89,7 +89,7 @@ int _askPitch( void);
 
 int _askRoll( void);
 
-int _instruct( 
+int _inctruct( 
     int x,
     int y,
     int z,

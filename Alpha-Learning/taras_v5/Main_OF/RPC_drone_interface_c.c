@@ -4,9 +4,9 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sun Jun 18 20:23:51 2017
+/* at Sun Jun 18 21:03:38 2017
  */
-/* Compiler settings for ..\..\src\Server\RPC_drone_Interface.idl:
+/* Compiler settings for src\Klient\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
     protocol : dce , ms_ext, app_config, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
@@ -33,7 +33,7 @@
 
 #include <string.h>
 
-#include "RPC_drone_Interface_h.h"
+#include "RPC_drone_interface_h.h"
 
 #define TYPE_FORMAT_STRING_SIZE   3                                 
 #define PROC_FORMAT_STRING_SIZE   547                               
@@ -41,32 +41,32 @@
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
 
-typedef struct _RPC_drone_Interface_MIDL_TYPE_FORMAT_STRING
+typedef struct _RPC_drone_interface_MIDL_TYPE_FORMAT_STRING
     {
     short          Pad;
     unsigned char  Format[ TYPE_FORMAT_STRING_SIZE ];
-    } RPC_drone_Interface_MIDL_TYPE_FORMAT_STRING;
+    } RPC_drone_interface_MIDL_TYPE_FORMAT_STRING;
 
-typedef struct _RPC_drone_Interface_MIDL_PROC_FORMAT_STRING
+typedef struct _RPC_drone_interface_MIDL_PROC_FORMAT_STRING
     {
     short          Pad;
     unsigned char  Format[ PROC_FORMAT_STRING_SIZE ];
-    } RPC_drone_Interface_MIDL_PROC_FORMAT_STRING;
+    } RPC_drone_interface_MIDL_PROC_FORMAT_STRING;
 
-typedef struct _RPC_drone_Interface_MIDL_EXPR_FORMAT_STRING
+typedef struct _RPC_drone_interface_MIDL_EXPR_FORMAT_STRING
     {
     long          Pad;
     unsigned char  Format[ EXPR_FORMAT_STRING_SIZE ];
-    } RPC_drone_Interface_MIDL_EXPR_FORMAT_STRING;
+    } RPC_drone_interface_MIDL_EXPR_FORMAT_STRING;
 
 
 static const RPC_SYNTAX_IDENTIFIER  _RpcTransferSyntax = 
 {{0x8A885D04,0x1CEB,0x11C9,{0x9F,0xE8,0x08,0x00,0x2B,0x10,0x48,0x60}},{2,0}};
 
 
-extern const RPC_drone_Interface_MIDL_TYPE_FORMAT_STRING RPC_drone_Interface__MIDL_TypeFormatString;
-extern const RPC_drone_Interface_MIDL_PROC_FORMAT_STRING RPC_drone_Interface__MIDL_ProcFormatString;
-extern const RPC_drone_Interface_MIDL_EXPR_FORMAT_STRING RPC_drone_Interface__MIDL_ExprFormatString;
+extern const RPC_drone_interface_MIDL_TYPE_FORMAT_STRING RPC_drone_interface__MIDL_TypeFormatString;
+extern const RPC_drone_interface_MIDL_PROC_FORMAT_STRING RPC_drone_interface__MIDL_ProcFormatString;
+extern const RPC_drone_interface_MIDL_EXPR_FORMAT_STRING RPC_drone_interface__MIDL_ExprFormatString;
 
 #define GENERIC_BINDING_TABLE_SIZE   0            
 
@@ -103,7 +103,7 @@ int _askHoops( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[0],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[0],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -118,7 +118,7 @@ int _askHoopX(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[30],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[30],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -133,7 +133,7 @@ int _askHoopY(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[66],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[66],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -148,7 +148,7 @@ int _askHoopH(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[102],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[102],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -163,7 +163,7 @@ int _askHoopW(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[138],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[138],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -177,7 +177,7 @@ int _askQR( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[174],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[174],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -192,7 +192,7 @@ int _askQRX(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[204],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[204],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -207,7 +207,7 @@ int _askQRY(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[240],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[240],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -222,7 +222,7 @@ int _askQRsize(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[276],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[276],
                   ( unsigned char * )&n);
     return ( int  )_RetVal.Simple;
     
@@ -236,7 +236,7 @@ int _askYaw( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[312],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[312],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -250,7 +250,7 @@ int _askHeight( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[342],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[342],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -264,7 +264,7 @@ int _askPitch( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[372],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[372],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -278,14 +278,14 @@ int _askRoll( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[402],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[402],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
 }
 
 
-int _instruct( 
+int _inctruct( 
     int x,
     int y,
     int z,
@@ -296,7 +296,7 @@ int _instruct(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[432],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[432],
                   ( unsigned char * )&x);
     return ( int  )_RetVal.Simple;
     
@@ -310,7 +310,7 @@ int _takeOff( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[486],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[486],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -324,7 +324,7 @@ int _land( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&cv_drone_int_StubDesc,
-                  (PFORMAT_STRING) &RPC_drone_Interface__MIDL_ProcFormatString.Format[516],
+                  (PFORMAT_STRING) &RPC_drone_interface__MIDL_ProcFormatString.Format[516],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
@@ -343,7 +343,7 @@ int _land( void)
 #endif
 
 
-static const RPC_drone_Interface_MIDL_PROC_FORMAT_STRING RPC_drone_Interface__MIDL_ProcFormatString =
+static const RPC_drone_interface_MIDL_PROC_FORMAT_STRING RPC_drone_interface__MIDL_ProcFormatString =
     {
         0,
         {
@@ -709,7 +709,7 @@ static const RPC_drone_Interface_MIDL_PROC_FORMAT_STRING RPC_drone_Interface__MI
 /* 430 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure _instruct */
+	/* Procedure _inctruct */
 
 /* 432 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -813,7 +813,7 @@ static const RPC_drone_Interface_MIDL_PROC_FORMAT_STRING RPC_drone_Interface__MI
         }
     };
 
-static const RPC_drone_Interface_MIDL_TYPE_FORMAT_STRING RPC_drone_Interface__MIDL_TypeFormatString =
+static const RPC_drone_interface_MIDL_TYPE_FORMAT_STRING RPC_drone_interface__MIDL_TypeFormatString =
     {
         0,
         {
@@ -854,7 +854,7 @@ static const MIDL_STUB_DESC cv_drone_int_StubDesc =
     0,
     0,
     0,
-    RPC_drone_Interface__MIDL_TypeFormatString.Format,
+    RPC_drone_interface__MIDL_TypeFormatString.Format,
     1, /* -error bounds_check flag */
     0x50002, /* Ndr library version */
     0,

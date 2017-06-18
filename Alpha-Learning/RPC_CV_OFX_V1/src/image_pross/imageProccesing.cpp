@@ -41,9 +41,9 @@ int imPros::getQR(Mat frame) {
 					int y3 = symbol->get_location_y(2);
 					int y4 = symbol->get_location_y(3);
 				
-					array_qr[amount].x = (y2-(y4-y2)/(x4-x2)*x2-y1+(y3-y1)/(x3-x1)*x1)/((y3-y1)/(x3-x1)-(y4-y2)/(x4-x2));
+					array_qr[amount].x =(int)(y2-(y4-y2)/(x4-x2)*x2-y1+(y3-y1)/(x3-x1)*x1)/((y3-y1)/(x3-x1)-(y4-y2)/(x4-x2));
 					array_qr[amount].y = array_qr[amount].x*(y3 - y1) / (x3 - x1) - (y3 - y1) / (x3 - x1)*x1 + y1;
-					array_qr[amount].size = sqrt((x2-x1)*(x2 - x1)+ (y2 - y1)*(y2 - y1));
+					array_qr[amount].size =(int)sqrt((x2-x1)*(x2 - x1)+ (y2 - y1)*(y2 - y1));
 					/*
 					cout << "x " << array_qr[amount].x << endl;
 					cout << "y " << array_qr[amount].x << endl;
