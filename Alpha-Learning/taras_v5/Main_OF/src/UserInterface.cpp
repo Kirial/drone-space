@@ -6,8 +6,12 @@
 
 UserInterface::UserInterface(DroneControl *_dronecontrol, DroneAI *_droneai) {
 
+  printf("Initializing User Interface... ");
+
   dronecontrol = _dronecontrol;
   droneai = _droneai;
+
+  printf("Success!\n");
 
 }
 
@@ -58,6 +62,10 @@ int UserInterface::keyboard(int key, bool keyPressed) {
     case 'l':
       dronecontrol->land();
       break;
+	case 'T':
+	case 't':
+		dronecontrol->takeoff();
+		break;
     case 'R':
     case 'r':
       droneai->restart();

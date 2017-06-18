@@ -146,7 +146,7 @@ Room::Room() {
   hitbox.node.move(0,ROOM_SIZE_Y/2,0);
   wirebox.node.setParent(node);
   hitbox.node.setParent(node);
-  wirebox.set(ROOM_SIZE_X,ROOM_SIZE_Y,ROOM_SIZE_X);
+  wirebox.set(ROOM_SIZE_X,ROOM_SIZE_Y,ROOM_SIZE_Z);
   hitbox.set(
     ROOM_SIZE_X-2*DRONE_SAFETYDISTANCE,
     ROOM_SIZE_Y-2*DRONE_SAFETYDISTANCE,
@@ -165,6 +165,8 @@ void Room::draw() {
 
 DroneRoom::DroneRoom() {
 
+  printf("Initializing DroneRoom... ");
+
   room.node.setParent(node);
 
   // Landing Platform
@@ -180,10 +182,24 @@ DroneRoom::DroneRoom() {
     hoops[1].setPosition(HOOP_B_X,HOOP_B_Y,HOOP_B_Z);
     hoops[2].setPosition(HOOP_C_X,HOOP_C_Y,HOOP_C_Z);
     hoops[3].setPosition(HOOP_D_X,HOOP_D_Y,HOOP_D_Z);
+    hoops[4].setPosition(HOOP_E_X,HOOP_E_Y,HOOP_E_Z);
+
+    hoops[0].radius = HOOP_A_R;
+    hoops[0].node.rotate(HOOP_A_A,0,1,0);
+    hoops[1].radius = HOOP_B_R;
+    hoops[1].node.rotate(HOOP_B_A,0,1,0);
+    hoops[2].radius = HOOP_C_R;
+    hoops[2].node.rotate(HOOP_C_A,0,1,0);
+    hoops[3].radius = HOOP_D_R;
+    hoops[3].node.rotate(HOOP_D_A,0,1,0);
+    hoops[4].radius = HOOP_E_R;
+    hoops[4].node.rotate(HOOP_E_A,0,1,0);
 
   }
 
   for(int i = 0; i < HOOP_COUNT; i++) {
+
+    printf("Adding hoop: %i. ", i);
 
     if(HOOP_RANDOM) {
 
@@ -207,15 +223,69 @@ DroneRoom::DroneRoom() {
 
   // QR
 
-  QRs[0].setPosition(QR_A_X,QR_A_Y,QR_A_Z);
-  QRs[1].setPosition(QR_B_X,QR_B_Y,QR_B_Z);
-  QRs[2].setPosition(QR_C_X,QR_C_Y,QR_C_Z);
-  QRs[3].setPosition(QR_D_X,QR_D_Y,QR_D_Z);
+  QRs[0].setPosition(QR_W00_X,QR_REAL_H,QR_W00_Z);
+  QRs[1].setPosition(QR_W01_X,QR_REAL_H,QR_W01_Z);
+  QRs[2].setPosition(QR_W02_X,QR_REAL_H,QR_W02_Z);
+  QRs[3].setPosition(QR_W03_X,QR_REAL_H,QR_W03_Z);
+  QRs[4].setPosition(QR_W04_X,QR_REAL_H,QR_W04_Z);
+  QRs[5].setPosition(QR_W10_X,QR_REAL_H,QR_W10_Z);
+  QRs[6].setPosition(QR_W11_X,QR_REAL_H,QR_W11_Z);
+  QRs[7].setPosition(QR_W12_X,QR_REAL_H,QR_W12_Z);
+  QRs[8].setPosition(QR_W13_X,QR_REAL_H,QR_W13_Z);
+  QRs[9].setPosition(QR_W14_X,QR_REAL_H,QR_W14_Z);
+  QRs[10].setPosition(QR_W20_X,QR_REAL_H,QR_W20_Z);
+  QRs[11].setPosition(QR_W21_X,QR_REAL_H,QR_W21_Z);
+  QRs[12].setPosition(QR_W22_X,QR_REAL_H,QR_W22_Z);
+  QRs[13].setPosition(QR_W23_X,QR_REAL_H,QR_W23_Z);
+  QRs[14].setPosition(QR_W24_X,QR_REAL_H,QR_W24_Z);
+  QRs[15].setPosition(QR_W30_X,QR_REAL_H,QR_W30_Z);
+  QRs[16].setPosition(QR_W31_X,QR_REAL_H,QR_W31_Z);
+  QRs[17].setPosition(QR_W32_X,QR_REAL_H,QR_W32_Z);
+  QRs[18].setPosition(QR_W33_X,QR_REAL_H,QR_W33_Z);
+  QRs[19].setPosition(QR_W34_X,QR_REAL_H,QR_W34_Z);
+
+  QRs[1].node.rotate(180,0,1,0);
+  QRs[2].node.rotate(180,0,1,0);
+  QRs[3].node.rotate(180,0,1,0);
+  QRs[4].node.rotate(180,0,1,0);
+  QRs[5].node.rotate(180,0,1,0);
+
+  QRs[5].node.rotate(90,0,1,0);
+  QRs[6].node.rotate(90,0,1,0);
+  QRs[7].node.rotate(90,0,1,0);
+  QRs[8].node.rotate(90,0,1,0);
+  QRs[9].node.rotate(90,0,1,0);
+
+  QRs[15].node.rotate(-90,0,1,0);
+  QRs[16].node.rotate(-90,0,1,0);
+  QRs[17].node.rotate(-90,0,1,0);
+  QRs[18].node.rotate(-90,0,1,0);
+  QRs[19].node.rotate(-90,0,1,0);
 
   QRs[0].node.setParent(node);
   QRs[1].node.setParent(node);
   QRs[2].node.setParent(node);
   QRs[3].node.setParent(node);
+  QRs[4].node.setParent(node);
+  QRs[5].node.setParent(node);
+  QRs[6].node.setParent(node);
+  QRs[7].node.setParent(node);
+  QRs[8].node.setParent(node);
+  QRs[9].node.setParent(node);
+  QRs[10].node.setParent(node);
+  QRs[11].node.setParent(node);
+  QRs[12].node.setParent(node);
+  QRs[13].node.setParent(node);
+  QRs[14].node.setParent(node);
+  QRs[15].node.setParent(node);
+  QRs[16].node.setParent(node);
+  QRs[17].node.setParent(node);
+  QRs[18].node.setParent(node);
+  QRs[19].node.setParent(node);
+
+  printf("Done Adding Hoops. ");
+
+  printf("Success!\n");
 
 }
 
@@ -227,13 +297,13 @@ void DroneRoom::draw() {
   room.draw();
   landingplatform.draw();
 
-  for(int i = 0; i < hoopCount; i++) {
+  for(int i = 0; i < HOOP_COUNT; i++) {
 
     hoops[i].draw();
 
   }
 
-  for(int i = 0; i < qrCount; i++) {
+  for(int i = 0; i < QR_COUNT; i++) {
 
     QRs[i].draw();
 

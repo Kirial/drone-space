@@ -4,10 +4,13 @@
 #include "DroneRoom.h"
 #include "Drone.h"
 #include "DroneAI.h"
+#include <iostream>
 
 bool sortByDist(const HoopDistance &lhs, const HoopDistance &rhs) { return lhs.intDist < rhs.intDist; }
 
 DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontrol) {
+
+  printf("Initializing AI... ");
 
   drone = _drone;
   droneroom = _droneroom;
@@ -22,6 +25,9 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
   started = false;
 
   startAI();
+
+  printf("Success!\n");
+
 
 }
 
@@ -60,6 +66,8 @@ void DroneAI::restart() {
 
 void DroneAI::update() {
 
+  printf("AI Loop.\n");
+
   if(!started) return;
 
   // Get Drone Information
@@ -74,7 +82,9 @@ void DroneAI::update() {
 
     // QRs
 
-    //getQRs();
+	cout << "ask qrs" << endl;
+
+    getQRs();
 
   // Calculate Position
 
@@ -206,11 +216,15 @@ void DroneAI::update() {
 
     // Takeoff
 
+    //printf("Takeoff Loop.\n");
+
     droneTakeoff();
 
   } else if(drone->getDroneMode() == LANDED) {
 
     // Start the Drone
+
+    //printf("START THE FUCKING DRONE.\n");
 
     droneStart();
 
@@ -232,7 +246,11 @@ void DroneAI::update() {
 
   // Virtual
 
+  //printf("Maybe the drone is wrong?\n");
+
   droneInstruct();
+
+  //printf("Ouch...\n");
 
   return;
 
@@ -287,7 +305,19 @@ void DroneAI::droneStart() {
 
   printf("Taking off!\n");
 
+  for (int i = 0; i < 1000; i++) {
+	  if (dronecontrol->takeoff() ==-1) {
+		  cout << "Failed!\n";
+	  }
+	  else {
+		  break;
+	  }
+  }
   dronecontrol->takeoff();
+
+  dronecontrol->instruct(0, 0, 0, 0);
+
+  Sleep(10000);
 
   takeoffCurrent = takeoffTail->next;
 
@@ -302,6 +332,8 @@ void DroneAI::droneStart() {
   printFlightMode(drone->getFlightMode());
   printDroneMode(drone->getDroneMode());
 
+  //printf("Ouch...\n");
+
 
 }
 void DroneAI::droneTakeoff() {
@@ -309,6 +341,8 @@ void DroneAI::droneTakeoff() {
   if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
 
     if(!takeoffCurrent->end) {
+
+      printf("Locating Takeoff Waypoint.\n");
 
       takeoffCurrent = takeoffCurrent->next;
       currentPath = takeoffCurrent;
@@ -439,11 +473,21 @@ void DroneAI::droneLand() {
 }
 void DroneAI::droneInstruct() {
 
+  //printf("Updating Drone.\n");
+
   drone->update();
+
+  //printf("Instructing Drone.\n");
 
   drone->instruction();
 
-  dronecontrol->instruct(drone->aiVector.x, drone->aiVector.y, drone->aiVector.z, drone->aiAngle);
+  //printf("AI control.\n");
+
+  dronecontrol->instruct(drone->aiVector.x, drone->aiVector.y, drone->aiVector.z, drone->aiAngle/8);
+
+  printf("x: %f, y: %f, z: %f, a: %f.\n", drone->aiVector.x, drone->aiVector.y, drone->aiVector.z, drone->aiAngle);
+
+  //printf("Ouch...\n");
 
 }
 
@@ -575,7 +619,7 @@ void DroneAI::drawLoopTrajectory() {
 
   }
 }
-void DroneAI::drawTakeoffTrajectory(){
+void DroneAI::drawTakeoffTrajectory() {
 
   ofSetColor(ofColor::green);
 
@@ -626,8 +670,6 @@ void DroneAI::drawTmpPath() {
   ofDrawArrow(drone->getPosition(),drone->getPosition()-tmpDestinationDrawing,5);
 
 }
-
-
 
 // Start Trajectories
 void DroneAI::startAllTrajectories() {
@@ -851,7 +893,11 @@ void DroneAI::getHoops() {
 
   drone->resetHoops();
 
+  //printf("Asking now!\n");
+
   int hoopsNow = dronecontrol->askHoops();
+
+  //printf("Asking done!\n");
 
   //printf("How Many Hoops do you see? %i\n", hoopsNow);
 
@@ -861,29 +907,37 @@ void DroneAI::getHoops() {
   int h;
   int n;
 
-  for(int i = 0; i < HOOP_COUNT * 2; i++) {
+  if (hoopsNow > 0) {
 
-    //printf("Binary: %i.\n", binary);
-    //printf("hoopsNow: %i.\n", hoopsNow);
+	  for (int i = 0; i < HOOP_COUNT * 2; i++) {
 
-    if(binary & hoopsNow) {
+		  //printf("Binary: %i.\n", binary);
+		  //printf("hoopsNow: %i.\n", hoopsNow);
 
-      //printf("Seeing Hoop: %i\n", i);
+		  if (binary & hoopsNow) {
 
-      x = dronecontrol->askHoopX(binary);
-      y = dronecontrol->askHoopY(binary);
-      h = dronecontrol->askHoopH(binary);
-      n = i + 1;
+			  //printf("Seeing Hoop: %i\n", i);
 
-      if(n > 6) n = false;
+			  x = dronecontrol->askHoopX(binary);
+			  y = dronecontrol->askHoopY(binary);
+			  h = dronecontrol->askHoopH(binary);
+			  n = i + 1;
 
-      drone->addHoop(x,y,h,n);
+			  //printf("Hoop - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
 
-    }
+			  if (n > 6) n = false;
 
-    binary = binary * 2;
+			  drone->addHoop(x, y, h, n);
+
+		  }
+
+		  binary = binary * 2;
+
+	  }
 
   }
+
+
 
 }
 void DroneAI::getQRs() {
@@ -891,6 +945,8 @@ void DroneAI::getQRs() {
   drone->resetQRs();
 
   int QRsNow = dronecontrol->askQRs();
+  
+  printf("How Many QRs do you see? %i\n", QRsNow);
 
   int binary = 1;
   int x;
@@ -898,19 +954,27 @@ void DroneAI::getQRs() {
   int h;
   int n;
 
-  for(int i = 0; i < (HOOP_COUNT + QR_REAL_COUNT); i++) {
+  if (QRsNow > 0) {
 
-    if(binary & QRsNow) {
+	  for (int i = 0; i < (HOOP_COUNT + QR_COUNT + 1); i++) {
 
-      x = dronecontrol->askQRX(binary);
-      y = dronecontrol->askQRY(binary);
-      h = dronecontrol->askQRsize(binary);
-      n = i + 1;
+		  if (binary & QRsNow) {
 
-      drone->addQR(x,y,h,n);
+			  x = dronecontrol->askQRX(binary);
+			  y = dronecontrol->askQRY(binary);
+			  h = dronecontrol->askQRsize(binary);
+			  n = i + 1;
 
-    }
+			  printf("QR - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
 
+			  drone->addQR(x, y, h, n);
+
+		  }
+
+		  binary = binary * 2;
+
+	  }
+  
   }
 
 }

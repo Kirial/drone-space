@@ -66,10 +66,9 @@ int imPros::getQR(Mat frame) {
 
 
 vector<RotatedRect> imPros::getElipser(Mat frame) {
-	cout << frame.size;
+	vector<vector<Point> > contours; // variable for counters 
+	vector<Vec4i> hierarchy; // 
 	ellipses.clear();
-	contours.clear(); // variable for counters 
-	hierarchy.clear(); // 
 	minumect.clear();
 	minEllipse.clear();
 	RNG rng(12345);
@@ -82,16 +81,15 @@ vector<RotatedRect> imPros::getElipser(Mat frame) {
 	/// detect red/warm colors 
 	cvtColor(image_inv, new_img, CV_BGR2HSV); // 
 	Mat1b mask; // new empty image 
-	inRange(new_img, Scalar(90 - 10, 70, 50), Scalar(90 + 10, 255, 255), mask); // Cyan is 90 																				/// Detect edges using Threshold
+	inRange(new_img, Scalar(90 - 10, 70, 50), Scalar(90 + 10, 255, 255), mask); // Cyan is 90 	
 	threshold(mask, threshold_output, 100, 255, THRESH_BINARY);
-
 	/// Find contours
 	findContours(threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-
+	cout << "crash ??" << endl;
 	/// Find the rotated rectangles and ellipses for each contour
 	minumect.resize(contours.size());
 	minEllipse.resize(contours.size());
-
+	cout << "crash ?" << endl;
 	for (unsigned int i = 0; i < contours.size(); i++)
 	{
 		minumect[i] = minAreaRect(Mat(contours[i]));
@@ -100,7 +98,7 @@ vector<RotatedRect> imPros::getElipser(Mat frame) {
 			minEllipse[i] = fitEllipse(Mat(contours[i]));
 		}
 	}
-
+	cout << "crash " << endl;
 	int k = 0;
 	ellipses.resize(1);
 	for (unsigned int i = 0; i < contours.size(); i++)

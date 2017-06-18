@@ -11,7 +11,13 @@ public:
 		int askRoll() {return rpc->askRoll();}
 		int askPitch() {return rpc->askPitch();}
 		int askHeight() {return rpc->askHeight();}
-		int instruct(float x, float y, float z, float a) {return rpc->inctruct((x*100),(y*100),(z*100),(a*50));}
+		int instruct(float x, float y, float z, float a) {
+			double vx = x * 1000;
+			double vy = y * 1000;
+			double vz = z * 1000;
+			double va = a * 1000;
+			return rpc->inctruct(vx,vy,vz,va);
+		}
 		int land() { return rpc->land(); }
 		int takeoff() { return rpc->takeOff(); }
 

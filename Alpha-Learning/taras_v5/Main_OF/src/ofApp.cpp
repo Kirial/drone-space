@@ -6,7 +6,12 @@
 void ofApp::setup(){
 	rpc.rpc_innit();
 	//skal slettes
-	fly = false;
+
+	int answer = -1;
+	while (answer == -1) {
+		answer = rpc.askPitch();
+		printf("Answer: %i.\n", answer);
+	}
 	
   //ofSetVerticalSync(true);
   ofBackground(255);
@@ -60,16 +65,6 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	
-	if(key==' '){ 
-		if (!fly) {
-			rpc.takeOff();
-			fly = true;
-		}
-		else {
-			rpc.land();
-			fly = false;
-		}
-	}
 
   keys[key] = true;
 

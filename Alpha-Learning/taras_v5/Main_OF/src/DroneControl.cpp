@@ -7,11 +7,15 @@
 
 DroneControl::DroneControl(Drone *_drone, ARDrone *_ardrone, CV *_cv) {
 
+  printf("Initializing dronecontrol... ");
+
   drone = _drone;
   ardrone = _ardrone;
   cv = _cv;
 
   // Setup RPC... something something
+
+  printf("Success!\n");
 
 }
 

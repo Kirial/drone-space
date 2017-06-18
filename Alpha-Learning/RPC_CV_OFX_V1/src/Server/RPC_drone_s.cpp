@@ -67,12 +67,14 @@ int _askHoops() {
 	vector<RotatedRect> elp; 
 	bool sameE = false; 
 	elp = image_reader->getElipser(img);  // get elipser 
+	cout << " no crash 00" << endl;
 	found = image_reader->getQR(img);  //get qr codes 
+	cout << " no crash 0" << endl;
 	if (found > 0) {
 		qr_read = true; // whis der er qr code funedet 
 	}
 	int foundUE = 0;
-
+	cout << " no crash 01" << endl;
 	for (int i = 0; i < (elp.size()-1); i++) { // test from 0 to end -1
 		sameE = false;  // ready to test next 
 		for (int a = i+1; a < elp.size(); a++) { // test from 1 to end
@@ -89,7 +91,7 @@ int _askHoops() {
 		}
 
 	}
-
+	cout << " no crash 02" << endl;
 	if (foundUE > 0) {
 		elRead = true;
 	}
@@ -98,6 +100,7 @@ int _askHoops() {
 
 	int rtrn_value = 0;
 	sameE = false; 
+	cout << " no crash 03" << endl;
 	int ukend_e = 64;
 	for (int i = 0; i < elipser.size(); i++) {
 		for (int a = 0; a < found; a++) {
@@ -119,6 +122,7 @@ int _askHoops() {
 		sameE = false;
 
 	}
+	cout << " no crash 04" << endl;
 	return rtrn_value; // return value 
 }
 
@@ -230,10 +234,11 @@ int _askHeight() {
 
 // Drone Instructions (True, ready to move, false can't move now)
 int _instruct(int x, int y, int z, int alfa) {
-	double vx = x / 100;
-	double vy = y / 100;
-	double vz = z / 100;
-	double vr = (alfa / 180)*3.14;
+	double vx = (double)x / 1000;
+	double vy = (double)y / 1000;
+	double vz = (double)z / 1000;
+	double vr = (double)alfa / 1000;
+	cout << " x is :" << vx << " y is:  " << vy << " z is : " << vz << " alfa is : " << vr << endl;
 	ardrone->move3D(vx, vy, vz, vr);
 	return 1;
 }

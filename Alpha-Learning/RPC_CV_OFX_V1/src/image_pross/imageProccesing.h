@@ -62,8 +62,6 @@ class imPros {
 		qr_struct array_qr[26];
 private:
 	vector<RotatedRect> ellipses;
-	vector<vector<Point> > contours; // variable for counters 
-	vector<Vec4i> hierarchy; // 
 	vector<RotatedRect> minumect;
 	vector<RotatedRect> minEllipse;
 
