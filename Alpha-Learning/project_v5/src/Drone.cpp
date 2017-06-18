@@ -4,6 +4,8 @@
 
 Drone::Drone(DroneRoom *_droneroom) {
 
+  printf("Initializing Drone... ");
+
   droneroom = _droneroom;
 
   box.setParent(node);
@@ -27,7 +29,7 @@ Drone::Drone(DroneRoom *_droneroom) {
 
   // Hoop
 
-  for(int i = 0; i < HOOP_COUNT*2; i++) {
+  for(int i = 0; i < HOOP_COUNT; i++) {
 
     viewedHoops[i].set(0,1,false);
     viewedHoops[i].rotate(90,1,0,0);
@@ -35,9 +37,9 @@ Drone::Drone(DroneRoom *_droneroom) {
     viewedHoops[i].setParent(node);
     viewedHoops[i].move(viewOffsetX, viewOffsetY, -viewOffsetZ);
 
-    viewedHoops[i+HOOP_COUNT*2].rotate(90,1,0,0);
-    viewedHoops[i+HOOP_COUNT*2].rotate(90,0,1,0);
-    viewedHoops[i+HOOP_COUNT*2].setParent(node);
+    viewedHoops[i+HOOP_COUNT].rotate(90,1,0,0);
+    viewedHoops[i+HOOP_COUNT].rotate(90,0,1,0);
+    viewedHoops[i+HOOP_COUNT].setParent(node);
 
     //projectedHoops[i].set(0,1,false);
     //projectedHoops[i].rotate(90,1,0,0);
@@ -50,19 +52,13 @@ Drone::Drone(DroneRoom *_droneroom) {
 
   // QR
 
-  for(int i = 0; i < (HOOP_COUNT+QR_COUNT); i++) {
+  for(int i = 0; i < (QR_COUNT); i++) {
 
     viewedQRs[i].set(0,0);
     viewedQRs[i].rotate(90,1,0,0);
     viewedQRs[i].rotate(90,0,0,1);
     viewedQRs[i].setParent(node);
     viewedQRs[i].move(viewOffsetX, viewOffsetY, -viewOffsetZ);
-
-    projectedQRs[i].set(0,0);
-    projectedQRs[i].rotate(90,1,0,0);
-    projectedQRs[i].rotate(90,0,0,1);
-    projectedQRs[i].setParent(node);
-    projectedQRs[i].setPosition(0,0,0);
 
     viewedQRsNumber[i] = false;
 
@@ -90,6 +86,9 @@ Drone::Drone(DroneRoom *_droneroom) {
   for(int i = 0; i < 4; i++) {
     view[i].setParent(node);
   }
+
+  printf("Success!\n");
+
 
 }
 
@@ -146,9 +145,9 @@ void Drone::addHoop(int x, int y, int h, int n) {
   viewedHoops[seenHoopsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
   viewedHoops[seenHoopsCount].set(h/DRONE_VIEW_PIXELCM,1,false);
 
-  viewedHoops[seenHoopsCount+HOOP_COUNT*2].setPosition(0,0,0);
-  viewedHoops[seenHoopsCount+HOOP_COUNT*2].set(50,1,false);
-  viewedHoops[seenHoopsCount+HOOP_COUNT*2].move(projectedCalculation(x,y,droneroom->hoops[n].radius,h));
+  viewedHoops[seenHoopsCount+HOOP_COUNT].setPosition(0,0,0);
+  viewedHoops[seenHoopsCount+HOOP_COUNT].set(50,1,false);
+  viewedHoops[seenHoopsCount+HOOP_COUNT].move(projectedCalculation(x,y,droneroom->hoops[n].radius,h));
 
   //printf("Done Adding Hoop.\n");
 
@@ -193,7 +192,7 @@ void Drone::drawViewedHoops() {
 
     ofSetColor(0,255,255); // Cyan
     viewedHoops[i].draw();
-    viewedHoops[i+HOOP_COUNT*2].draw();
+    viewedHoops[i+HOOP_COUNT].draw();
 
   }
 

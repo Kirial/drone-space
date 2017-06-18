@@ -9,6 +9,8 @@ bool sortByDist(const HoopDistance &lhs, const HoopDistance &rhs) { return lhs.i
 
 DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontrol) {
 
+  printf("Initializing AI... ");
+
   drone = _drone;
   droneroom = _droneroom;
   dronecontrol = _dronecontrol;
@@ -22,6 +24,8 @@ DroneAI::DroneAI(Drone *_drone, DroneRoom *_droneroom, DroneControl *_dronecontr
   started = false;
 
   startAI();
+
+  printf("Success!\n");
 
 }
 
@@ -59,6 +63,8 @@ void DroneAI::restart() {
 }
 
 void DroneAI::update() {
+
+  //printf("AI Loop.\n");
 
   if(!started) return;
 
@@ -206,11 +212,15 @@ void DroneAI::update() {
 
     // Takeoff
 
+    //printf("Takeoff Loop.\n");
+
     droneTakeoff();
 
   } else if(drone->getDroneMode() == LANDED) {
 
     // Start the Drone
+
+    //printf("START THE FUCKING DRONE.\n");
 
     droneStart();
 
@@ -232,7 +242,11 @@ void DroneAI::update() {
 
   // Virtual
 
+  //printf("Maybe the drone is wrong?\n");
+
   droneInstruct();
+
+  //printf("Ouch...\n");
 
   return;
 
@@ -302,6 +316,8 @@ void DroneAI::droneStart() {
   printFlightMode(drone->getFlightMode());
   printDroneMode(drone->getDroneMode());
 
+  //printf("Ouch...\n");
+
 
 }
 void DroneAI::droneTakeoff() {
@@ -309,6 +325,8 @@ void DroneAI::droneTakeoff() {
   if(drone->getDestinationDistance() < WAYPOINT_DISTANCE) {
 
     if(!takeoffCurrent->end) {
+
+      printf("Locating Takeoff Waypoint.\n");
 
       takeoffCurrent = takeoffCurrent->next;
       currentPath = takeoffCurrent;
@@ -439,11 +457,19 @@ void DroneAI::droneLand() {
 }
 void DroneAI::droneInstruct() {
 
+  //printf("Updating Drone.\n");
+
   drone->update();
+
+  //printf("Instructing Drone.\n");
 
   drone->instruction();
 
+  //printf("AI control.\n");
+
   dronecontrol->instruct(drone->aiVector.x, drone->aiVector.y, drone->aiVector.z, drone->aiAngle);
+
+  //printf("Ouch...\n");
 
 }
 
@@ -626,8 +652,6 @@ void DroneAI::drawTmpPath() {
   ofDrawArrow(drone->getPosition(),drone->getPosition()-tmpDestinationDrawing,5);
 
 }
-
-
 
 // Start Trajectories
 void DroneAI::startAllTrajectories() {
@@ -843,7 +867,7 @@ int DroneAI::finishLandingTrajectory() {
 
 // --- Anti Collision ---
 
-ofVec3f DroneAI::antiCollision() {}
+//ofVec3f DroneAI::antiCollision() {}
 
 // --- Real Drone Functions ---
 
@@ -903,8 +927,8 @@ void DroneAI::getQRs() {
     if(binary & QRsNow) {
 
       x = dronecontrol->askQRX(binary);
-      x = dronecontrol->askQRY(binary);
-      x = dronecontrol->askQRsize(binary);
+      y = dronecontrol->askQRY(binary);
+      h = dronecontrol->askQRsize(binary);
       n = i + 1;
 
       drone->addQR(x,y,h,n);
