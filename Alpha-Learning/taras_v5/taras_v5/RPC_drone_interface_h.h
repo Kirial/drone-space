@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sat Jun 17 22:50:35 2017
+/* at Sun Jun 18 00:19:05 2017
  */
 /* Compiler settings for src_fraNiklas\Klient\RPC_drone_interface.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 

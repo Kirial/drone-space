@@ -30,10 +30,18 @@ int imPros::getQR(Mat frame) {
 							array_qr[amount].code = code[i];
 						}
 					}
-					for (int a = 0; a < 4; a++) {
-						array_qr[amount].coordinats[a][0] = symbol->get_location_x(a);
-						array_qr[amount].coordinats[a][1] = symbol->get_location_y(a);
-					}
+					int x1 = symbol->get_location_x(0);
+					int x2 = symbol->get_location_x(1);
+					int x3 = symbol->get_location_x(2);
+					int x4 = symbol->get_location_x(3);
+					int y1 = symbol->get_location_y(0);
+					int y2 = symbol->get_location_y(1);
+					int y3 = symbol->get_location_y(2);
+					int y4 = symbol->get_location_y(3);
+				
+					array_qr[amount].x = (y2-(y4-y2)/(x4-x2)*x2-y1+(y3-y1)/(x3-x1)*x1)/((y3-y1)/(x3-x1)-(y4-y2)/(x4-x2));
+					array_qr[amount].y = array_qr[amount].x*(y3 - y1) / (x3 - x1) - (y3 - y1) / (x3 - x1)*x1 + y1;
+					array_qr[amount].size = sqrt((x2-x1)*(x2 - x1)+ (y2 - y1)*(y2 - y1));
 					amount++;
 		}
 		

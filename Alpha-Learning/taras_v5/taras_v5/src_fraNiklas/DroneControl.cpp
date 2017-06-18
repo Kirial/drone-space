@@ -55,8 +55,12 @@ int DroneControl::land() {
 
 void DroneControl::instruct() {
 
+  //printf("Manuel Instruction.\n");
+
   drone->move(ofVec3f(forwardBackwardSpeed, upDownSpeed, strafeLeftRightSpeed));
   drone->turn(turnLeftRightSpeed);
+
+  instruct(forwardBackwardSpeed,upDownSpeed,strafeLeftRightSpeed,turnLeftRightSpeed);
 
 }
 

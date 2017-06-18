@@ -1,19 +1,25 @@
 #include "RPC_drone_s.h"
 #include <iostream>
-
+#define SCREENW 640
+#define SCREENH 360
 RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBindingHandle*/)
 {
 	return RPC_S_OK; // Always allow anyone.
 }
 ARDrone *ardrone;
 imPros image_reader;
+vector<RotatedRect> elipser;
+vector<int> elipser_nr;
+bool elRead;
 bool qr_read;
 int found;
+
 
 void rpc_drone_s::RPC_setup(ARDrone *_ardrone) {
 	ardrone = _ardrone;
 	RPC_STATUS status;
 	qr_read = false;
+	elRead = false;
 
 	// Uses the protocol combined with the endpoint for receiving
 	// remote procedure calls.
@@ -53,29 +59,97 @@ void rpc_drone_s::RPC_setup(ARDrone *_ardrone) {
 }
 
 int _askHoops() {
-	std::cout << 1 << std::endl;
-	return 1;
+	int margin = 10; // magrin i px
+	Mat img = ardrone->getImage();
+	vector<RotatedRect> elp;
+	bool sameE = false;
+	elp = image_reader.getElipser(img);
+	found = image_reader.getQR(img); 
+	int foundUE = 0;
+
+	for (int i = 0; i < (elp.size()-1); i++) {
+		for (int a = i+1; a < elp.size(); a++) {
+			if ((elp[i].center.x - elp[a].center.x) < margin && (elp[i].center.x - elp[a].center.x) > -margin && (elp[i].center.y - elp[a].center.y) < margin && (elp[i].center.y - elp[a].center.y) > -margin) {
+				sameE = true;
+				break;
+			}
+		}
+		if (!sameE) {
+			foundUE++;
+			elipser.resize(foundUE);
+			elipser[foundUE-1] = elp[i];
+		}
+		sameE = false; 
+	}
+	if (foundUE > 0) {
+		elRead = true;
+	}
+
+	elipser_nr.resize(foundUE);
+
+	int rtrn_value = 0;
+	sameE = false; 
+	int ukend_e = 64;
+	for (int i = 0; i < elipser.size(); i++) {
+		for (int a = 0; a < found; a++) {
+			if (image_reader.array_qr[a].code <= P05){
+				if ((image_reader.array_qr[a].x - elipser[i].center.x) < margin && (image_reader.array_qr[a].x - elipser[i].center.x) > -margin){
+					rtrn_value = rtrn_value | image_reader.array_qr[a].code;
+					elipser_nr[i] = image_reader.array_qr[a].code;
+					sameE = true;
+				}
+			}
+		}
+		if (!sameE) {
+			elipser_nr[i] = ukend_e;
+			rtrn_value = rtrn_value | ukend_e;
+			ukend_e =ukend_e * 2;
+			sameE = false;
+		}
+
+	}
+	return rtrn_value;
 }
 
 int _askHoopX(int n) { // X position on camera
-	std::cout << n << std::endl;
-	return n;
+	if (!elRead) return 1337;
+	for (int i = 0; i < elipser_nr.size(); i++) {
+		if(elipser_nr[i] == n){
+			return elipser[i].center.x - SCREENW;
+		}
+	}
+	return 1337;
 }
 
 int _askHoopY(int n) {
-	std::cout << n << std::endl;
-	return n;
-} // Y position on camera
+	if (!elRead) return 1337;
+	for (int i = 0; i < elipser_nr.size(); i++) {
+		if (elipser_nr[i] == n) {
+			return elipser[i].center.y - SCREENH;
+		}
+	}
+	return 1337;
+}
 
 int _askHoopH(int n) {
-	std::cout << n << std::endl;
-	return n;
-} // Vertical Radius
+	if (!elRead) return 1337;
+	for (int i = 0; i < elipser_nr.size(); i++) {
+		if (elipser_nr[i] == n) {
+			return elipser[i].size.height;
+		}
+	}
+	return 1337;
+}
 
 int _askHoopW(int n) {
-	std::cout << n << std::endl;
-	return n;
-} // Horizontal Radius
+	if (!elRead) return 1337;
+	for (int i = 0; i < elipser_nr.size(); i++) {
+		if (elipser_nr[i] == n) {
+			return elipser[i].size.width;
+		}
+	}
+	return 1337;
+} 
 
   // CV - QR
 int _askQR() {
@@ -89,20 +163,32 @@ int _askQR() {
 
 }
 int _askQRX(int n) {
-
+	if (!qr_read) return 1337;
 	for (int i = 0; i < found; i++) {
-		image_reader.array_qr;
+		if (image_reader.array_qr[i].code == n) {
+			return image_reader.array_qr[i].x- SCREENW;
+		}
 	}
 	
-	return -1;
+	return 1337;
 }
 int _askQRY(int n) {
-	std::cout << n << std::endl;
-	return n;
+	if (!qr_read) return 1337;
+	for (int i = 0; i < found; i++) {
+		if (image_reader.array_qr[i].code == n) {
+			return image_reader.array_qr[i].y- SCREENH;
+		}
+	}
+	return 1337;
 }
 int _askQRsize(int n) {
-	std::cout << n << std::endl;
-	return n;
+	if (!qr_read) return 1337;
+	for (int i = 0; i < found; i++) {
+		if (image_reader.array_qr[i].code == n) {
+			return image_reader.array_qr[i].size;
+		}
+	}
+	return 1337;
 }
 
 int _askYaw() {
@@ -131,10 +217,6 @@ int _askHeight() {
 
 // Drone Instructions (True, ready to move, false can't move now)
 int _instruct(int x, int y, int z, int alfa) {
-	cout << x <<" ";
-	cout << y <<" ";
-	cout << z <<" ";
-	cout << alfa <<endl;
 	double vx = x / 100;
 	double vy = y / 100;
 	double vz = z / 100;

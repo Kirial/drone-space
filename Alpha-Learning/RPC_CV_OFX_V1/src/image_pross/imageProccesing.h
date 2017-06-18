@@ -42,7 +42,8 @@ using namespace zbar;
 #define imageProccesing_H_
 
 struct qr_struct {
-	int coordinats[4][2];
+	int x;
+	int y;
 	int size;
 	string qr_data;
 	int code;

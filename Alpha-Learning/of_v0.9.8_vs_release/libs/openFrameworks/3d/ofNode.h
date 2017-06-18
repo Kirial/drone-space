@@ -263,7 +263,7 @@ protected:
 	ofNode * parent;
 
 private:
-	void onParentPositionChanged(ofVec3f & position) {onPositionChanged();}
+  	void onParentPositionChanged(ofVec3f & position) {onPositionChanged();}
 	void onParentOrientationChanged(ofQuaternion & orientation) {onOrientationChanged();}
 	void onParentScaleChanged(ofVec3f & scale) {onScaleChanged();}
 

@@ -84,6 +84,66 @@ void DroneAI::update() {
 
     // 3. QR Code Based Position
 
+  // --- Anti Collision
+
+  if(drone->getDestinationDistance() < WAYPOINT_DISTANCE && followTmpPath) {
+
+    drone->setFlightMode(currentPath->flightmode);
+    drone->setDestination(currentPath->point);
+    drone->setDroneMode(currentPath->dronemode);
+
+    followTmpPath = false;
+
+  }
+
+  if(drone->getDroneMode() != STEADY && drone->getDroneMode() != TAKEOFF && drone->getDroneMode() != LANDING) {
+
+    // Check Room
+
+    if(droneroom->room.hitbox.inside(drone->getPosition(),&tmpPath.point)) {
+
+      printf("Outside Room Safetybox!\n");
+
+      drone->setDestination(tmpPath.point);
+
+      drone->setFlightMode(NORMAL);
+
+      droneInstruct();
+
+      followTmpPath = true;
+
+      //drone->AIinstruct(tmpPath);
+
+      //return;
+
+    }
+
+    //droneroom->getRoomHitbox().inside(drone->getPosition());
+
+    // Check All Hoops
+
+    for(int i = 0; i < HOOP_COUNT; i++) {
+
+      if(droneroom->hoops[i].hitbox.outside(drone->getPosition(),&tmpPath.point)) {
+
+        printf("Inside Hoop Hitbox!\n");
+
+        //drone->setDestination(tmpPath.point);
+
+        //drone->setFlightMode(NORMAL);
+
+        //droneInstruct();
+
+        //drone->AIinstruct(nextDestination);
+
+        //return;
+
+      }
+
+    }
+
+  }
+
   // --- Manual
 
   if(drone->getDroneMode() == MANUAL) {
@@ -100,47 +160,7 @@ void DroneAI::update() {
 
   // --- Autonomous
 
-  Trajectory nextDestination;
-
-  // --- Anti Collision
-
-  /*
-
-  if(drone->getDroneMode != STEADY) {
-
-    // Check Room
-
-    if(droneroom->room.hitbox.inside(drone->getPosition(),&nextDestination.point)) {
-
-      drone->update();
-
-      drone->AIinstruct(nextDestination);
-
-      return;
-
-    }
-
-    //droneroom->getRoomHitbox().inside(drone->getPosition());
-
-    // Check All Hoops
-
-    for(int i = 0; i < HOOP_COUNT; i++) {
-
-      if(droneroom->hoops[i].hitbox(drone->getPosition(),&nextDestination.point)) {
-
-        drone->update();
-
-        drone->AIinstruct(nextDestination);
-
-        return;
-
-      }
-
-    }
-
-  }
-
-  */
+  //tmpPath.next = currentPath;
 
   if(ofGetElapsedTimeMillis() > DEADLINE*1000) {
 
@@ -202,8 +222,6 @@ void DroneAI::update() {
 
   // Virtual
 
-  drone->update();
-
   droneInstruct();
 
   return;
@@ -215,6 +233,7 @@ void DroneAI::draw() {
   drawTakeoffTrajectory();
   drawLandingTrajectory();
   drawTrueAngle();
+  drawTmpPath();
 
 }
 
@@ -248,11 +267,20 @@ void DroneAI::droneStart() {
 
   optimizeTrajectory(loopCurrent, loopHead, &loopTrajectoryCount);
 
+
+
   // Reset Timer
+
+  // Optimize Rotation and Position (Jesper)
+
+
 
   printf("Taking off!\n");
 
+  dronecontrol->takeoff();
+
   takeoffCurrent = takeoffTail->next;
+  currentPath = takeoffCurrent;
 
   drone->setDroneMode(TAKEOFF);
   drone->setFlightMode(takeoffCurrent->flightmode);
@@ -272,6 +300,7 @@ void DroneAI::droneTakeoff() {
     if(!takeoffCurrent->end) {
 
       takeoffCurrent = takeoffCurrent->next;
+      currentPath = takeoffCurrent;
 
       drone->setDestination(takeoffCurrent->point);
       drone->setFlightMode(takeoffCurrent->flightmode);
@@ -290,6 +319,7 @@ void DroneAI::droneTakeoff() {
 
       loopCurrent = loopHead;
       loopCurrent = loopCurrent->next;
+      currentPath = loopCurrent;
 
       drone->setFlightMode(loopCurrent->flightmode);
       drone->setDestination(loopCurrent->point);
@@ -316,6 +346,7 @@ void DroneAI::droneLoop() {
     printf("New Loop Waypoint.\n");
 
     loopCurrent = loopCurrent->next;
+    currentPath = loopCurrent;
 
     drone->setFlightMode(loopCurrent->flightmode);
     drone->setDestination(loopCurrent->point);
@@ -343,6 +374,7 @@ void DroneAI::droneLanding() {
     finishLandingTrajectory();
 
     landingCurrent = landingTail->next;
+    loopCurrent = landingCurrent;
 
     calculatedLandingTrajectory = true;
 
@@ -360,6 +392,7 @@ void DroneAI::droneLanding() {
       printf("Destination - x: %f, y: %f, y: %f.\n",drone->getDestination().x,drone->getDestination().y,drone->getDestination().z);
 
       landingCurrent = landingCurrent->next;
+      currentPath = landingCurrent;
 
       drone->setFlightMode(landingCurrent->flightmode);
       drone->setDestination(landingCurrent->point);
@@ -413,6 +446,8 @@ void DroneAI::droneInstruct() {
     //printf("Moving - x: %f, y: %f, z: %f, a: .\n", drone->getDirection().x, drone->getDirection().y, drone->getDirection().z, drone->getAngleOffset());
 
   }
+
+  drone->update();
 
   drone->instruction();
 
@@ -591,6 +626,14 @@ void DroneAI::drawLandingTrajectory() {
 
   ofSetColor(ofColor::black);
 }
+void DroneAI::drawTmpPath() {
+
+  ofSetColor(255,0,0);
+  ofDrawArrow(drone->getPosition(),drone->getPosition()-tmpPath.point,5);
+
+}
+
+
 
 // Start Trajectories
 void DroneAI::startAllTrajectories() {
@@ -805,10 +848,8 @@ int DroneAI::finishLandingTrajectory() {
 }
 
 // --- Anti Collision ---
-/*
-ofVec3f DroneAI::antiCollision() {
 
-}*/
+ofVec3f DroneAI::antiCollision() {}
 
 // --- Real Drone Functions ---
 
@@ -818,8 +859,7 @@ void DroneAI::getHoops() {
 
   int hoopsNow = dronecontrol->askHoops();
 
-  int binary = 1;
-  int x, y, h, n = 1;
+  int binary, x, y, h, n = 1;
 
   for(int i = 0; i < HOOP_COUNT * 2; i++) {
 
@@ -847,8 +887,7 @@ void DroneAI::getQRs() {
 
   int QRsNow = dronecontrol->askQRs();
 
-  int binary = 1;
-  int x, y, h, n = 1;
+  int binary, x, y, h, n = 1;
 
   for(int i = 0; i < (HOOP_COUNT + QR_REAL_COUNT); i++) {
 
