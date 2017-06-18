@@ -53,14 +53,30 @@ int DroneControl::land() {
 
 // Manual Control
 
-void DroneControl::instruct() {
+void DroneControl::manual() {
 
   //printf("Manuel Instruction.\n");
 
-  drone->move(ofVec3f(forwardBackwardSpeed, upDownSpeed, strafeLeftRightSpeed));
+  drone->move(ofVec3f(forwardBackwardSpeed*DRONE_MS_TO_FPS, upDownSpeed*DRONE_MS_TO_FPS, strafeLeftRightSpeed*DRONE_MS_TO_FPS));
   drone->turn(turnLeftRightSpeed);
 
-  instruct(forwardBackwardSpeed,upDownSpeed,strafeLeftRightSpeed,turnLeftRightSpeed);
+  instruct(forwardBackwardSpeed,upDownSpeed,strafeLeftRightSpeed,turnLeftRightSpeed * DRONE_ANGLE_FPS);
+
+}
+
+void DroneControl::ai(float x, float y, float z, float a) {
+
+  ofVec3f vector = ofVec3f(x,y,z);
+
+  vector = vector.getNormalized() * drone->getSpeed();
+
+  instruct(vector.x, vector.y, vector.z, a);
+
+}
+
+void DroneControl::ai(ofVec3f vector, float a) {
+
+  ai(vector.x, vector.y, vector.z, a);
 
 }
 

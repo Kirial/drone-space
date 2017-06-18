@@ -553,7 +553,9 @@ obj/osx/Release/src/Drone.o: \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.h \
   /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h \
   /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/settings.h \
-  /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/Drone.h
+  /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/Drone.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/DroneRoom.h \
+  /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/ofxNBxyz/ofxNBxyzWirebox.h
 
 /Users/nb/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h:
 
@@ -1662,3 +1664,7 @@ obj/osx/Release/src/Drone.o: \
 /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/settings.h:
 
 /Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/Drone.h:
+
+/Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/DroneRoom.h:
+
+/Users/nb/Workspace/Drone-Space/drone-space-git/Alpha-Learning/project_v5/src/ofxNBxyz/ofxNBxyzWirebox.h:

@@ -74,7 +74,7 @@ void DroneAI::update() {
 
     // QRs
 
-    getQRs();
+    //getQRs();
 
   // Calculate Position
 
@@ -124,6 +124,8 @@ void DroneAI::update() {
 
     // Check All Hoops
 
+    /*
+
     for(int i = 0; i < HOOP_COUNT; i++) {
 
       if(droneroom->hoops[i].hitbox.outside(drone->getPosition(),&tmpDestination)) {
@@ -148,6 +150,8 @@ void DroneAI::update() {
 
     }
 
+    */
+
   }
 
   // --- Manual
@@ -158,7 +162,7 @@ void DroneAI::update() {
 
     drone->update();
 
-    dronecontrol->instruct();
+    dronecontrol->manual();
 
     return;
 
@@ -435,37 +439,11 @@ void DroneAI::droneLand() {
 }
 void DroneAI::droneInstruct() {
 
-  // Only turn left or right
-
-  //printf("DestinationOffset - x: %f, y: %f, z: %f.\n", );
-
-  if(drone->getAngleOffset() > DRONE_ANGLE_OFFSET && drone->getDroneMode() != TAKEOFF && drone->getDroneMode() != LANDING) {
-
-    // Only turning
-
-    //printf("Turning: %f.\n", drone->getAngleOffset());
-
-  }
-
-  else if(drone->getDroneMode() == TAKEOFF || drone->getDroneMode() == LANDING) {
-
-    // Not turning
-
-    //printf("Moving - x: %f, y: %f, z: %f.\n", drone->getDirection().x, drone->getDirection().y, drone->getDirection().z);
-
-  }
-
-  else {
-
-    // Normal
-
-    //printf("Moving - x: %f, y: %f, z: %f, a: .\n", drone->getDirection().x, drone->getDirection().y, drone->getDirection().z, drone->getAngleOffset());
-
-  }
-
   drone->update();
 
   drone->instruction();
+
+  dronecontrol->instruct(drone->aiVector.x, drone->aiVector.y, drone->aiVector.z, drone->aiAngle);
 
 }
 
@@ -875,6 +853,8 @@ void DroneAI::getHoops() {
 
   int hoopsNow = dronecontrol->askHoops();
 
+  //printf("How Many Hoops do you see? %i\n", hoopsNow);
+
   int binary = 1;
   int x;
   int y;
@@ -883,7 +863,12 @@ void DroneAI::getHoops() {
 
   for(int i = 0; i < HOOP_COUNT * 2; i++) {
 
+    //printf("Binary: %i.\n", binary);
+    //printf("hoopsNow: %i.\n", hoopsNow);
+
     if(binary & hoopsNow) {
+
+      //printf("Seeing Hoop: %i\n", i);
 
       x = dronecontrol->askHoopX(binary);
       y = dronecontrol->askHoopY(binary);
