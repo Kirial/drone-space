@@ -21,9 +21,7 @@ int main(int argc, char *argv[])
 	
 	rpc_drone_s test;
 	imPros im;
-	test.RPC_setup(&ardrone,&im);
-	
+	test.RPC_setup(&ardrone,&im);	
     ardrone.close();
-
     return 0;
 }
