@@ -7,12 +7,11 @@
 
 #define SCALE 1
 
-#define MAC_SPACE_A 324
-#define MAC_SPACE_B 234
+#define MAC_SPACE 32
 #define WINDOWS_SPACE 123
 
-#define MAC_SHIFT_A 345
-#define MAC_SHIFT_B 466
+#define MAC_SHIFT_A 2304
+#define MAC_SHIFT_B 2305
 #define WINDOWS_SHIFT 577
 
 #define STARTLANDING 4.5*60 // Seconds

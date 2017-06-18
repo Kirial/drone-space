@@ -194,9 +194,13 @@ void Drone::update() {
 
   // Destination offset
 
-  destinationOffset = destination - node.getGlobalPosition();
-
-  direction.setGlobalPosition(destination);
+  if(tmpDest) {
+    destinationOffset = tmpDestination - node.getGlobalPosition();
+    direction.setGlobalPosition(tmpDestination);
+  } else {
+    destinationOffset = destination - node.getGlobalPosition();
+    direction.setGlobalPosition(destination);
+  }
 
   // Rotation angle offset
 

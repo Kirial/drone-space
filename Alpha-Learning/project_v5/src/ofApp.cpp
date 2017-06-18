@@ -57,6 +57,8 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+  //printf("Key: %i\n",key);
+
   keys[key] = true;
 
   userinterface.keyboard(key, keys[key]);
@@ -65,6 +67,8 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+
+  //printf("Key: %i\n",key);
 
   keys[key] = false;
 

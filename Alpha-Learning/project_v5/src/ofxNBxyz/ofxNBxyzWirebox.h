@@ -27,6 +27,7 @@ class Wirebox {
     ofNode cornerNodes[corners];
 
     ofNode positionNode;
+    ofNode droneNode;
 
 };
 
