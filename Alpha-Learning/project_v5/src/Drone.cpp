@@ -2,7 +2,9 @@
 #include "settings.h"
 #include "Drone.h"
 
-Drone::Drone() {
+Drone::Drone(DroneRoom *_droneroom) {
+
+  droneroom = _droneroom;
 
   box.setParent(node);
   forward.setParent(node);
@@ -25,7 +27,7 @@ Drone::Drone() {
 
   // Hoop
 
-  for(int i = 0; i < HOOP_COUNT; i++) {
+  for(int i = 0; i < HOOP_COUNT*2; i++) {
 
     viewedHoops[i].set(0,1,false);
     viewedHoops[i].rotate(90,1,0,0);
@@ -33,10 +35,14 @@ Drone::Drone() {
     viewedHoops[i].setParent(node);
     viewedHoops[i].move(viewOffsetX, viewOffsetY, -viewOffsetZ);
 
-    projectedHoops[i].set(0,1,false);
-    projectedHoops[i].rotate(90,1,0,0);
-    projectedHoops[i].rotate(90,0,1,0);
-    projectedHoops[i].setParent(node);
+    viewedHoops[i+HOOP_COUNT*2].rotate(90,1,0,0);
+    viewedHoops[i+HOOP_COUNT*2].rotate(90,0,1,0);
+    viewedHoops[i+HOOP_COUNT*2].setParent(node);
+
+    //projectedHoops[i].set(0,1,false);
+    //projectedHoops[i].rotate(90,1,0,0);
+    //projectedHoops[i].rotate(90,0,1,0);
+    //projectedHoops[i].setParent(node);
 
     viewedHoopsNumber[i] = false;
 
@@ -56,12 +62,15 @@ Drone::Drone() {
     projectedQRs[i].rotate(90,1,0,0);
     projectedQRs[i].rotate(90,0,0,1);
     projectedQRs[i].setParent(node);
+    projectedQRs[i].setPosition(0,0,0);
 
     viewedQRsNumber[i] = false;
 
   }
 
   // Test Drawings
+
+  /*
 
   addHoop(40,40,100,7);
   addHoop(60,60,100,8);
@@ -70,6 +79,8 @@ Drone::Drone() {
   addQR(400,400,100,7);
   addQR(500,500,100,8);
   addQR(600,600,100,9);
+
+  */
 
   // Set Flight- and DroneMode
 
@@ -127,14 +138,30 @@ void Drone::addHoop(int x, int y, int h, int n) {
 
   //printf("Adding hoop - x: %i, y: %i, h: %i, n: %i.\n", x, y, h, n);
 
+  //printf("Adding Hoop.\n");
+
+  viewedHoops[seenHoopsCount].setPosition(0,0,0);
+  viewedHoops[seenHoopsCount].move(viewOffsetX, 0, 0);
+
   viewedHoops[seenHoopsCount].move(0,-x/DRONE_VIEW_PIXELCM,y/DRONE_VIEW_PIXELCM);
   viewedHoops[seenHoopsCount].set(h/DRONE_VIEW_PIXELCM,1,false);
+
+  viewedHoops[seenHoopsCount+HOOP_COUNT*2].setPosition(0,0,0);
+  viewedHoops[seenHoopsCount+HOOP_COUNT*2].set(50,1,false);
+  viewedHoops[seenHoopsCount+HOOP_COUNT*2].move(projectedCalculation(x,y,droneroom->hoops[n].radius,h));
+
+  //printf("Done Adding Hoop.\n");
+
   viewedHoopsNumber[seenHoopsCount] = n;
 
   seenHoopsCount++;
 
+  //printf("Hoop Count: %i.\n", seenHoopsCount);
+
 }
 void Drone::resetHoops() {
+
+  //printf("Reset Hoops.\n");
 
   seenHoopsCount = 0;
 
@@ -149,6 +176,8 @@ void Drone::addQR(int x, int y, int h, int n) {
 
   seenQRsCount++;
 
+  //printf("QR Count: %i.\n", seenQRsCount);
+
 }
 void Drone::resetQRs() {
 
@@ -160,20 +189,16 @@ void Drone::drawViewedHoops() {
 
   for(int i = 0; i < seenHoopsCount; i++) {
 
+    //printf("Drawing Hoop: %i\n", i);
+
     ofSetColor(0,255,255); // Cyan
     viewedHoops[i].draw();
+    viewedHoops[i+HOOP_COUNT*2].draw();
 
   }
 
 }
-void Drone::drawProjectedHoops() {
 
-  for(int i = 0; i < seenHoopsCount; i++) {
-
-
-  }
-
-}
 void Drone::drawViewedQRs() {
 
   for(int i = 0; i < seenQRsCount; i++) {
@@ -229,6 +254,8 @@ void Drone::instruction() {
 
       node.rotate(angleRotation,0,1,0);
 
+      aiAngle = angleRotation * DRONE_ANGLE_FPS;
+
     }
 
     else {
@@ -237,7 +264,11 @@ void Drone::instruction() {
 
       node.rotate(-angleRotation,0,1,0);
 
+      aiAngle = -angleRotation * DRONE_ANGLE_FPS;
+
     }
+
+    return;
 
   }
 
@@ -254,6 +285,13 @@ void Drone::instruction() {
     else moveDistance = speed;
 
     node.move(moveDistance * destinationOffset.getNormalized());
+
+    aiVector = ofVec3f(direction.getPosition().getNormalized()) * moveDistance;
+
+    //printf("AI Vector.\n");
+    //printf("x: %f.\n",aiVector.x);
+    //printf("y: %f.\n",aiVector.y);
+    //printf("z: %f.\n",aiVector.z);
 
   }
 
@@ -423,5 +461,120 @@ void printDroneMode(DroneMode dronemode) {
     break;
 
   }
+
+}
+
+ofVec2f Drone::trueXY(int x, int y) {
+
+  /*
+
+  printf("Input X: %i\n", x);
+  printf("Input Y: %i\n", y);
+
+  */
+
+  float trueX = x*(X1*x+1)*(X1*y+1);
+  float trueY = y*(X1*y+1)*(X1*x+1);
+
+  /*
+
+  printf("True X: %f\n", trueX);
+  printf("True Y: %f\n", trueY);
+
+  */
+
+  return ofVec2f(trueX, trueY);
+
+}
+
+ofVec3f Drone::trueAngleVector(ofVec2f trueXY) {
+
+  ofNode result;
+
+  float angleX = atan(trueXY.x/961);
+
+  result.rotate(angleX,0,1,0);
+
+  float angleY = atan(trueXY.y/961);
+
+  result.rotate(angleY,0,0,1);
+
+  return result.getXAxis();
+
+}
+
+float Drone::getDistance(int trueSize, int perseivedSize, int x, int y) {
+
+  //float trueObjectStart = (x-perseivedSize/2)*(X1*(x-perseivedSize/2)+1)*(y*X1+1);
+  //float trueObjectEnd = (x+perseivedSize/2)*(X1*(x+perseivedSize/2)+1)*(y*X1+1);
+
+  //printf("Input perseivedSize: %i.\n", perseivedSize);
+
+  //printf("Resizing hoop.\n");
+
+  ofVec2f trueObject = trueXY(x-perseivedSize/2, x+perseivedSize/2);
+
+  /*
+
+  printf("Hoops Resized!\n");
+  printf("x: %f.\n",trueObject.x);
+  printf("y: %f.\n",trueObject.y);
+
+  */
+
+  //float trueObjectStart = (x-perseivedSize/2)*(X1*(x-perseivedSize/2)+1)*(y*X1+1);
+  //float trueObjectEnd = (x+perseivedSize/2)*(X1*(x+perseivedSize/2)+1)*(y*X1+1);
+
+  float resizedPerseivedSize = trueObject.y - trueObject.x;
+
+  //printf("Output perseivedSize: %f.\n", resizedPerseivedSize);
+
+  float pixelPerCm = resizedPerseivedSize / trueSize;
+
+  //printf("Pixel per cm: %f.\n", pixelPerCm);
+
+  float distance = PXCM / pixelPerCm;
+
+  return distance;
+
+}
+
+ofVec3f Drone::objectVector(ofVec3f trueAngle, float distance) {
+
+  return trueAngle * distance;
+
+}
+
+ofVec3f Drone::projectedCalculation(int x, int y, int trueSize, int perseivedSize) {
+
+  //printf("Starting Calculations.\n");
+
+  ofVec3f angle = trueAngleVector(trueXY(x,y));
+
+  /*
+
+  printf("Angle:\n");
+  printf("x: %f.\n",angle.x);
+  printf("y: %f.\n",angle.y);
+  printf("z: %f.\n",angle.z);
+
+  */
+
+  float distance = getDistance(trueSize, perseivedSize, x, y);
+
+  //printf("Distance: %f.\n", distance);
+
+  ofVec3f result = objectVector(angle, distance);
+
+  /*
+
+  printf("Result Calculations.\n");
+  printf("x: %f.\n",result.x);
+  printf("x: %f.\n",result.y);
+  printf("x: %f.\n",result.z);
+
+  */
+
+  return result;
 
 }

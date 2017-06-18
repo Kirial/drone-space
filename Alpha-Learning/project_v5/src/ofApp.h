@@ -45,8 +45,9 @@ class ofApp : public ofBaseApp{
 		// ARDrone ardrone = ARDrone(&rpc);
 		// CV cv = CV(&rpc);
 
-		Drone drone;
+
 		DroneRoom droneroom;
+		Drone drone = Drone(&droneroom);
 		ARDrone ardrone;
 		CV cv;
 		DroneControl dronecontrol = DroneControl(&drone, &ardrone, &cv);

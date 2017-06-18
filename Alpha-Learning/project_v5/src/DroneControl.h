@@ -18,15 +18,32 @@ public:
   // --- RPC Functions Pointers  ---
 
   // CV - Hoops
-  int askHoops() {return cv->askHoops();}
-  int askHoopX(int n) {return cv->askHoopX(n);} // X position on camera
-  int askHoopY(int n) {return cv->askHoopY(n);} // Y position on camera
-  int askHoopH(int n) {return cv->askHoopH(n);} // Vertical Radius
-  int askHoopW(int n) {return cv->askHoopW(n);} // Horizontal Radius
+  int askHoops() {
+    return 1;}
+    //return cv->askHoops();}
+  int askHoopX(int n) {
+    return 0;}
+    //return cv->askHoopX(n);} // X position on camera
+  int askHoopY(int n) {
+    return 0;}
+    //return cv->askHoopY(n);} // Y position on camera
+  int askHoopH(int n) {
+    return 100;}
+    //return cv->askHoopH(n);} // Vertical Radius
+  int askHoopW(int n) {
+    return 100;}
+    //return cv->askHoopW(n);} // Horizontal Radius
 
   // CV - QR
-  int askQRs() {return cv->askQRs();}
-  int askQRX(int n) {return cv->askQRX(n);}
+  int askQRs() {
+
+    //return 1;
+    return cv->askQRs();
+  }
+  int askQRX(int n) {
+    //return 10;
+    return cv->askQRX(n);
+  }
   int askQRY(int n) {return cv->askQRY(n);}
   int askQRsize(int n) {return cv->askQRsize(n);}
 
@@ -43,7 +60,10 @@ public:
 
   // Manual Control
 
-  void instruct();
+  void manual();
+
+  void ai(float x, float y, float z, float a);
+  void ai(ofVec3f vector, float a);
 
   int upToggle(bool keyPressed); // Space
   int downToggle(bool keyPressed); // Shift

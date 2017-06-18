@@ -2,6 +2,8 @@
 #define DRONE_H
 
 #include "ofMain.h"
+#include "settings.h"
+#include "DroneRoom.h"
 
 enum DroneMode {READY, HOLD, AUTONOMOUS, MANUAL, LANDED, TAKEOFF, LANDING};
 
@@ -14,7 +16,7 @@ class Drone {
 
 public:
 
-  Drone();
+  Drone(DroneRoom *droneroom);
 
   void draw();
   void update();
@@ -60,6 +62,9 @@ public:
 
   ofNode node;
 
+  ofVec3f aiVector;
+  float aiAngle;
+
   // What the drone sees
 
   void addHoop(int x, int y, int h, int n);
@@ -68,7 +73,15 @@ public:
   void addQR(int x, int y, int h, int n);
   void resetQRs();
 
+  ofVec2f trueXY(int x, int y);
+  ofVec3f trueAngleVector(ofVec2f trueXY);
+  float getDistance(int trueSize, int perseivedSize, int x, int y);
+  ofVec3f objectVector(ofVec3f trueAngle, float distance);
+  ofVec3f projectedCalculation(int x, int y, int trueSize, int perseivedSize);
+
 private:
+
+  DroneRoom *droneroom;
 
   // View
 
@@ -85,8 +98,8 @@ private:
   int seenHoopsCount;
   int seenQRsCount;
 
-  ofCylinderPrimitive viewedHoops[HOOP_COUNT];
-  ofCylinderPrimitive projectedHoops[HOOP_COUNT];
+  ofCylinderPrimitive viewedHoops[HOOP_COUNT*4];
+  //ofCylinderPrimitive projectedHoops[HOOP_COUNT];
   int viewedHoopsNumber[HOOP_COUNT];
 
   ofPlanePrimitive viewedQRs[HOOP_COUNT+QR_COUNT];

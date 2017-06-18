@@ -29,6 +29,9 @@
 
 #define DRONE_VIEW_COUNT 4
 
+#define X1 0.0003
+#define PXCM 1188.769441 // At 100 cms
+
 // Drone - Safety Distance
 
 #define DRONE_SAFETYDISTANCE 50 // "Radius"
@@ -42,13 +45,16 @@
 
 // Drone - Speeds
 
-#define DRONE_STEADY_SPEED 0.833
-#define DRONE_NORMAL_SPEED 1.667 // m/s
+#define DRONE_STEADY_SPEED 0.5
+#define DRONE_NORMAL_SPEED 1 // m/s
 #define DRONE_FAST_SPEED 2
-#define DRONE_INSANE_SPEED 5
-#define DRONE_LUDICROUS_SPEED 10
+#define DRONE_INSANE_SPEED 10
+#define DRONE_LUDICROUS_SPEED 1000
 
-#define DRONE_ROTATION_SPEED 5
+#define DRONE_MS_TO_FPS 1.6667
+
+#define DRONE_ROTATION_SPEED 1
+#define DRONE_ANGLE_FPS 60
 
 #define DRONE_ORIENTATION_VECTOR 100
 
@@ -267,5 +273,37 @@
 #define LOOP_TRAJECTORY_MAX 256
 #define TAKEOFF_TRAJECTORY_MAX 8
 #define LANDING_TRAJECTORY_MAX 8
+
+// QRs
+
+#define P00 1
+#define P01 2
+#define P02 4
+#define P03 8
+#define P04 16
+#define P05 32
+
+#define W0000 64
+#define W0001 128
+#define W0002 256
+#define W0003 512
+#define W0004 1024
+#define W0100 2048
+#define W0101 4096
+#define W0102 8192
+#define W0103 16384
+#define W0104 32798
+
+#define W0200 65536
+#define W0201 131072
+#define W0202 262144
+#define W0203 524288
+#define W0204 1048576
+
+#define W0300 2097152
+#define W0301 4194304
+#define W0302 8388608
+#define W0303 16777216
+#define W0304 33554432
 
 #endif /* end of include guard: SETTINGS */
