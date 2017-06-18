@@ -12,6 +12,9 @@ Wirebox::Wirebox() {
 
   }
 
+  //positionNode.setParent(node);
+  droneNode.setParent(node);
+
 }
 
 void Wirebox::drawNodes() {
@@ -96,7 +99,6 @@ float Wirebox::inside(ofVec3f position, ofVec3f *result) {
 
   tmpResult.set(0,0,0);
 
-
   positionNode.setGlobalPosition(position);
 
   /*
@@ -163,9 +165,8 @@ float Wirebox::inside(ofVec3f position, ofVec3f *result) {
 
     *result = tmpResult;
 
-    printf("Inside dist: %f.\n", tmpResult.length());
-
     return tmpResult.length();
+
   }
 
   return 0;
@@ -180,64 +181,64 @@ float Wirebox::outside(ofVec3f position, ofVec3f *result) {
 
   tmpResult.set(0,0,0);
 
-  positionNode.setGlobalPosition(position);
+  droneNode.setGlobalPosition(position);
 
   /*
 
   printf("Testing Outside.\n");
 
-  printf("Drone X: %f\n", positionNode.getX());
-  printf("Drone Y: %f\n", positionNode.getY());
-  printf("Drone Z: %f\n", positionNode.getZ());
+  printf("Drone X: %f\n", droneNode.getX());
+  printf("Drone Y: %f\n", droneNode.getY());
+  printf("Drone Z: %f\n", droneNode.getZ());
 
   printf("X: %f\n", X/2);
   printf("Y: %f\n", Y/2);
   printf("Z: %f\n", Z/2);
 
-  printf("X: %f\n", X/2);
-  printf("Y: %f\n", Y/2);
-  printf("Z: %f\n", Z/2);
+  printf("Node X: %f\n", node.getX());
+  printf("Node Y: %f\n", node.getX());
+  printf("Node Z: %f\n", node.getX());
 
   */
 
   if(
-    positionNode.getX() < X/2 &&
-    positionNode.getX() > -X/2 &&
-    positionNode.getY() < Y/2 &&
-    positionNode.getY() > -Y/2 &&
-    positionNode.getZ() < Z/2 &&
-    positionNode.getZ() > -Z/2
+    droneNode.getX() < X/2 &&
+    droneNode.getX() > -X/2 &&
+    droneNode.getY() < Y/2 &&
+    droneNode.getY() > -Y/2 &&
+    droneNode.getZ() < Z/2 &&
+    droneNode.getZ() > -Z/2
   ) {
 
-    printf("Inside.\n");
+    //printf("Inside.\n");
 
-    dist = X/2 - positionNode.getX();
+    dist = X/2 - droneNode.getX();
     tmpResult.set(dist,0,0);
 
-    if(dist > X/2 + positionNode.getX()) {
+    if(dist > X/2 + droneNode.getX()) {
       //printf("Dist: %f\n",dist);
-      dist = X/2 + positionNode.getX();
+      dist = X/2 + droneNode.getX();
       //printf("Dist: %f\n",dist);
       tmpResult.set(-dist,0,0);
     }
 
-    if(dist > Y/2 - positionNode.getY()) {
-      dist = (Y/2 - positionNode.getY());
+    if(dist > Y/2 - droneNode.getY()) {
+      dist = (Y/2 - droneNode.getY());
       tmpResult.set(0,dist,0);
     }
 
-    if(dist > Y/2 + positionNode.getY()) {
-      dist = -(Y/2 + positionNode.getY());
+    if(dist > Y/2 + droneNode.getY()) {
+      dist = -(Y/2 + droneNode.getY());
       tmpResult.set(0,dist,0);
     }
 
-    if(dist > Z/2 - positionNode.getZ()) {
-      dist = (Z/2 - positionNode.getZ());
+    if(dist > Z/2 - droneNode.getZ()) {
+      dist = (Z/2 - droneNode.getZ());
       tmpResult.set(0,0,dist);
     }
 
-    if(dist > Z/2 + positionNode.getZ()) {
-      dist = -(Z/2 + positionNode.getZ());
+    if(dist > Z/2 + droneNode.getZ()) {
+      dist = -(Z/2 + droneNode.getZ());
       tmpResult.set(0,0,dist);
     }
 
@@ -251,7 +252,9 @@ float Wirebox::outside(ofVec3f position, ofVec3f *result) {
 
     //*result = position - tmpResult;
 
-    *result = tmpResult;
+    droneNode.move(tmpResult*1.2);
+
+    *result = position - droneNode.getGlobalPosition();
 
     //printf("Outside dist: %f.\n", tmpResult.length());
 

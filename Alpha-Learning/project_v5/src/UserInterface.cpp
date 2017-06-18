@@ -38,8 +38,7 @@ int UserInterface::keyboard(int key, bool keyPressed) {
     case 'e':
       dronecontrol->turnRightToggle(keyPressed);
       break;
-    case MAC_SPACE_A:
-    case MAC_SPACE_B:
+    case MAC_SPACE:
       // Or start the program.
       dronecontrol->upToggle(keyPressed);
     break;

@@ -29,8 +29,15 @@ public:
 
   ofVec3f setDestination(ofVec3f _destination); // Set new destination.
   ofVec3f getDestination(); // Return diffence vector.
+
+  ofVec3f setTmpDestination(ofVec3f _tmpDestination);
+  ofVec3f getTmpDestination();
+
+  void unsetTmpDest();
+
   ofVec3f getDirection();
   ofVec3f getDestinationOffset();
+
   float getDestinationDistance();
   float getAngleOffset();
 
@@ -99,6 +106,9 @@ private:
 
   ofVec3f destination;
   ofVec3f destinationOffset;
+
+  ofVec3f tmpDestination;
+  int tmpDest;
 
   ofVec3f angleRotationDirection;
 

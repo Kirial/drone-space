@@ -42,7 +42,7 @@ public:
 private:
 
   Trajectory *currentPath;
-  Trajectory tmpPath;
+  ofVec3f tmpDestinationDrawing;
   int followTmpPath = false;
 
   Drone *drone;
@@ -89,6 +89,10 @@ private:
   // Calculate Path
 
   ofVec3f path();
+
+  int looping;
+  int takeoff;
+  int landing;
 
   // Trajectory Functions
   int originalTrajectory();
