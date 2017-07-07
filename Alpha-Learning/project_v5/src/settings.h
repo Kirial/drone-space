@@ -14,8 +14,8 @@
 #define MAC_SHIFT_B 2305
 #define WINDOWS_SHIFT 577
 
-#define STARTLANDING 4.5*60 // Seconds
-#define DEADLINE 5*60 // Seconds
+#define STARTLANDING 1.667*60 // Seconds
+#define DEADLINE 2*60 // Seconds
 
 // --- Drone ---
 
@@ -39,7 +39,7 @@
 
 // Drone - Landing Platform
 
-#define DRONE_START_X -300
+#define DRONE_START_X -400
 #define DRONE_START_Y 20
 #define DRONE_START_Z 200
 
@@ -48,7 +48,7 @@
 #define LANDINGPLATFORM_X 80
 #define LANDINGPLATFORM_Z 100
 
-#define LANDINGPLATFORM_POS_X -300
+#define LANDINGPLATFORM_POS_X -400
 #define LANDINGPLATFORM_POS_Z 200
 
 #define LANDINGPLATFORM_POS_Y 100 // Landing CheckPoint offset
@@ -82,7 +82,7 @@
 
 // Hoop
 
-#define HOOP_COUNT 5
+#define HOOP_COUNT 6
 
 #define HOOP_RADIUS_A 40
 #define HOOP_RADIUS_B 45
@@ -99,7 +99,7 @@
 
 // Hoop Random
 
-#define HOOP_RANDOM false
+#define HOOP_RANDOM true
 
 // Hoop A
 
@@ -141,13 +141,13 @@
 #define HOOP_E_R 40
 #define HOOP_E_A 15
 
-// Hoop F ?
+// Hoop F
 
-#define HOOP_F_X 400
-#define HOOP_F_Y 200
-#define HOOP_F_Z -400
+#define HOOP_F_X -230
+#define HOOP_F_Y 150
+#define HOOP_F_Z 320
 #define HOOP_F_R 40
-#define HOOP_F_A -15
+#define HOOP_F_A 15
 
 // QR
 

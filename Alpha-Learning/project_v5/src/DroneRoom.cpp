@@ -183,6 +183,7 @@ DroneRoom::DroneRoom() {
     hoops[2].setPosition(HOOP_C_X,HOOP_C_Y,HOOP_C_Z);
     hoops[3].setPosition(HOOP_D_X,HOOP_D_Y,HOOP_D_Z);
     hoops[4].setPosition(HOOP_E_X,HOOP_E_Y,HOOP_E_Z);
+    hoops[5].setPosition(HOOP_F_X,HOOP_F_Y,HOOP_F_Z);
 
     hoops[0].radius = HOOP_A_R;
     hoops[0].node.rotate(HOOP_A_A,0,1,0);
@@ -194,6 +195,15 @@ DroneRoom::DroneRoom() {
     hoops[3].node.rotate(HOOP_D_A,0,1,0);
     hoops[4].radius = HOOP_E_R;
     hoops[4].node.rotate(HOOP_E_A,0,1,0);
+    hoops[4].radius = HOOP_F_R;
+    hoops[4].node.rotate(HOOP_F_A,0,1,0);
+
+    hoops[0].setRadius(hoops[0].radius);
+    hoops[1].setRadius(hoops[1].radius);
+    hoops[2].setRadius(hoops[2].radius);
+    hoops[3].setRadius(hoops[3].radius);
+    hoops[4].setRadius(hoops[4].radius);
+    hoops[5].setRadius(hoops[5].radius);
 
   }
 
